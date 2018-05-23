@@ -2,6 +2,12 @@
   <input type="search" class="searchbar" :placeholder="placeholder" v-bind:value="value" v-on:input="updateValue($event.target.value)">
 </template>
 
+/*
+* TODO:
+* - Add search icon
+* - Add ARIA labels
+*/
+
 <script>
 export default {
   props: {
