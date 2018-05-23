@@ -30,6 +30,16 @@ body, html
   padding: 0
   margin: 0
 
+input, input:focus
+  padding: 0
+  margin: 0
+  font-family: $font
+  font-size: 1rem
+  color: $black
+  border: 0
+  border-radius: .2rem
+  outline: 0
+
 /* Flexbox fallback */
 #app
   display: flex
@@ -48,7 +58,7 @@ aside.sidebar
 main.main-content
   flex: 3
   background: $white
-  border-radius: 3px
+  border-radius: .2rem
   padding: 1rem
 
 @supports (display: grid)
