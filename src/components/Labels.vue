@@ -1,6 +1,6 @@
 <template>
   <li class="labels">
-    <span 
+    <span
       class="label"
       v-for="label in labels"
       :key="label.index"

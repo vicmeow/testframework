@@ -1,34 +1,27 @@
 <template>
   <li class="list-item">
-    <!-- Item title -->
-    <h2 class="item-title">{{title}}</h2>
-    <!-- First data set -->
-    <div class="dataset" v-if="tc">
-      <span>Test cases</span>
-      <span>{{tc}}</span>
+    <!-- Data sets -->
+    <h2 class="item-title">{{item.name}}</h2>
+    <div class="dataset" v-for="(value, key) in item.data" :key="key">
+      <span class="data-title">{{key}}</span>
+      <span>{{value}}</span>
     </div>
-    <!-- Second data set 
-    <div class="dataset">
-      <span>Tables</span>
-      <span>{{item.tables}}</span>
-    </div>-->
-    <!-- Third data set 
-    <div class="dataset">
-      <span>Runs</span>
-      <span>{{item.runs}}</span>
-    </div>-->
   </li>
 </template>
 
 <script>
 export default {
   props: {
-    title: {
+    item: {
+      type: Object,
+      required: true
+    }
+    /* title: {
       type: String,
       required: true
     },
-    tc: {
-      type: Number,
+    label: {
+      type: String,
       required: false
     },
     tables: {
@@ -42,24 +35,63 @@ export default {
     steps: {
       type: String,
       required: false
-    }
+    } */
   }
 }
 </script>
 
-
 <style lang="sass" scoped>
+
+  =border($width, $color)
+    border-left: $width solid $color
 
   @import 'src/assets/styles/style-variables.sass'
 
-  .success
-    border-left: .4rem solid $green
+  li.list-item
+    background: $white
+    border-radius: 3px
+    margin-bottom: .5rem
+    box-sizing: border-box
+    transition: transform .3s ease-in-out
+    box-shadow: 0 2px 2px 0 $bg, 0 -1px 2px 0 $bg
+    *
+      margin: .1rem 0
+    &:hover
+      transform: translateX(-.5rem)
 
-  .error
-    border-left: .4rem solid $red
+  .dataset
+    display: flex
+    justify-content: space-between
+    &::first-letter
+      text-transform: capitalize
 
-  .current
-    border-left: .4rem solid $blue
+  .project
+    padding: .5rem 1rem
+    &.success
+      +border(.4rem, $green)
+    &.error
+      +border(.4rem, $red)
 
+  .table, .run
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: baseline
+    min-height: 35px
+    padding: .2rem 1rem
+    &.success
+      +border(.25rem, $green)
+    &.error
+      +border(.25rem, $red)
+    &.current
+      +border(.25rem, $blue)
+
+  .item-title
+    font-size: 1rem
+    font-weight: bold
+
+  h3
+    font-weight: normal
+    font-size: 1rem
 
 </style>

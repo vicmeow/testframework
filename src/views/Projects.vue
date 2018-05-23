@@ -10,9 +10,8 @@
         <list-item
           slot="list-item"
           v-for="item in items"
-          :key="item.index"
-          :title="item.name"
-          :tc="item.tc"
+          :key="item.name"
+          :item="item"
           :class="{
             success: item.status === 'success',
             error: item.status === 'error',
@@ -21,13 +20,9 @@
             table: item.type === 'table',
             run: item.type === 'run'
           }"/>
-            
-          
         </item-list>
       </TheSidebar>
-    <MainContent>
-
-      </MainContent>
+    <MainContent/>
   </div>
 </template>
 
@@ -51,43 +46,53 @@ export default {
     items: [
       {
         name: 'Webshop',
-        tc: 123,
-        tables: 3,
-        runs: 34,
         type: 'project',
-        status: 'error'
+        status: 'error',
+        data: {
+          'test cases': 123,
+          tables: 3,
+          runs: 34
+        }
       },
       {
         name: 'Project 2',
-        tc: 124,
-        tables: 3,
-        runs: 34,
         type: 'project',
-        status: 'success'
+        status: 'success',
+        data: {
+          'test cases': 123,
+          tables: 3,
+          runs: 34
+        }
       },
       {
         name: 'Project 3',
-        tc: 11134,
-        tables: 3,
-        runs: 34,
         type: 'project',
-        status: 'success'
+        status: 'success',
+        data: {
+          'test cases': 123,
+          tables: 3,
+          runs: 34
+        }
       },
       {
         name: 'Project 4',
-        tc: 1219,
-        tables: 3,
-        runs: 34,
         type: 'project',
-        status: 'success'
+        status: 'success',
+        data: {
+          'test cases': 123,
+          tables: 3,
+          runs: 34
+        }
       },
       {
         name: 'Project 5',
-        tc: 1337,
-        tables: 3,
-        runs: 34,
         type: 'project',
-        status: 'error'
+        status: 'error',
+        data: {
+          'test cases': 123,
+          tables: 3,
+          runs: 34
+        }
       }
     ]
   })
