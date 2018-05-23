@@ -1,6 +1,6 @@
 <template>
   <aside class="sidebar">
-    <searchbar :placeholder="placeholder" v-model="value" @input="findMatch"/>
+    <searchbar :placeholder="placeholder" v-model="value"/>
     <item-list :items="items">
         <!-- Labels for List of Projects -->
         <labels slot="labels" :labels="['Project', '+']"/>
@@ -47,13 +47,6 @@ export default {
         return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
     })
   }
-  },
-  methods: {
-    findMatch (value) {
-      return this.items.filter(item => {
-        return item.name.includes(value)
-      })
-    }
   },
   data: () => ({
     value: '',
