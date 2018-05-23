@@ -10,6 +10,7 @@
           v-for="item in filteredItems"
           :key="item.name"
           :item="item"
+          :sidebar="true"
           :class="{
             success: item.status === 'success',
             error: item.status === 'error',
@@ -36,72 +37,24 @@ export default {
     ListItem
   },
   props: {
+    items: {
+      type: Array,
+      required: true
+    },
     placeholder: {
       type: String,
       required: true
     }
   },
   computed: {
-    filteredItems() {
+    filteredItems () {
       return this.items.filter(item => {
         return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
-    })
-  }
+      })
+    }
   },
   data: () => ({
-    value: '',
-    items: [
-      {
-        name: 'Abc',
-        type: 'project',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Abcd',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'B',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'A',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'C',
-        type: 'project',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      }
-    ]
+    value: ''
   })
 }
 </script>

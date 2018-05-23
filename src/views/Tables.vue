@@ -1,26 +1,16 @@
 <template>
-  <main class="content">
-      <h1>Selected: {{title}}</h1>
-  </main>
+  <div class="tables">
+    <TheSidebar :placeholder="'Search tables...'" :items="tables"/>
+  </div>
 </template>
 
 <script>
-import ItemList from '@/components/list/ItemList'
-import ListItem from '@/components/list/ListItem'
-import Labels from '@/components//Labels'
+import TheSidebar from '@/components/TheSidebar'
 
 export default {
-  name: 'MainContent',
+  name: 'Projects',
   components: {
-    ItemList,
-    ListItem,
-    Labels
-  },
-  props: {
-    title: {
-      type: String,
-      required: true
-    }
+    TheSidebar
   },
   data: () => ({
     tables: [
@@ -67,23 +57,11 @@ export default {
     ]
   })
 }
-
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
-  @import 'src/assets/styles/style-variables.sass'
+  .projects
+    display: contents
 
-  .content
-    background: $white
-
-  .list
-    grid-column-start: 8
-    grid-column: span 4
-    z-index: 2
-
-  .list-title
-    font-size: 1rem
-    font-weight: bold
-    margin-bottom: .5rem
 </style>

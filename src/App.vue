@@ -44,6 +44,8 @@ input, input:focus
 #app
   display: flex
   flex-wrap: wrap
+  max-width: 1440px
+  margin: auto
 
 header.header
   flex-basis: 100%
@@ -51,11 +53,13 @@ header.header
   display: flex
   justify-content: space-between
   padding: 1rem
+  margin-bottom: 1rem
 
 aside.sidebar
   flex: 1
+  margin-right: 1rem
 
-main.main-content
+main.content
   flex: 3
   background: $white
   border-radius: .2rem
@@ -71,11 +75,13 @@ main.main-content
 
   header.header
     grid-area: hd
+    margin-bottom: 0
 
   aside.sidebar
     grid-area: sb
+    margin-right: 0
 
-  main.main-content
+  main.content
     grid-area: mn
 
 </style>
