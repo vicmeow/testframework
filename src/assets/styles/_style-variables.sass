@@ -1,0 +1,46 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Lato')
+
+$font: 'Lato', sans-serif
+
+// Base colors
+$black: #323232
+$white: #ffffff
+$grey: #BBBBBB
+
+$bg: #F5F7FA
+
+$green: #66E866
+$red: #E86666
+$blue: #6666E8
+
+  
+
+
+// Mixins
+$large-desktop-width: 2048px
+$small-laptop-width: 1100px
+$tablet-width: 1120px
+$mobile-width: 768px
+$small-mobile: 320px
+
+@mixin large-desktop
+  @media (min-width: #{$large-desktop-width})
+    @content
+
+@mixin small-laptop
+  @media (max-width: #{$small-laptop-width})
+    @content
+
+@mixin tablet
+  @media (max-width: #{$tablet-width})
+    @content
+
+@mixin mobile
+  @media (max-width: #{$mobile-width})
+    @content
+
+@mixin small
+  @media (max-width: #{$mobile-width})
+    @content
