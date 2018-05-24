@@ -1,81 +1,56 @@
 <template>
   <div class="projects">
-    <TheSidebar :placeholder="'Search projects...'" :items="projects"/>
-    <MainContent :title="title"/>
+    <h1>Hello world</h1>
+    <!-- SIDEBAR 
+    <TheSidebar :placeholder="'Search projects...'" :items="projects" :labels="['Projects', '+']"/> -->
+    <!-- MAIN COMPONENT 
+    <main-content :title="title">
+      
+    </main-content>-->
   </div>
 </template>
 
 <script>
 import TheSidebar from '@/components/TheSidebar'
 import MainContent from '@/components/MainContent'
+import mapGetters from 'vuex'
+import ItemList from '@/components/list/ItemList'
+import ListItem from '@/components/list/ListItem'
 
 export default {
   name: 'Projects',
   components: {
     TheSidebar,
-    MainContent
+    MainContent,
+    ItemList,
+    ListItem
   },
   props: {
     title: {
       type: String,
-      required: true,
-      default: 'Name'
+      required: false,
+      default: 'Title'
     }
   },
-  data: () => ({
-    projects: [
-      {
-        name: 'Abc',
-        type: 'project',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Abcd',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'B',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'A',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'C',
-        type: 'project',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
+  computed: {
+    projects(){
+      return this.$store.state.projects
+    },
+    tables(){
+      
+    }
+  },
+  mounted () {
+    // FETCH FIRST PROJECT IN LIST ON INITIAL RENDER
+    const projects = this.$store.state.projects
+    let tables = []
+      for (let project of projects ) {
+        for (let table of project.tables){
+          tables.push(table)
         }
       }
-    ]
-  })
+      console.log(tables)
+  }
 }
 </script>
 
@@ -83,5 +58,12 @@ export default {
 
   .projects
     display: contents
+
+  .table-list
+    grid-column-start: 8
+    grid-column: span 4
+  
+  .run-list
+    grid-column: span 8
 
 </style>

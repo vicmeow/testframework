@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 
   @import 'src/assets/styles/style-variables.sass'
 
@@ -37,8 +37,5 @@ export default {
     font-size: .8rem
     font-weight: 300
     color: $grey
-
-  .action
-    cursor: pointer
 
 </style>

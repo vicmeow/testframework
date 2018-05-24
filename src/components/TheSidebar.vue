@@ -1,9 +1,7 @@
 <template>
   <aside class="sidebar">
     <searchbar :placeholder="placeholder" v-model="value"/>
-    <item-list :items="items">
-        <!-- Labels for List of Projects -->
-        <labels slot="labels" :labels="['Project', '+']"/>
+    <item-list :items="items" :labels="labels">
         <!-- Loop to render list-items -->
         <list-item
           slot="list-item"
@@ -30,6 +28,7 @@ import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
 
 export default {
+  name: 'Sidebar',
   components: {
     Searchbar,
     ItemList,
@@ -39,22 +38,30 @@ export default {
   props: {
     items: {
       type: Array,
-      required: true
+      required: false,
     },
     placeholder: {
       type: String,
       required: true
-    }
-  },
-  computed: {
-    filteredItems () {
-      return this.items.filter(item => {
-        return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
-      })
+    },
+    labels: {
+      type: Array,
+      required: true
     }
   },
   data: () => ({
     value: ''
-  })
+  }),
+  computed: {
+    filteredItems () {
+      if(this.items){
+        return this.items.filter(item => {
+        return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
+      })
+      } else {
+        return false
+      }
+    }
+  }
 }
 </script>

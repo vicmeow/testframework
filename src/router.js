@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Projects from './views/Projects'
-// import Tables from './views/Tables'
+import Home from './views/Home'
+import TheSidebar from './components/TheSidebar'
+import store from './store/store'
 // import Runs from './views/Runs'
 
 Vue.use(Router)
@@ -16,21 +18,20 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'projects',
-      component: Projects,
-      children: [
-        {
-          path: '/:title',
-          name: 'project',
-          props: true,
-          component: Projects
-        }
-        // {
-        // path: 'runs/:id',
-        // props: true,
-        // component: Runs
-        // }
-      ]
+      name: 'home',
+      component: Home,
+      redirect: {name: 'project', params: {item: store.state.projects[0], projects: store.state.projects, labels: ['Projects', '+'], listtype: 'Tables'}}
+    },
+    {
+      path: '/project/:title',
+      name: 'project',
+      props: true,
+      component: Home
+    },
+    {
+      path: 'test',
+      name: 'test',
+      component: Projects
     }
   ]
 })

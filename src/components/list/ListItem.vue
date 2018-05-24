@@ -1,9 +1,10 @@
 <template>
-  <li class="list-item">
+  <li 
+    class="list-item"> 
     <!-- Data sets -->
-      <router-link 
-        class="item-title" 
-        :to="{ name: 'project', params: {title: item.name}}"
+      <router-link
+        class="item-title"
+        :to="{ name: 'project', params: { title: item.name, item: item} }"
         >
           {{item.name}}
         </router-link>
@@ -25,6 +26,9 @@ export default {
       type: Boolean,
       required: false
     }
+  },
+  mounted(){
+    
   }
 }
 </script>
@@ -36,13 +40,12 @@ export default {
 
   @import 'src/assets/styles/style-variables.sass'
 
-  li.list-item
+  .list-item
     background: $white
     border-radius: 3px
     margin-bottom: .5rem
     box-sizing: border-box
     transition: transform .3s ease-in-out
-    box-shadow: 0 2px 2px 0 $bg, 0 -1px 2px 0 $bg
     box-shadow: 0 .1rem .4rem $bg-darker
     *
       margin: .1rem 0
@@ -57,8 +60,9 @@ export default {
   .dataset
     display: flex
     justify-content: space-between
-    &::first-letter
-      text-transform: capitalize
+  
+  .data-title::first-letter
+    text-transform: capitalize
 
   .project
     padding: .5rem 1rem
@@ -87,5 +91,13 @@ export default {
   h3
     font-weight: normal
     font-size: 1rem
+  
+  .router-link-exact-active
+    color: $blue
+  
+  .active
+    transform: translateX(-.5rem)
+    box-shadow: 0 .5rem 1rem $bg-darker
+
 
 </style>
