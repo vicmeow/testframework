@@ -1,9 +1,15 @@
 <template>
-  <li class="list-item">
+  <li 
+    class="list-item"> 
     <!-- Data sets -->
-    <h2 class="item-title">{{item.name}}</h2>
+      <router-link
+        class="item-title"
+        :to="{ name: name, params: {item: item, labels: [name + 's', '+']} }"
+        >
+          {{item.name}}
+        </router-link>
     <div class="dataset" v-for="(value, key) in item.data" :key="key">
-      <span class="data-title">{{key}}</span>
+      <span class="data-title" v-if="sidebar">{{key}}</span>
       <span>{{value}}</span>
     </div>
   </li>
@@ -15,27 +21,18 @@ export default {
     item: {
       type: Object,
       required: true
-    }
-    /* title: {
+    },
+    name: {
       type: String,
       required: true
     },
-    label: {
-      type: String,
+    sidebar: {
+      type: Boolean,
       required: false
-    },
-    tables: {
-      type: Number,
-      required: false
-    },
-    runs: {
-      type: Number,
-      required: false
-    },
-    steps: {
-      type: String,
-      required: false
-    } */
+    }
+  },
+  mounted(){
+    
   }
 }
 </script>
@@ -47,23 +44,29 @@ export default {
 
   @import 'src/assets/styles/style-variables.sass'
 
-  li.list-item
+  .list-item
     background: $white
     border-radius: 3px
     margin-bottom: .5rem
     box-sizing: border-box
     transition: transform .3s ease-in-out
-    box-shadow: 0 2px 2px 0 $bg, 0 -1px 2px 0 $bg
+    box-shadow: 0 .1rem .4rem $bg-darker
     *
       margin: .1rem 0
     &:hover
       transform: translateX(-.5rem)
 
+  .item-title
+    font-size: 1rem
+    font-weight: normal
+    cursor: pointer
+
   .dataset
     display: flex
     justify-content: space-between
-    &::first-letter
-      text-transform: capitalize
+  
+  .data-title::first-letter
+    text-transform: capitalize
 
   .project
     padding: .5rem 1rem
@@ -71,6 +74,9 @@ export default {
       +border(.4rem, $green)
     &.error
       +border(.4rem, $red)
+
+    .item-title
+      font-weight: bold
 
   .table, .run
     display: flex
@@ -86,12 +92,16 @@ export default {
     &.current
       +border(.25rem, $blue)
 
-  .item-title
-    font-size: 1rem
-    font-weight: bold
-
   h3
     font-weight: normal
     font-size: 1rem
+  
+  .router-link-exact-active
+    color: $blue
+  
+  .active
+    transform: translateX(-.5rem)
+    box-shadow: 0 .5rem 1rem $bg-darker
+
 
 </style>

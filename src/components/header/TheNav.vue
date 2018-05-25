@@ -1,8 +1,16 @@
 <template>
   <nav class="nav">
-    <router-link to="/">Projects</router-link>
+    
   </nav>
 </template>
+
+<script>
+export default {
+  name: 'Navigation'
+}
+</script>
+
+
 <style scoped lang="sass">
 
   nav.nav

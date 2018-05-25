@@ -8,7 +8,7 @@
 <script>
 import TheNav from '@/components/header/TheNav'
 export default {
-  name: 'TheHeader',
+  name: 'Header',
   components: {
     TheNav
   }

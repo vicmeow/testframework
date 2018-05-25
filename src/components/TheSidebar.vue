@@ -1,15 +1,15 @@
 <template>
   <aside class="sidebar">
     <searchbar :placeholder="placeholder" v-model="value"/>
-    <item-list :items="items">
-        <!-- Labels for List of Projects -->
-        <labels slot="labels" :labels="['Project', '+']"/>
+    <item-list :items="items" :labels="labels">
         <!-- Loop to render list-items -->
         <list-item
           slot="list-item"
           v-for="item in filteredItems"
           :key="item.name"
           :item="item"
+          :sidebar="true"
+          :name="'project'"
           :class="{
             success: item.status === 'success',
             error: item.status === 'error',
@@ -29,6 +29,7 @@ import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
 
 export default {
+  name: 'Sidebar',
   components: {
     Searchbar,
     ItemList,
@@ -36,72 +37,32 @@ export default {
     ListItem
   },
   props: {
+    items: {
+      type: Array,
+      required: false,
+    },
     placeholder: {
       type: String,
       required: true
+    },
+    labels: {
+      type: Array,
+      required: true
     }
   },
-  computed: {
-    filteredItems() {
-      return this.items.filter(item => {
-        return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
-    })
-  }
-  },
   data: () => ({
-    value: '',
-    items: [
-      {
-        name: 'Abc',
-        type: 'project',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Abcd',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'B',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'A',
-        type: 'project',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'C',
-        type: 'project',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
+    value: ''
+  }),
+  computed: {
+    filteredItems () {
+      if(this.items){
+        return this.items.filter(item => {
+        return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
+      })
+      } else {
+        return false
       }
-    ]
-  })
+    }
+  }
 }
 </script>

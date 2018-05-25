@@ -1,108 +1,120 @@
 <template>
-  <main class="main-content">
-    <div class="project-selected"></div>
-      <item-list>
-        <labels slot="labels" :labels="['Name', 'Test cases']"/>
-        <li slot="list-title"><h2 class="list-title">Tables</h2></li>
+  <main class="content">
+      <div class="item">
+        <h1>{{item.name}}</h1>
+      </div>
+
+
+      <item-list 
+        v-if="tables"
+        :class="{'table-list': tables}" 
+        :title="'Tables'" 
+        :labels="['Name', 'Test cases']"
+        >
         <list-item
-          slot="list-item"
-          v-for="item in items"
-          :key="item.name"
-          :item="item"
           :class="{
+            active: $route.path === 'projects/' + item.name,
             success: item.status === 'success',
             error: item.status === 'error',
-            table: item.type === 'table',
-            run: item.type === 'run'
-          }"/>
-      </item-list>
-  </main>
+            table: tables
+          }"
+          slot="list-item"
+          v-for="item in tables"
+          :key="item.name"
+          :item="item"
+          :name="'table'"
+          />
+        </item-list>
+        <item-list 
+          v-if="runs"
+          :class="{'run-list': runs}" 
+          :title="'Latest runs'" 
+          :labels="['Name', 'Test cases']"
+          >
+          <list-item
+            :class="{
+              active: $route.path === 'projects/' + item.name,
+              success: item.status === 'success',
+              error: item.status === 'error',
+              current: item.status === 'current',
+              run: runs
+            }"
+            slot="list-item"
+            v-for="item in runs"
+            :key="item.name"
+            :item="item"
+            :name="'run'"
+            />
+        </item-list>
+    </main>
 </template>
 
 <script>
+
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
-import Labels from '@/components//Labels'
 
 export default {
-  name: 'MainContent',
+  name: 'Content',
   components: {
     ItemList,
-    ListItem,
-    Labels
+    ListItem
   },
-  data: () => ({
-    items: [
-      {
-        name: 'Webshop',
-        type: 'table',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Project 2',
-        type: 'table',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Project 3',
-        type: 'table',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Project 4',
-        type: 'table',
-        status: 'success',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      },
-      {
-        name: 'Project 5',
-        type: 'table',
-        status: 'error',
-        data: {
-          'test cases': 123,
-          tables: 3,
-          runs: 34
-        }
-      }
-    ]
-  })
+  props: {
+    item: {
+      type: Object,
+      required: false
+    },
+    tables: {
+      type: Array,
+      required: false
+    },
+    runs: {
+      type: Array,
+      required: false
+    }
+  }
 }
 
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
   @import 'src/assets/styles/style-variables.sass'
 
-  .main-content
+  .content
+    display: contents
+  
+  .item
     background: $white
-
-  .list
-    grid-column-start: 8
-    grid-column: span 4
+    grid-row: 2
+    grid-column-start: 4
+    grid-column-end: 8
     z-index: 2
+    padding: .5rem 1rem
+    z-index: 1000
 
-  .list-title
-    font-size: 1rem
-    font-weight: bold
-    margin-bottom: .5rem
+  .item-info
+    display: flex
+    flex-direction: row
+
+  .info-container
+    display: flex
+    flex-direction: column
+    margin-right: 1rem
+
+  .table-list
+    grid-row: 2
+    grid-column-start: 8
+    grid-column-end: 12
+    z-index: 2
+    margin: 1rem
+  
+  .run-list
+    grid-row: 3
+    grid-column-start: 4
+    grid-column-end: 12
+    z-index: 2
+    margin: 1rem
+
 </style>
