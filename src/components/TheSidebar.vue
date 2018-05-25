@@ -9,6 +9,7 @@
           :key="item.name"
           :item="item"
           :sidebar="true"
+          :name="'project'"
           :class="{
             success: item.status === 'success',
             error: item.status === 'error',

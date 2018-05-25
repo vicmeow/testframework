@@ -1,14 +1,14 @@
 <template>
   <main class="content">
       <div class="item">
-        <h1>{{title}}</h1>
+        <h1>{{item.name}}</h1>
       </div>
 
 
       <item-list 
         v-if="tables"
         :class="{'table-list': tables}" 
-        :title="listtype" 
+        :title="'Tables'" 
         :labels="['Name', 'Test cases']"
         >
         <list-item
@@ -22,12 +22,13 @@
           v-for="item in tables"
           :key="item.name"
           :item="item"
+          :name="'table'"
           />
         </item-list>
         <item-list 
           v-if="runs"
           :class="{'run-list': runs}" 
-          :title="listtype" 
+          :title="'Latest runs'" 
           :labels="['Name', 'Test cases']"
           >
           <list-item
@@ -42,6 +43,7 @@
             v-for="item in runs"
             :key="item.name"
             :item="item"
+            :name="'run'"
             />
         </item-list>
     </main>
@@ -59,13 +61,9 @@ export default {
     ListItem
   },
   props: {
-    title: {
-      type: String,
+    item: {
+      type: Object,
       required: false
-    },
-    listtype: {
-      type: String,
-      required: true
     },
     tables: {
       type: Array,

@@ -4,7 +4,7 @@
     <!-- Data sets -->
       <router-link
         class="item-title"
-        :to="{ name: 'project', params: { title: item.name, item: item} }"
+        :to="{ name: name, params: {item: item, labels: [name + 's', '+']} }"
         >
           {{item.name}}
         </router-link>
@@ -20,6 +20,10 @@ export default {
   props: {
     item: {
       type: Object,
+      required: true
+    },
+    name: {
+      type: String,
       required: true
     },
     sidebar: {

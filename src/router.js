@@ -20,13 +20,27 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      redirect: {name: 'project', params: {item: store.state.projects[0], projects: store.state.projects, labels: ['Projects', '+'], listtype: 'Tables'}}
+      redirect: {name: 'project', params: {title: store.state.projects[0].name, item: store.state.projects[0], items: store.state.projects, labels: ['Projects', '+']}}
     },
     {
-      path: '/project/:title',
+      path: '/:title',
       name: 'project',
       props: true,
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: ':table',
+          name: 'table',
+          component: Home,
+          props: true
+        },
+        {
+          path: ':run',
+          name: 'run',
+          component: Home,
+          props: true
+        }
+      ]
     },
     {
       path: 'test',

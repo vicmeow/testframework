@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="content-bg"></div>
-    <TheSidebar :placeholder="'Search projects...'" :items="projects" :labels="labels"/>
-    <main-content :title="item.name" :tables="item.tables" :runs="item.runs" :projects="projects" :listtype="listtype">
+    <TheSidebar :placeholder="'Search projects...'" :labels="labels" :items="items" :name="'sidebar'"/>
+    <main-content :title="item.name" :tables="item.tables" :runs="item.runs">
     </main-content>
   </div>
 </template>
@@ -22,15 +22,11 @@ export default {
       type: Object,
       required: true
     },
-    listtype: {
-      type: String,
-      required: true
-    },
     labels: {
       type: Array,
       required: true
     },
-    projects: {
+    items: {
       type: Array,
       required: false
     }

@@ -37,5 +37,6 @@ export default {
     font-size: .8rem
     font-weight: 300
     color: $grey
+    text-transform: capitalize
 
 </style>
