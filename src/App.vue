@@ -1,15 +1,23 @@
 <template>
   <div id="app">
     <the-header/>
+    <TheSidebar :placeholder="'Search projects...'" :items="activeList" :type="'sidebar'"/>
     <router-view/>
   </div>
 </template>
 
 <script>
+import TheSidebar from '@/components/TheSidebar'
 import TheHeader from '@/components/header/TheHeader'
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    TheSidebar
+  },
+  computed: {
+    activeList () {
+      return this.$store.getters['projects/projects']
+    }
   }
 }
 </script>
@@ -70,9 +78,6 @@ main.content
   background: $white
   border-radius: .2rem
   padding: 1rem
-
-.wrapper
-  display: contents
 
 @supports (display: grid)
   #app

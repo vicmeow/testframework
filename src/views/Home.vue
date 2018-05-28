@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="content-bg"></div>
-    <TheSidebar :placeholder="'Search projects...'" :labels="labels" :items="items" :name="'sidebar'"/>
-    <main-content :title="item.name" :tables="item.tables" :runs="item.runs">
-    </main-content>
+
   </div>
 </template>
 
@@ -18,21 +15,10 @@ export default {
     MainContent
   },
   props: {
-    item: {
-      type: Object,
-      required: true
-    },
     labels: {
-      type: Array,
-      required: true
-    },
-    items: {
       type: Array,
       required: false
     }
-  },
-  mounted(){
-    //this.$router.replace({name: 'project', item: this.item})
   }
 }
 </script>
@@ -41,9 +27,9 @@ export default {
 
   @import 'src/assets/styles/style-variables.sass'
 
-  .projects
+  .wrapper
     display: contents
-  
+
   .content-bg
     background: $white
     grid-area: mn

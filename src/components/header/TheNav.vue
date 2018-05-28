@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    
+
   </nav>
 </template>
 
@@ -9,7 +9,6 @@ export default {
   name: 'Navigation'
 }
 </script>
-
 
 <style scoped lang="sass">
 

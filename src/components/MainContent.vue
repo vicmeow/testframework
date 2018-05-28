@@ -1,51 +1,8 @@
 <template>
   <main class="content">
       <div class="item">
-        <h1>{{item.name}}</h1>
+        <h1>Hello world</h1>
       </div>
-
-
-      <item-list 
-        v-if="tables"
-        :class="{'table-list': tables}" 
-        :title="'Tables'" 
-        :labels="['Name', 'Test cases']"
-        >
-        <list-item
-          :class="{
-            active: $route.path === 'projects/' + item.name,
-            success: item.status === 'success',
-            error: item.status === 'error',
-            table: tables
-          }"
-          slot="list-item"
-          v-for="item in tables"
-          :key="item.name"
-          :item="item"
-          :name="'table'"
-          />
-        </item-list>
-        <item-list 
-          v-if="runs"
-          :class="{'run-list': runs}" 
-          :title="'Latest runs'" 
-          :labels="['Name', 'Test cases']"
-          >
-          <list-item
-            :class="{
-              active: $route.path === 'projects/' + item.name,
-              success: item.status === 'success',
-              error: item.status === 'error',
-              current: item.status === 'current',
-              run: runs
-            }"
-            slot="list-item"
-            v-for="item in runs"
-            :key="item.name"
-            :item="item"
-            :name="'run'"
-            />
-        </item-list>
     </main>
 </template>
 
@@ -84,7 +41,7 @@ export default {
 
   .content
     display: contents
-  
+
   .item
     background: $white
     grid-row: 2
@@ -109,7 +66,7 @@ export default {
     grid-column-end: 12
     z-index: 2
     margin: 1rem
-  
+
   .run-list
     grid-row: 3
     grid-column-start: 4

@@ -1,7 +1,5 @@
 <template>
   <ul class="list">
-    <li v-if="title"><h2 class="list-title">{{title}}</h2></li>
-    <labels :labels="labels"/>
     <slot name="list-item"></slot>
   </ul>
 </template>
@@ -12,19 +10,9 @@ export default {
   components: {
     Labels
   },
-  props: {
-    title: {
-      type: String,
-      required: false
-    },
-    labels: {
-      type: Array,
-      required: true
-    }
-  }
+  props: {}
 }
 </script>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">

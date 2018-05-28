@@ -1,5 +1,6 @@
 <template>
   <li class="labels">
+    <!--
     <span
       class="label"
       v-for="label in labels"
@@ -7,6 +8,7 @@
       >
       {{label}}
     </span>
+    -->
   </li>
 </template>
 
@@ -16,7 +18,7 @@ export default {
   props: {
     labels: {
       type: Array,
-      required: true
+      required: false
     }
   }
 }

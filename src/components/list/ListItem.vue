@@ -1,15 +1,9 @@
 <template>
-  <li 
-    class="list-item"> 
-    <!-- Data sets -->
-      <router-link
-        class="item-title"
-        :to="{ name: name, params: {item: item, labels: [name + 's', '+']} }"
-        >
-          {{item.name}}
-        </router-link>
+  <li
+    class="list-item">
+    <router-link :to="{name: item.type, params: {id: item.title, item: item}}">{{item.title}}</router-link>
     <div class="dataset" v-for="(value, key) in item.data" :key="key">
-      <span class="data-title" v-if="sidebar">{{key}}</span>
+      <span class="data-title" v-if="type === 'sidebar'">{{key}}</span>
       <span>{{value}}</span>
     </div>
   </li>
@@ -20,19 +14,15 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true
+      required: false
     },
-    name: {
+    type: {
       type: String,
-      required: true
-    },
-    sidebar: {
-      type: Boolean,
       required: false
     }
   },
-  mounted(){
-    
+  mounted () {
+
   }
 }
 </script>
@@ -64,7 +54,7 @@ export default {
   .dataset
     display: flex
     justify-content: space-between
-  
+
   .data-title::first-letter
     text-transform: capitalize
 
@@ -95,13 +85,12 @@ export default {
   h3
     font-weight: normal
     font-size: 1rem
-  
+
   .router-link-exact-active
     color: $blue
-  
+
   .active
     transform: translateX(-.5rem)
     box-shadow: 0 .5rem 1rem $bg-darker
-
 
 </style>
