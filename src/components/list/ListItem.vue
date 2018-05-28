@@ -1,15 +1,33 @@
 <template>
-  <li
-    class="list-item">
-    <router-link :to="{name: item.type, params: {id: item.title, item: item}}">{{item.title}}</router-link>
-    <div class="dataset" v-for="(value, key) in item.data" :key="key">
+  <li 
+    class="list-item" 
+    :class="{
+      success: item.status === 'OK',
+      error: item.status === 'FAILED',
+      current: item.status === 'current',
+      sidebar: type === 'sidebar',
+      table: type === 'table',
+      run: type === 'run',
+      testcase: type === 'testcase'
+    }">
+    <slot name="routerlink"></slot>
+    {{item.countAll}}
+    <div 
+      class="dataset" 
+      v-for="(value, key) in item.data" 
+      :key="key">
       <span class="data-title" v-if="type === 'sidebar'">{{key}}</span>
       <span>{{value}}</span>
     </div>
+
+
+      
+
   </li>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   props: {
     item: {
@@ -19,6 +37,11 @@ export default {
     type: {
       type: String,
       required: false
+    },
+    methods: {
+      ...mapActions({
+      sidebarList: 'get_SidebarList' // map `this.add()` to `this.$store.dispatch('increment')`
+    })
     }
   },
   mounted () {
@@ -35,12 +58,16 @@ export default {
   @import 'src/assets/styles/style-variables.sass'
 
   .list-item
+    display: flex
     background: $white
     border-radius: 3px
     margin-bottom: .5rem
     box-sizing: border-box
     transition: transform .3s ease-in-out
     box-shadow: 0 .1rem .4rem $bg-darker
+    justify-content: space-between
+    flex-wrap: wrap
+
     *
       margin: .1rem 0
     &:hover
@@ -52,13 +79,15 @@ export default {
     cursor: pointer
 
   .dataset
+    display: contents
     display: flex
     justify-content: space-between
 
   .data-title::first-letter
     text-transform: capitalize
 
-  .project
+  .sidebar
+    flex-direction: column
     padding: .5rem 1rem
     &.success
       +border(.4rem, $green)
@@ -67,11 +96,13 @@ export default {
 
     .item-title
       font-weight: bold
+      flex-basis: 100%
 
-  .table, .run
+  .table, .run, .testcase
     display: flex
     flex-direction: row
     justify-content: space-between
+    align-content: center
     align-items: baseline
     min-height: 35px
     padding: .2rem 1rem
@@ -92,5 +123,8 @@ export default {
   .active
     transform: translateX(-.5rem)
     box-shadow: 0 .5rem 1rem $bg-darker
+  
+  .testcase-data
+    display: contents
 
 </style>

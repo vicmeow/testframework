@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Item from '@/views/Item'
+import Run from '@/views/Run'
+import LandingPage from '@/views/LandingPage'
 // import TheSidebar from './components/TheSidebar'
 import store from '@/store/store'
-// import Runs from './views/Runs'
+import Projects from '@/views/Projects'
+import Project from '@/views/Project'
 
 Vue.use(Router)
 
@@ -14,23 +16,39 @@ Vue.use(Router)
  */
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
+      name: 'landing',
+      component: LandingPage,
       redirect: {
-        name: 'Projects'
+        name: 'projects'
       }
     },
     {
       path: '/projects',
-      name: 'Projects',
-      component: Item,
+      name: 'projects',
+      component: Projects,
       props: true,
+      redirect: {
+        name: 'project',
+        params: {
+          projecttitle: store.getters['projects/projects'][0].title,
+          item: store.getters['projects/projects'][0]
+        }
+      },
       children: [
         {
-          path: ':id',
+          path: ':projecttitle',
           name: 'project',
-          component: Item,
+          component: Project,
+          props: true
+        },
+        {
+          path: ':projecttitle/:runtitle',
+          name: 'run',
+          component: Run,
           props: true
         }
       ]

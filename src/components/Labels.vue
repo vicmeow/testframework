@@ -1,6 +1,5 @@
 <template>
   <li class="labels">
-    <!--
     <span
       class="label"
       v-for="label in labels"
@@ -8,7 +7,6 @@
       >
       {{label}}
     </span>
-    -->
   </li>
 </template>
 

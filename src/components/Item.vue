@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <h1>{{item.title}}</h1>
+    <h1>{{title}}</h1>
   </div>
 </template>
 
@@ -12,33 +12,34 @@ import ListItem from '@/components/list/ListItem'
 
 export default {
   name: 'Item',
-  components: {
-    TheSidebar,
-    MainContent,
-    ItemList,
-    ListItem
-  },
   props: {
+    title: {
+      type: String,
+      required: false
+    },
     item: {
       type: Object,
       required: false
-    }
-  },
-  created () {
-    if(!this.title){
-      this.$router.push({ 
-          name: 'project', 
-          params: {
-            id: this.$store.getters['projects/projects'][0].title,
-            item: this.$store.getters['projects/projects'][0]
-            }
-          })
+    },
+    activeList: {
+      type: Array,
+      required: false
     }
   }
 }
 </script>
 
+<style lang="sass" scoped>
+  .border
+    border: 5px solid red
+</style>
+
+
 <style lang="sass">
+
+  .border
+    grid-column: 2/12
+    
 
   .item
     grid-column: 4 / 12

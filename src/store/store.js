@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import projects from './modules/projects'
+import runs from './modules/runs'
+import testcases from './modules/testcases'
+
 /* ----------  Modules  ---------- */
 // import projects from './modules/projects'
 
@@ -8,29 +11,29 @@ Vue.use(Vuex) // Tell our vue app to use Vuex
 
 /* ----------  Global Scope  ---------- */
 const state = {
-  activeList: [],
+  sidebarList: [],
   activeItem: {}
 }
 const getters = {
-  activeList () {
-    return state.activeList
+  sidebarList () {
+    return state.sidebarList
   },
   activeItem () {
     return state.activeItem
   }
 }
 const actions = {
-  get_activeList ({commit}, list) {
-    commit('RECEIVE_ACTIVELIST', list)
+  get_sidebarList ({commit}, list) {
+    commit('set_sidebarList', list)
   },
   get_activeItem ({commit}, item) {
     commit('RECEIVE_ACTIVEITEM', item)
   }
 }
 const mutations = {
-  RECEIVE_ACTIVELIST (state, {data}) {
-    state.activeList = []
-    state.activeList.push(data)
+  set_sidebarList (state, {data}) {
+    state.sidebarList = []
+    state.sidebarList.push(data)
   },
   RECEIVE_ACTIVEItem (state, {data}) {
     state.activeItem = data
@@ -44,6 +47,8 @@ export default new Vuex.Store({
   mutations,
   getters,
   modules: {
-    projects
+    projects,
+    runs,
+    testcases
   }
 })
