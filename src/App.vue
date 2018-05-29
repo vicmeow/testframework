@@ -71,8 +71,9 @@ main.content
   border-radius: .2rem
   padding: 1rem
 
-.wrapper
-  display: contents
+.route-main
+  grid-column: 2/12
+  border: 2px solid red
 
 @supports (display: grid)
   #app

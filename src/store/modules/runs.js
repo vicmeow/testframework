@@ -1,31 +1,33 @@
 const state = {
-  projects: [
+  runs: [
     {
-      title: 'Project 1',
-      type: 'project',
+      title: 'Run 1',
+      suite: 'RI-Kern Suite',
       status: 'FAILED',
+      id: '3f2376db-1e68-4a16-a280-f346317ed46f',
       data: {
         'test cases': 45,
-        runs: 2,
-        tables: 0
+        success: 30,
+        error: 15
       }
     },
     {
-      title: 'Project 2',
-      type: 'project',
+      title: 'Run 2',
+      suite: 'RI-Kern Suite',
       status: 'OK',
+      id: '3f2376db-1e68-4a16-a280-f346317ed46f',
       data: {
         'test cases': 45,
-        runs: 2,
-        tables: 0
+        success: 45,
+        error: 0
       }
     }
   ]
 }
 
 const getters = {
-  projects () {
-    return state.projects
+  runs () {
+    return state.runs
   }
 }
 const actions = {}

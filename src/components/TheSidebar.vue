@@ -1,23 +1,34 @@
 <template>
   <aside class="sidebar">
     <searchbar :placeholder="placeholder" v-model="value"/>
+    <slot name="back"></slot>
     <item-list :items="items" :labels="labels">
         <!-- Loop to render list-items -->
         <list-item
           slot="list-item"
           v-for="item in filteredItems"
-          :key="item.name"
+          :key="item.title"
           :item="item"
-          :sidebar="true"
-          :name="'project'"
-          :class="{
-            success: item.status === 'success',
-            error: item.status === 'error',
-            current: item.status === 'current',
-            project: item.type === 'project',
-            table: item.type === 'table',
-            run: item.type === 'run'
-          }"/>
+          :type="'sidebar'">
+          
+          <router-link
+            v-if="routename === 'run'"
+            slot="routerlink"
+            class="item-title"
+            :to="{name: routename, params: {runtitle: item.title}}"
+            >{{item.title}}
+            </router-link>
+          <router-link
+            v-if="routename === 'project'"
+            slot="routerlink"
+            class="item-title"
+            :to="{name: routename, params: {projecttitle: item.title}}"
+            >{{item.title}}
+            </router-link>
+          </list-item>
+
+          
+          
         </item-list>
   </aside>
 </template>
@@ -39,14 +50,22 @@ export default {
   props: {
     items: {
       type: Array,
-      required: false,
+      required: false
     },
     placeholder: {
       type: String,
-      required: true
+      required: false
+    },
+    type: {
+      type: String,
+      required: false
     },
     labels: {
       type: Array,
+      required: false
+    },
+    routename: {
+      type: String,
       required: true
     }
   },
@@ -54,11 +73,12 @@ export default {
     value: ''
   }),
   computed: {
+
     filteredItems () {
-      if(this.items){
+      if (this.items) {
         return this.items.filter(item => {
-        return item.name.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
-      })
+          return item.title.toLowerCase().indexOf(this.value.toLowerCase()) >= 0
+        })
       } else {
         return false
       }

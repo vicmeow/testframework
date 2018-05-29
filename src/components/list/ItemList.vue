@@ -1,6 +1,6 @@
 <template>
   <ul class="list">
-    <li v-if="title"><h2 class="list-title">{{title}}</h2></li>
+    <h4 class="list-title">{{title}}</h4>
     <labels :labels="labels"/>
     <slot name="list-item"></slot>
   </ul>
@@ -19,12 +19,11 @@ export default {
     },
     labels: {
       type: Array,
-      required: true
+      required: false
     }
   }
 }
 </script>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
