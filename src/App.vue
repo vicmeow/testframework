@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <the-header/>
-    <router-view/>
+    <router-view>
+      <router-view></router-view>
+    </router-view>
   </div>
 </template>
 
@@ -53,6 +55,9 @@ h1
   flex-wrap: wrap
   margin: auto
 
+.wrapper
+  display: contents
+
 header.header
   flex-basis: 100%
   background: $white
@@ -70,10 +75,6 @@ main.content
   background: $white
   border-radius: .2rem
   padding: 1rem
-
-.route-main
-  grid-column: 2/12
-  border: 2px solid red
 
 @supports (display: grid)
   #app

@@ -10,7 +10,7 @@
           :key="item.title"
           :item="item"
           :type="'sidebar'">
-          
+
           <router-link
             v-if="routename === 'run'"
             slot="routerlink"
@@ -27,8 +27,6 @@
             </router-link>
           </list-item>
 
-          
-          
         </item-list>
   </aside>
 </template>

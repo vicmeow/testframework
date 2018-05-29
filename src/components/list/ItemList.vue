@@ -34,6 +34,7 @@ export default {
     list-style-type: none
     margin: 0
     padding: 0
+    margin-top: 1rem
 
   .list-title
     font-size: 1rem

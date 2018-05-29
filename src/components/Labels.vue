@@ -1,10 +1,6 @@
 <template>
   <li class="labels">
-    <span
-      class="label"
-      v-for="label in labels"
-      :key="label.index"
-      >
+    <span class="label" v-for="label in labels" :key="label.index">
       {{label}}
     </span>
   </li>
@@ -37,6 +33,11 @@ export default {
     font-size: .8rem
     font-weight: 300
     color: $grey
+
+  .label::first-letter
     text-transform: capitalize
+
+  .label:nth-child(1)
+    flex-basis: 50%
 
 </style>

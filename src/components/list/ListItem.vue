@@ -1,33 +1,26 @@
 <template>
-  <li 
-    class="list-item" 
-    :class="{
-      success: item.status === 'OK',
-      error: item.status === 'FAILED',
-      current: item.status === 'current',
-      sidebar: type === 'sidebar',
-      table: type === 'table',
-      run: type === 'run',
-      testcase: type === 'testcase'
+  <li class="list-item"
+      :class="{
+        success: item.status === 'OK',
+        error: item.status === 'FAILED',
+        current: item.status === 'current',
+        sidebar: type === 'sidebar',
+        table: type === 'table',
+        run: type === 'run',
+        testcase: type === 'testcase'
     }">
+
     <slot name="routerlink"></slot>
-    {{item.countAll}}
-    <div 
-      class="dataset" 
-      v-for="(value, key) in item.data" 
-      :key="key">
-      <span class="data-title" v-if="type === 'sidebar'">{{key}}</span>
+
+    <div class="sidebar-dataset" v-for="(value, key) in item.data" :key="key" v-if="type === 'sidebar'">
+      <span class="data-title">{{key}}</span>
       <span>{{value}}</span>
     </div>
-
-
-      
 
   </li>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
 export default {
   props: {
     item: {
@@ -37,15 +30,7 @@ export default {
     type: {
       type: String,
       required: false
-    },
-    methods: {
-      ...mapActions({
-      sidebarList: 'get_SidebarList' // map `this.add()` to `this.$store.dispatch('increment')`
-    })
     }
-  },
-  mounted () {
-
   }
 }
 </script>
@@ -78,7 +63,7 @@ export default {
     font-weight: normal
     cursor: pointer
 
-  .dataset
+  .sidebar-dataset
     display: contents
     display: flex
     justify-content: space-between
@@ -118,12 +103,12 @@ export default {
     font-size: 1rem
 
   .router-link-exact-active
-    color: $blue
+    font-weight: bold
 
   .active
     transform: translateX(-.5rem)
     box-shadow: 0 .5rem 1rem $bg-darker
-  
+
   .testcase-data
     display: contents
 

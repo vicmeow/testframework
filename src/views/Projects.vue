@@ -4,18 +4,10 @@
   </div>
 </template>
 
-<script>
-
-export default {
-  name: 'Projects'
-}
-</script>
-
 <style lang="sass">
-
-  @import 'src/assets/styles/style-variables.sass'
-
-  .wrapper
-    display: contents
-
+  .item
+    grid-column: 4 / 12
+    background: white
+    border-radius: .2rem
+    padding: .5rem 1rem
 </style>

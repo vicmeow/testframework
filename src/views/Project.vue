@@ -1,13 +1,12 @@
 <template>
   <div class="wrapper">
     <the-sidebar :placeholder="'Search projects...'" :routename="'project'" :items="projects"/>
-    <div class="item">
-      <span class="label">Title</span>
-      <h1 class="item-title">{{$route.params.projecttitle}}</h1>
 
-      <item-list 
-        class="run-list" 
-        :title="'Runs'" 
+    <item :titleLabel="'Project'" :title="$route.params.projecttitle">
+      <item-list
+        slot="list-bottom"
+        class="run-list"
+        :title="'Runs'"
         :labels="['Name', 'Test cases', 'Success', 'Fail']"
         >
         <list-item
@@ -27,14 +26,13 @@
             </list-item>
 
         </item-list>
-
+        </item>
     </div>
-  </div>
 </template>
 
 <script>
 import TheSidebar from '@/components/TheSidebar'
-import MainContent from '@/components/MainContent'
+import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
 
@@ -42,7 +40,7 @@ export default {
   name: 'Project',
   components: {
     TheSidebar,
-    MainContent,
+    Item,
     ItemList,
     ListItem
   },
@@ -57,36 +55,12 @@ export default {
     }
   },
   computed: {
-    projects(){
+    projects () {
       return this.$store.getters['projects/projects']
     },
-    runs(){
+    runs () {
       return this.$store.getters['runs/runs']
     }
   }
 }
 </script>
-
-<style lang="sass">
-
-  .wrapper
-    display: contents
-
-  .route
-    border: 1px solid red
-
-  .item
-    grid-column: 4 / 12
-    background: white
-    border-radius: .2rem
-    padding: .5rem 1rem
-    
-
-  .table-list
-    grid-column-start: 8
-    grid-column: span 4
-
-  .run-list
-    grid-column: span 8
-
-</style>
