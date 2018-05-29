@@ -1,7 +1,7 @@
 <template>
   <li class="list-item"
       :class="{
-        active: $route.params.title === item.title,
+        active: item.title === $route.params.projecttitle || item.title === $route.params.runtitle,
         success: item.status === 'OK',
         error: item.status === 'FAILED',
         current: item.status === 'current',

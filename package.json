@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npm run src_format && npm run src_lint && vue-cli-service serve --open",
-    "build": "npm run src_format && npm run src_lint && vue-cli-service build",
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "src_format": "prettier --no-semi --single-quote --trailing-comma es5 --write \"{src,tests}/**/*.js\""
   },

@@ -7,7 +7,7 @@
       <item-list slot="list-bottom"
                  class="run-list"
                  :title="'Runs'"
-                 :labels="['Name', 'Test cases', 'Success', 'Fail']">
+                 :labels="['Name']">
 
         <list-item slot="list-item"
                    v-for="item in runs"
