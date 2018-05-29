@@ -9,9 +9,26 @@
 
 <script>
 import TheHeader from '@/components/header/TheHeader'
+// Enables us to use ...mapActions in our comonponent
+import {mapActions} from 'vuex'
 export default {
   components: {
     TheHeader
+  },
+  methods: {
+    ...mapActions({
+      fetchData: 'api/FETCH_DATA' // maps 'this.fetchData()' to 'this.$store.dispatch['api/FETCH_DATA']'
+    })
+  },
+  created(){
+    // Data fetching API calls go here
+    // Fetch data from API by dispatching the FETCH_DATA action from the api module in the store
+    // Example:
+    this.$store.dispatch['api/FETCH_DATA']
+    // To see if api module is availble in the store, use the Vue extensions in firefox or chrome dectools
+    // One can also map the action to a method, and call it here:
+    this.fetchData()
+    // See ...mapActions above.
   }
 }
 </script>

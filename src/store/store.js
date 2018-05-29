@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+/* ----------  Modules  ---------- */
 import projects from './modules/projects'
 import runs from './modules/runs'
 import testcases from './modules/testcases'
-
-/* ----------  Modules  ---------- */
-// import projects from './modules/projects'
+// Import the api module to the store
+import api from './modules/api'
 
 Vue.use(Vuex) // Tell our vue app to use Vuex
 
@@ -49,6 +49,8 @@ export default new Vuex.Store({
   modules: {
     projects,
     runs,
-    testcases
+    testcases,
+    // Make api module available in the store
+    api
   }
 })

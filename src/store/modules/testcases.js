@@ -9,7 +9,7 @@ const getters = {
     for (let item of testcases) {
       state.testcases.push(item.meta.tc)
     }
-    return state.testcases.sort((a,b) => {
+    return state.testcases.sort((a, b) => {
       return b.time - a.time
     })
   }
@@ -17,8 +17,7 @@ const getters = {
 
 const actions = {}
 
-const mutations = {
-}
+const mutations = {}
 export default {
   namespaced: true,
   state,
