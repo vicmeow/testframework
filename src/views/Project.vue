@@ -3,30 +3,31 @@
     <the-sidebar :placeholder="'Search projects...'" :routename="'project'" :items="projects"/>
 
     <item :titleLabel="'Project'" :title="$route.params.projecttitle">
-      <item-list
-        slot="list-bottom"
-        class="run-list"
-        :title="'Runs'"
-        :labels="['Name', 'Test cases', 'Success', 'Fail']"
-        >
-        <list-item
-          slot="list-item"
-          v-for="item in runs"
-          :key="item.title"
-          :item="item"
-          :type="'run'">
 
-          <router-link
-            slot="routerlink"
-            class="item-title"
-            :to="{name: 'run', params: {runtitle: item.title}}"
-            >{{item.title}}
-            </router-link>
+      <item-list slot="list-bottom"
+                 class="run-list"
+                 :title="'Runs'"
+                 :labels="['Name', 'Test cases', 'Success', 'Fail']">
 
+        <list-item slot="list-item"
+                   v-for="item in runs"
+                   :key="item.title"
+                   :item="item"
+                   :type="'run'">
+
+          <router-link slot="routerlink"
+                       class="item-title"
+                       :to="{
+                         name: 'run',
+                         params: {
+                           runtitle: item.title
+                            }
+                          }">
+              {{item.title}}
+              </router-link>
             </list-item>
-
         </item-list>
-        </item>
+      </item>
     </div>
 </template>
 

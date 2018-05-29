@@ -1,8 +1,6 @@
 <template>
   <li class="labels">
-    <span class="label" v-for="label in labels" :key="label.index">
-      {{label}}
-    </span>
+    <span class="label" v-for="label in labels" :key="label.index">{{label}}</span>
   </li>
 </template>
 

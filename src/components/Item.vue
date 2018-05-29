@@ -2,6 +2,7 @@
   <div class="item">
     <span class="label">{{titleLabel}} title</span>
     <h1 class="item-title">{{title}}</h1>
+
     <slot name="list-right"></slot>
     <slot name="list-bottom"></slot>
   </div>

@@ -1,34 +1,32 @@
 <template>
   <aside class="sidebar">
     <searchbar :placeholder="placeholder" v-model="value"/>
+    <!-- BACK button -->
     <slot name="back"></slot>
-    <item-list :items="items" :labels="labels">
-        <!-- Loop to render list-items -->
-        <list-item
-          slot="list-item"
-          v-for="item in filteredItems"
-          :key="item.title"
-          :item="item"
-          :type="'sidebar'">
-
-          <router-link
-            v-if="routename === 'run'"
-            slot="routerlink"
-            class="item-title"
-            :to="{name: routename, params: {runtitle: item.title}}"
-            >{{item.title}}
+    <!-- ITEMLIST in sidebar -->
+    <item-list :labels="labels">
+      <!-- Loop to render LISTITEMS in sidebar -->
+        <list-item slot="list-item"
+                   v-for="item in filteredItems"
+                   :key="item.title" :item="item"
+                   :type="'sidebar'">
+          <!-- ROUTERLINK if LISTITEM === RUN -->
+          <router-link slot="routerlink"
+                       v-if="routename === 'run'"
+                       class="item-title"
+                       :to="{name: routename, params: {runtitle: item.title}}">
+              {{item.title}}
             </router-link>
-          <router-link
-            v-if="routename === 'project'"
-            slot="routerlink"
-            class="item-title"
-            :to="{name: routename, params: {projecttitle: item.title}}"
-            >{{item.title}}
+          <!-- ROUTERLINK if LISTITEM === PROJECT -->
+          <router-link slot="routerlink"
+                       v-if="routename === 'project'"
+                       class="item-title"
+                       :to="{name: routename, params: {projecttitle: item.title}}">
+              {{item.title}}
             </router-link>
-          </list-item>
-
-        </item-list>
-  </aside>
+        </list-item>
+      </item-list>
+    </aside>
 </template>
 
 <script>
@@ -45,6 +43,9 @@ export default {
     Labels,
     ListItem
   },
+  data: () => ({
+    value: ''
+  }),
   props: {
     items: {
       type: Array,
@@ -67,12 +68,9 @@ export default {
       required: true
     }
   },
-  data: () => ({
-    value: ''
-  }),
   computed: {
-
     filteredItems () {
+      // Filters item in sidebar according to searcbar input
       if (this.items) {
         return this.items.filter(item => {
           return item.title.toLowerCase().indexOf(this.value.toLowerCase()) >= 0

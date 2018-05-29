@@ -1,15 +1,31 @@
 <template>
   <div class="wrapper">
-    <the-sidebar :placeholder="'Search runs...'" :items="runs" :routename="'run'" :labels="['runs', '+']">
-      <router-link slot="back" to="/projects" class="label">Go back</router-link>
-    </the-sidebar>
+    <the-sidebar :placeholder="'Search runs...'"
+                 :items="runs"
+                 :routename="'run'"
+                 :labels="['runs', '+']">
+
+        <router-link slot="back" to="/projects" class="label">Go back</router-link>
+
+      </the-sidebar>
 
    <item :titleLabel="'Run'" :title="$route.params.runtitle">
-      <item-list slot="list-bottom" class="run-list" :title="'Test cases'" :labels="['Name', 'Test cases']">
-        <list-item slot="list-item" v-for="item in testcases" :key="item.title" :item="item" :type="'testcase'">
-          <h3 slot="routerlink" class="item-title">{{item.title}}</h3>
-          </list-item>
+
+      <item-list slot="list-bottom"
+                 class="run-list"
+                 :title="'Test cases'"
+                 :labels="['Name', 'Test cases']">
+
+          <list-item slot="list-item"
+                    v-for="item in testcases"
+                    :key="item.title"
+                    :item="item"
+                    :type="'testcase'">
+
+            <h3 slot="routerlink" class="item-title">{{item.title}}</h3>
+            </list-item>
         </item-list>
+
       </item>
   </div>
 </template>
