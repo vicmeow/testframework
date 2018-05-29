@@ -83,6 +83,10 @@ main.content
     grid-template-rows: 55px auto auto
     grid-template-areas: "hd hd hd hd hd hd hd hd hd hd hd hd " ". sb sb mn mn mn mn mn mn mn mn ." ". sb sb mn mn mn mn mn mn mn mn ."
     grid-gap: 1rem
+    @include tablet
+      padding: 0 1rem
+      grid-template-columns: repeat(8, 1fr)
+      grid-template-areas: "hd hd hd hd hd hd hd hd " "sb sb mn mn mn mn mn mn" "sb sb mn mn mn mn mn mn"
 
   header.header
     grid-area: hd

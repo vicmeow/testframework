@@ -4,7 +4,7 @@
     <!-- BACK button -->
     <slot name="back"></slot>
     <!-- ITEMLIST in sidebar -->
-    <item-list :labels="labels">
+    <item-list :labels="labels" class="sidebar">
       <!-- Loop to render LISTITEMS in sidebar -->
         <list-item slot="list-item"
                    v-for="item in filteredItems"

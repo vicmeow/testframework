@@ -56,10 +56,10 @@ export default {
     }
   },
   computed: {
-    projects () {
+    projects() {
       return this.$store.getters['projects/projects']
     },
-    runs () {
+    runs() {
       return this.$store.getters['runs/runs']
     }
   }

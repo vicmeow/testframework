@@ -5,7 +5,7 @@
                  :routename="'run'"
                  :labels="['runs', '+']">
 
-        <router-link slot="back" to="/projects" class="label">Go back</router-link>
+        <router-link slot="back" to="/projects" tag="span" exact class="label">Go back</router-link>
 
       </the-sidebar>
 
@@ -14,7 +14,7 @@
       <item-list slot="list-bottom"
                  class="run-list"
                  :title="'Test cases'"
-                 :labels="['Name', 'Test cases']">
+                 :labels="['Name', 'Timestamp']">
 
           <list-item slot="list-item"
                     v-for="item in testcases"
@@ -59,10 +59,10 @@ export default {
     }
   },
   computed: {
-    runs () {
+    runs() {
       return this.$store.getters['runs/runs']
     },
-    testcases () {
+    testcases() {
       return this.$store.getters['testcases/testcases']
     }
   }

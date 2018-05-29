@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Item',
   props: {
@@ -26,8 +25,10 @@ export default {
 </script>
 
 <style lang="sass">
+  @import 'src/assets/styles/style-variables.sass'
+
   .item
-    grid-column: 4 / 12
+    grid-area: mn
     background: white
     border-radius: .2rem
     padding: .5rem 1rem

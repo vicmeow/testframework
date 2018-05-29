@@ -1,6 +1,7 @@
 <template>
   <li class="list-item"
       :class="{
+        active: $route.params.title === item.title,
         success: item.status === 'OK',
         error: item.status === 'FAILED',
         current: item.status === 'current',
@@ -11,10 +12,13 @@
     }">
 
     <slot name="routerlink"></slot>
+    <span class="data-item" v-if="type === 'testcase'">
+    {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
+      </span>
 
     <div class="sidebar-dataset" v-for="(value, key) in item.data" :key="key" v-if="type === 'sidebar'">
       <span class="data-title">{{key}}</span>
-      <span>{{value}}</span>
+      <span class="data-item">{{value}}</span>
     </div>
 
   </li>
@@ -42,6 +46,8 @@ export default {
 
   @import 'src/assets/styles/style-variables.sass'
 
+  /* GENERAL STYLING OF LIST ITEM */
+
   .list-item
     display: flex
     background: $white
@@ -51,10 +57,11 @@ export default {
     transition: transform .3s ease-in-out
     box-shadow: 0 .1rem .4rem $bg-darker
     justify-content: space-between
-    flex-wrap: wrap
+    flex-wrap: no-wrap
 
     *
       margin: .1rem 0
+
     &:hover
       transform: translateX(-.5rem)
 
@@ -63,13 +70,15 @@ export default {
     font-weight: normal
     cursor: pointer
 
+  .data-title::first-letter
+    text-transform: capitalize
+
+  /* STYLING OF LIST ITEMS IN SIDEBAR */
+
   .sidebar-dataset
     display: contents
     display: flex
     justify-content: space-between
-
-  .data-title::first-letter
-    text-transform: capitalize
 
   .sidebar
     flex-direction: column
@@ -82,6 +91,8 @@ export default {
     .item-title
       font-weight: bold
       flex-basis: 100%
+  
+  /* STYLING OF LIST ITEMS WHEN A TABLE, RUN OR TESTCASE */
 
   .table, .run, .testcase
     display: flex
@@ -97,10 +108,15 @@ export default {
       +border(.25rem, $red)
     &.current
       +border(.25rem, $blue)
+    
+    .item-title
+      flex-basis: 80%
+      padding-right: 1rem
 
-  h3
-    font-weight: normal
-    font-size: 1rem
+    .data-item
+      flex-basis: 20%
+  
+  /* ROUTER LINK STYLING */
 
   .router-link-exact-active
     font-weight: bold
@@ -108,8 +124,5 @@ export default {
   .active
     transform: translateX(-.5rem)
     box-shadow: 0 .5rem 1rem $bg-darker
-
-  .testcase-data
-    display: contents
 
 </style>
