@@ -2,6 +2,7 @@
 import axios from 'axios'
 
 const state = {
+  message: 'this message comes from our api module. Data from the API call will be put somewhere here.',
   testcases: []
 }
 
