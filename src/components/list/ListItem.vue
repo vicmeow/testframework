@@ -91,7 +91,7 @@ export default {
     .item-title
       font-weight: bold
       flex-basis: 100%
-  
+
   /* STYLING OF LIST ITEMS WHEN A TABLE, RUN OR TESTCASE */
 
   .table, .run, .testcase
@@ -108,14 +108,14 @@ export default {
       +border(.25rem, $red)
     &.current
       +border(.25rem, $blue)
-    
+
     .item-title
       flex-basis: 80%
       padding-right: 1rem
 
     .data-item
       flex-basis: 20%
-  
+
   /* ROUTER LINK STYLING */
 
   .router-link-exact-active

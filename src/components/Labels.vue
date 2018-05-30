@@ -25,10 +25,10 @@ export default {
     justify-content: space-between
     margin-bottom: .25rem
     padding-right: 1rem
-  
+
   .sidebar .labels
     padding-left: 1.4rem
-  
+
   .run-list .labels
     padding-left: 1.25rem
 
