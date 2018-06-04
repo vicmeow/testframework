@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper">
-    <the-sidebar :placeholder="'Search runs...'"
-                 :items="runs"
-                 :routename="'run'"
-                 :labels="['runs', '+']">
+    <the-sidebar :placeholder="'Search testcases...'"
+                 :items="testcases"
+                 :routename="'testcase'"
+                 :labels="['testcase', '+']">
 
         <router-link slot="back" to="/projects" tag="span" exact class="label">Go back</router-link>
 
       </the-sidebar>
 
-   <item :titleLabel="'Run'" :title="$route.params.runtitle">
+   <item :titleLabel="'Steps'" :title="$route.params.tctitle">
 
       <item-list slot="list-bottom"
                  class="run-list"
@@ -17,20 +17,12 @@
                  :labels="['Name', 'Timestamp']">
 
           <list-item slot="list-item"
-                    v-for="item in testcases"
+                    v-for="item in steps"
                     :key="item.title"
                     :item="item"
-                    :type="'testcase'">
+                    :type="'step'">
 
-            <router-link 
-                      slot="routerlink" 
-                      class="item-title" 
-                      @click.native="fetchSteps"
-                      :to="{
-                        name: 'testcase', 
-                        params: {
-                          tctitle: item.title
-                          }}">{{item.title}}</router-link>
+            <h3 slot="routerlink" class="item-title">{{item.title}}</h3>
             </list-item>
         </item-list>
 
@@ -43,9 +35,9 @@ import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
-import {mapActions} from 'vuex'
+
 export default {
-  name: 'Run',
+  name: 'Testcase',
   components: {
     TheSidebar,
     Item,
@@ -66,17 +58,12 @@ export default {
       required: false
     }
   },
-  methods: {
-    ...mapActions({
-      fetchSteps: 'testcases/FETCH_STEPS'
-    })
-  },
   computed: {
-    runs () {
-      return this.$store.getters['runs/runs']
-    },
     testcases () {
       return this.$store.getters['testcases/testcases']
+    },
+    steps () {
+      return this.$store.getters['testcases/steps']
     }
   }
 }

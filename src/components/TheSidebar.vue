@@ -24,6 +24,13 @@
                        :to="{name: routename, params: {projecttitle: item.title}}">
               {{item.title}}
             </router-link>
+          <!-- ROUTERLINK if LISTITEM === TESTCASE -->
+          <router-link slot="routerlink"
+                       v-if="routename === 'testcase'"
+                       class="item-title"
+                       :to="{name: routename, params: {tctitle: item.title}}">
+              {{item.title}}
+            </router-link>
         </list-item>
       </item-list>
     </aside>

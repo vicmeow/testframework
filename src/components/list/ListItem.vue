@@ -8,11 +8,16 @@
         sidebar: type === 'sidebar',
         table: type === 'table',
         run: type === 'run',
-        testcase: type === 'testcase'
+        testcase: type === 'testcase',
+        step: type === 'step'
     }">
 
     <slot name="routerlink"></slot>
     <span class="data-item" v-if="type === 'testcase'">
+    {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
+      </span>
+    
+    <span class="data-item" v-if="type === 'step'">
     {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
       </span>
 
@@ -94,7 +99,7 @@ export default {
 
   /* STYLING OF LIST ITEMS WHEN A TABLE, RUN OR TESTCASE */
 
-  .table, .run, .testcase
+  .table, .run, .testcase, .step
     display: flex
     flex-direction: row
     justify-content: space-between
@@ -102,6 +107,7 @@ export default {
     align-items: baseline
     min-height: 35px
     padding: .2rem 1rem
+    align-items: center
     &.success
       +border(.25rem, $green)
     &.error

@@ -6,6 +6,7 @@ import LandingPage from '@/views/LandingPage'
 import store from '@/store/store'
 import Projects from '@/views/Projects'
 import Project from '@/views/Project'
+import Testcase from '@/views/Testcase'
 
 Vue.use(Router)
 
@@ -49,6 +50,12 @@ export default new Router({
           path: ':projecttitle/:runtitle',
           name: 'run',
           component: Run,
+          props: true
+        },
+        {
+          path: ':projecttitle/:runtitle/:tctitle',
+          name: 'testcase',
+          component: Testcase,
           props: true
         }
       ]
