@@ -9,7 +9,7 @@
 
       </the-sidebar>
 
-   <item :titleLabel="'Steps'" :title="$route.params.tctitle">
+   <item :titleLabel="'Testcase'" :title="$route.params.tctitle">
 
       <item-list slot="list-bottom"
                  class="run-list"
@@ -22,7 +22,15 @@
                     :item="item"
                     :type="'step'">
 
-            <h3 slot="routerlink" class="item-title">{{item.title}}</h3>
+            <router-link 
+                      slot="routerlink" 
+                      class="item-title" 
+                      :to="{
+                        name: 'step', 
+                        params: {
+                          steptitle: item.title,
+                          item: item
+                          }}">{{item.title}}</router-link>
             </list-item>
         </item-list>
 

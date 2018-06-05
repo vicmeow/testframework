@@ -66,7 +66,12 @@ const mutations = {
       state.steps.push({
         title: step.meta.step.name,
         status: 'OK',
-        time: step.meta.time
+        time: step.meta.time,
+        data: {
+          data1: 'data1',
+          data2: 'data2',
+          data3: 'data3'
+        }
       })
     }
   }

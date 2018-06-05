@@ -5,6 +5,9 @@
 
     <slot name="list-right"></slot>
     <slot name="list-bottom"></slot>
+    <div class="log" v-if="log">
+      {{log}}
+    </div>
   </div>
 </template>
 
@@ -19,6 +22,10 @@ export default {
     titleLabel: {
       type: String,
       required: true
+    },
+    log: {
+      type: Object,
+      required: false
     }
   }
 }
@@ -32,4 +39,12 @@ export default {
     background: white
     border-radius: .2rem
     padding: .5rem 1rem
+  
+  .log
+    grid-column: 4/8
+    margin: 1rem 0
+    white-space: pre
+    background: $black
+    color: white
+    padding: 1rem
 </style>

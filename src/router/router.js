@@ -7,6 +7,7 @@ import store from '@/store/store'
 import Projects from '@/views/Projects'
 import Project from '@/views/Project'
 import Testcase from '@/views/Testcase'
+import Step from '@/views/Step'
 
 Vue.use(Router)
 
@@ -56,6 +57,12 @@ export default new Router({
           path: ':projecttitle/:runtitle/:tctitle',
           name: 'testcase',
           component: Testcase,
+          props: true
+        },
+        {
+          path: ':projecttitle/:runtitle/:tctitle/:steptitle',
+          name: 'step',
+          component: Step,
           props: true
         }
       ]
