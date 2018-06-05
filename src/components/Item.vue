@@ -47,4 +47,5 @@ export default {
     background: $black
     color: white
     padding: 1rem
+    border-radius: .2rem
 </style>
