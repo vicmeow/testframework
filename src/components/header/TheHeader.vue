@@ -15,6 +15,12 @@ export default {
 }
 </script>
 
+/**
+ * TODO:
+ * - Add user profile (current user) info in right corner
+ * - Add signout button
+ */
+
 <style lang="sass" scoped>
 
   @import 'src/assets/styles/style-variables.sass'

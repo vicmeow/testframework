@@ -1,11 +1,15 @@
 <template>
   <div id="app">
     <the-header/>
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
+
+/**
+ * TODO:
+ * - Add route transitions
+ * - Add a footer with neccessary information
+ */
 
 <script>
 import TheHeader from '@/components/header/TheHeader'
@@ -79,17 +83,21 @@ h1
   display: contents
 
 header.header
+  position: sticky
+  top: 0
   flex-basis: 100%
   background: $white
   display: flex
   justify-content: flex-start
   align-items: center
-  //padding: 1rem
-  //margin-bottom: 1rem
+  z-index: 99
 
 aside.sidebar
   flex: 1
   margin-right: 1rem
+  position: sticky
+  top: calc(55px + 1rem)
+  height: 100vh
 
 main.content
   flex: 3
@@ -122,11 +130,10 @@ main.content
 
 /* TRANSITIONS */
 
-.fade-enter-active, .fade-leave-active
+.page-enter-active, .page-leave-active
   transition: all .3s
 
-.fade-enter, .fade-leave-to
-  opacity: 0
-  transform: translateY(1rem)
+.page-enter, .page-leave-to
+  transform: translateY(5rem)
 
 </style>

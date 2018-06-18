@@ -13,8 +13,8 @@ Vue.use(Router)
 
 /**
  * TODO:
- * Load last active or first project in list on initial render
- * Add dynamic routing for tables and runs by name or id
+ * - Load last active or first project in list on initial render
+ * - Add dynamic routing for tables and runs by name or id
  */
 
 export default new Router({

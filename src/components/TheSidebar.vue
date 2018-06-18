@@ -36,6 +36,11 @@
     </aside>
 </template>
 
+/**
+ * TODO:
+ * - Make selected item always appear on top of list
+ */
+
 <script>
 import Searchbar from '@/components/Searchbar'
 import ItemList from '@/components/list/ItemList'

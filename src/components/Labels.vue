@@ -4,6 +4,11 @@
   </li>
 </template>
 
+/**
+ * TODO:
+ * - Make this component reusable in Item component
+ */
+
 <script>
 export default {
   name: 'Labels',
@@ -35,6 +40,7 @@ export default {
   .label
     font-size: .8rem
     color: $grey
+    margin-bottom: .2rem
 
   .label::first-letter
     text-transform: capitalize
