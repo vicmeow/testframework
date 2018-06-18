@@ -1,13 +1,11 @@
 <template>
   <div class="wrapper">
     <the-sidebar :placeholder="'Search testcases...'"
+                 :back="{name: 'run'}"
                  :items="testcases"
                  :routename="'testcase'"
                  :labels="['testcase', '+']">
-
-        <router-link slot="back" to="/projects" tag="span" exact class="label">Go back</router-link>
-
-      </the-sidebar>
+    </the-sidebar>
 
    <item :titleLabel="'Testcase'" :title="$route.params.tctitle">
 
@@ -22,11 +20,11 @@
                     :item="item"
                     :type="'step'">
 
-            <router-link 
-                      slot="routerlink" 
-                      class="item-title" 
+            <router-link
+                      slot="routerlink"
+                      class="item-title"
                       :to="{
-                        name: 'step', 
+                        name: 'step',
                         params: {
                           steptitle: item.title,
                           item: item

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <the-sidebar :placeholder="'Search projects...'" :routename="'project'" :items="projects"/>
+    <the-sidebar :placeholder="'Search projects...'" :routename="'project'" :labels="['project', '+']" :items="projects"/>
 
     <item :titleLabel="'Project'" :title="$route.params.projecttitle">
 

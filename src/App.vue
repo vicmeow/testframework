@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <the-header/>
-    <router-view>
+    <transition name="fade" mode="out-in">
       <router-view></router-view>
-    </router-view>
+    </transition>
   </div>
 </template>
 
@@ -41,6 +41,16 @@ body, html
   box-sizing: border-box
   padding: 0
   margin: 0
+
+ul
+  list-style-type: none
+  margin: 0
+  padding: 0
+
+button
+  outline: 0
+  background: 0
+  border: 0
 
 input, input:focus
   padding: 0
@@ -108,5 +118,14 @@ main.content
 
   main.content
     grid-area: mn
+
+/* TRANSITIONS */
+
+.fade-enter-active, .fade-leave-active
+  transition: all .3s
+
+.fade-enter, .fade-leave-to
+  opacity: 0
+  transform: translateY(1rem)
 
 </style>

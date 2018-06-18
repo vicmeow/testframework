@@ -23,7 +23,7 @@ export default {
   .labels
     display: flex
     justify-content: space-between
-    margin-bottom: .25rem
+    margin-bottom: .5rem
     padding-right: 1rem
 
   .sidebar .labels

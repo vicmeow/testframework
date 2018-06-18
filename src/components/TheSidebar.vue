@@ -1,7 +1,9 @@
 <template>
   <aside class="sidebar">
-    <searchbar :placeholder="placeholder" v-model="value"/>
     <!-- BACK button -->
+    <router-link :to="back" tag="button" exact class="label navigate-back">< Back to {{back.name}}s</router-link>
+    <searchbar :placeholder="placeholder" v-model="value"/>
+    <slot name="navigate-back"></slot>
     <slot name="back"></slot>
     <!-- ITEMLIST in sidebar -->
     <item-list :labels="labels" class="sidebar">
@@ -54,6 +56,10 @@ export default {
     value: ''
   }),
   props: {
+    back: {
+      type: Object,
+      required: false
+    },
     items: {
       type: Array,
       required: false
@@ -89,3 +95,10 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+
+  button.navigate-back
+    margin-bottom: .5rem
+    cursor: pointer
+</style>

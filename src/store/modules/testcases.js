@@ -67,6 +67,7 @@ const mutations = {
         title: step.meta.step.name,
         status: 'OK',
         time: step.meta.time,
+        log: step,
         data: {
           data1: 'data1',
           data2: 'data2',

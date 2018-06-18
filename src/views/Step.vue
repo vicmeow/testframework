@@ -1,15 +1,13 @@
 <template>
   <div class="wrapper">
     <the-sidebar :placeholder="'Search steps...'"
+                 :back="{name: 'testcase'}"
                  :items="steps"
                  :routename="'step'"
                  :labels="['step', '+']">
+    </the-sidebar>
 
-        <router-link slot="back" to="/projects" tag="span" exact class="label">Go back</router-link>
-
-      </the-sidebar>
-
-   <item :titleLabel="'Step'" :title="$route.params.steptitle" :log="item"></item>
+   <item :titleLabel="'Step'" :title="$route.params.steptitle" :log="item.log"></item>
   </div>
 </template>
 

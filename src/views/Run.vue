@@ -1,13 +1,11 @@
 <template>
   <div class="wrapper">
     <the-sidebar :placeholder="'Search runs...'"
+                 :back="{name: 'project'}"
                  :items="runs"
                  :routename="'run'"
                  :labels="['runs', '+']">
-
-        <router-link slot="back" to="/projects" tag="span" exact class="label">Go back</router-link>
-
-      </the-sidebar>
+    </the-sidebar>
 
    <item :titleLabel="'Run'" :title="$route.params.runtitle">
 
@@ -22,12 +20,12 @@
                     :item="item"
                     :type="'testcase'">
 
-            <router-link 
-                      slot="routerlink" 
-                      class="item-title" 
+            <router-link
+                      slot="routerlink"
+                      class="item-title"
                       @click.native="fetchSteps"
                       :to="{
-                        name: 'testcase', 
+                        name: 'testcase',
                         params: {
                           tctitle: item.title
                           }}">{{item.title}}</router-link>

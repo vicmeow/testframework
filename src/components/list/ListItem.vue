@@ -16,7 +16,7 @@
     <span class="data-item" v-if="type === 'testcase'">
     {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
       </span>
-    
+
     <span class="data-item" v-if="type === 'step'">
     {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
       </span>
