@@ -1,17 +1,17 @@
 <template>
   <div class="wrapper">
-    <the-sidebar :placeholder="'Search testcases...'"
+    <the-sidebar :placeholder="'Search test cases...'"
                  :back="{name: 'run'}"
                  :items="testcases"
                  :routename="'testcase'"
-                 :labels="['testcase', '+']">
+                 :labels="['test case', '+']">
     </the-sidebar>
 
-   <item :titleLabel="'Testcase'" :title="$route.params.tctitle">
+   <item :title="$route.params.tctitle">
 
       <item-list slot="list-bottom"
                  class="run-list"
-                 :title="'Test cases'"
+                 :title="'steps'"
                  :labels="['Name', 'Timestamp']">
 
           <list-item slot="list-item"

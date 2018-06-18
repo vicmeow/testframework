@@ -7,7 +7,7 @@
                  :labels="['step', '+']">
     </the-sidebar>
 
-   <item :titleLabel="'Step'" :title="$route.params.steptitle" :log="item.log"></item>
+   <item :title="$route.params.steptitle" :log="item.log"></item>
   </div>
 </template>
 
@@ -29,6 +29,11 @@ export default {
     item: {
       type: Object,
       required: false
+    }
+  },
+   computed: {
+    steps () {
+      return this.$store.getters['runs/runs']
     }
   }
 }

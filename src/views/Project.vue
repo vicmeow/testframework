@@ -2,7 +2,7 @@
   <div class="wrapper">
     <the-sidebar :placeholder="'Search projects...'" :routename="'project'" :labels="['project', '+']" :items="projects"/>
 
-    <item :titleLabel="'Project'" :title="$route.params.projecttitle">
+    <item :title="$route.params.projecttitle">
 
       <item-list slot="list-bottom"
                  class="run-list"

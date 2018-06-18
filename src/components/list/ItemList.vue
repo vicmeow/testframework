@@ -37,8 +37,9 @@ export default {
     margin-top: 1rem
 
   .list-title
-    font-size: 1rem
-    font-weight: bold
+    font-size: 1.2rem
     margin-bottom: .2rem
+    &:first-letter
+      text-transform: uppercase
 
 </style>

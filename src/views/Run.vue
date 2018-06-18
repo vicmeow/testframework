@@ -7,7 +7,7 @@
                  :labels="['runs', '+']">
     </the-sidebar>
 
-   <item :titleLabel="'Run'" :title="$route.params.runtitle">
+   <item :title="$route.params.runtitle">
 
       <item-list slot="list-bottom"
                  class="run-list"

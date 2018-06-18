@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <span class="label">{{titleLabel}} title</span>
+    <span class="label">Title</span>
     <h1 class="item-title">{{title}}</h1>
 
     <ul class="labels">
@@ -44,10 +44,6 @@ export default {
   name: 'Item',
   props: {
     title: {
-      type: String,
-      required: true
-    },
-    titleLabel: {
       type: String,
       required: true
     },

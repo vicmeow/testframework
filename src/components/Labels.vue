@@ -41,9 +41,8 @@ export default {
     font-size: .8rem
     color: $grey
     margin-bottom: .2rem
-
-  .label::first-letter
-    text-transform: capitalize
+    &:first-letter
+      text-transform: uppercase
 
   .run-list .labels .label:nth-child(1)
     flex-basis: 80%
