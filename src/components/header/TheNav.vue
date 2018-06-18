@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style scoped lang="sass" scoped>
+<style scoped lang="sass">
 
   @import 'src/assets/styles/style-variables.sass'
 
@@ -30,6 +30,5 @@ export default {
 
   .active
     border-bottom: 2px solid $blue
-
 
 </style>
