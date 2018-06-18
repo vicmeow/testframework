@@ -82,9 +82,10 @@ header.header
   flex-basis: 100%
   background: $white
   display: flex
-  justify-content: space-between
-  padding: 1rem
-  margin-bottom: 1rem
+  justify-content: flex-start
+  align-items: center
+  //padding: 1rem
+  //margin-bottom: 1rem
 
 aside.sidebar
   flex: 1
@@ -100,7 +101,7 @@ main.content
   #app
     display: grid
     grid-template-columns: repeat(12, 1fr)
-    grid-template-rows: 55px auto auto
+    grid-template-rows: repeat(3, auto)
     grid-template-areas: "hd hd hd hd hd hd hd hd hd hd hd hd " ". sb sb mn mn mn mn mn mn mn mn ." ". sb sb mn mn mn mn mn mn mn mn ."
     grid-gap: 1rem
     @include tablet

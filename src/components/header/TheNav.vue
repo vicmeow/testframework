@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
-    <router-link to="/projects">Projects</router-link>
-    <router-link to="/">Landing</router-link>
+    <router-link to="/" class="nav-link" :class="{active: $route.name === 'landing'}">Home</router-link>
+    <router-link to="/projects" class="nav-link" :class="{active: $route.path.includes('/projects')}">Projects</router-link>
   </nav>
 </template>
 
@@ -11,8 +11,25 @@ export default {
 }
 </script>
 
-<style scoped lang="sass">
+<style scoped lang="sass" scoped>
 
-  nav.nav
+  @import 'src/assets/styles/style-variables.sass'
+
+  .nav
+    display: flex
+    height: 100%
+    margin-left: 1rem
+
+  .nav-link
+    align-self: flex-end
+    font-size: 1rem
+    margin-right: 1rem
+    border-bottom: 2px solid $bg-darker
+    padding: 0 .5rem
+    padding-bottom: .5rem
+
+  .active
+    border-bottom: 2px solid $blue
+
 
 </style>

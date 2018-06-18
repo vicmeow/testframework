@@ -1,10 +1,8 @@
 <template>
   <aside class="sidebar">
     <!-- BACK button -->
-    <router-link :to="back" tag="button" exact class="label navigate-back">< Back to {{back.name}}s</router-link>
+    <router-link v-if="$route.name != 'project'" :to="back" tag="button" exact class="label navigate-back">Back</router-link>
     <searchbar :placeholder="placeholder" v-model="value"/>
-    <slot name="navigate-back"></slot>
-    <slot name="back"></slot>
     <!-- ITEMLIST in sidebar -->
     <item-list :labels="labels" class="sidebar">
       <!-- Loop to render LISTITEMS in sidebar -->
@@ -99,6 +97,10 @@ export default {
 <style lang="sass" scoped>
 
   button.navigate-back
+    color: black
     margin-bottom: .5rem
     cursor: pointer
+    background: white
+    padding: .2rem 1rem
+    border-radius: 1rem
 </style>

@@ -23,10 +23,7 @@ export default new Router({
     {
       path: '/',
       name: 'landing',
-      component: LandingPage,
-      redirect: {
-        name: 'projects'
-      }
+      component: LandingPage
     },
     {
       path: '/projects',

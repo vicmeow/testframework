@@ -33,6 +33,7 @@ export default {
   @import 'src/assets/styles/style-variables.sass'
 
   .searchbar
+    -webkit-appearance: none
     min-height: 35px
     width: 100%
     margin-bottom: .5rem
@@ -40,6 +41,7 @@ export default {
     box-shadow: 0 .1rem .4rem $bg-darker
     &::placeholder
       color: $grey
+      opacity: 1
     &:focus
       transform: scale(1.05)
 

@@ -2,7 +2,7 @@
   <div class="item">
     <span class="label">{{titleLabel}} title</span>
     <h1 class="item-title">{{title}}</h1>
-    
+
     <ul class="labels">
       <li class="label-item">
         <span class="label label-type">Label</span>
@@ -53,7 +53,7 @@ export default {
 
     .label-item span
       display: block
-      
+
 </style>
 
 <style lang="sass">
@@ -64,7 +64,7 @@ export default {
     background: white
     border-radius: .2rem
     padding: .5rem 1rem
-  
+
   .item-title
     margin-bottom: .5rem
 
@@ -78,4 +78,3 @@ export default {
     border-radius: .2rem
     line-height: 1.5
 </style>
-
