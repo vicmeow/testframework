@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import projects from './modules/projects'
 import runs from './modules/runs'
 import testcases from './modules/testcases'
+import steps from './modules/steps'
 
 Vue.use(Vuex) // Tell our vue app to use Vuex
 
@@ -47,6 +48,7 @@ export default new Vuex.Store({
   modules: {
     projects,
     runs,
-    testcases
+    testcases,
+    steps
   }
 })

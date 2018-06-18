@@ -40,7 +40,7 @@ export default {
     margin-bottom: .2rem
     &:first-letter
       text-transform: uppercase
-  
+
   .run-list, .tc-list, .step-list
     margin-top: 1rem
 

@@ -2,23 +2,23 @@
 import axios from 'axios'
 
 const state = {
-  testcases: []
+  steps: []
 }
 
 const getters = {
-  testcases () {
-    return state.testcases
+  steps () {
+    return state.steps
   }
 }
 
 const actions = {
-  async FETCH_TC ({commit}, id) {
+  async FETCH_STEPS ({commit}, id) {
     try {
       const response = await axios.get(
-        'http://localhost:3000/testcases/' + id
+        'http://localhost:3000/teststeps/' + id
       )
       // Send data to mutations to write/give(mutate) data to state
-      commit('RECEIVE_TC', {data: response.data})
+      commit('RECEIVE_STEPS', {data: response.data})
     } catch (error) {
       console.log(error)
     }
@@ -26,15 +26,15 @@ const actions = {
 }
 
 const mutations = {
-  RECEIVE_TC (state, {data}) {
+  RECEIVE_STEPS (state, {data}) {
     // Loop through objects in response data
-    for (let testcase of data) {
+    for (let step of data) {
       // Push objects with custom keys to state
-      state.testcases.push({
-        time: testcase.meta.time,
-        title: testcase.meta.tc.name,
-        id: testcase._id,
+      state.steps.push({
+        title: step.meta.step.name,
         status: 'OK',
+        time: step.meta.time,
+        log: step,
         data: {
           data1: 'data1',
           data2: 'data2',

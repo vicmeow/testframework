@@ -23,6 +23,7 @@
             <router-link
                       slot="routerlink"
                       class="item-title"
+                      @click.native="fetchSteps"
                       :to="{
                         name: 'step',
                         params: {
@@ -42,6 +43,7 @@ import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Testcase',
@@ -59,19 +61,18 @@ export default {
     item: {
       type: Object,
       required: false
-    },
-    activeList: {
-      type: Array,
-      required: false
     }
   },
   computed: {
-    testcases () {
-      return this.$store.getters['testcases/testcases']
-    },
-    steps () {
-      return this.$store.getters['testcases/steps']
-    }
+    ...mapGetters({
+      testcases: 'testcases/testcases',
+      steps: 'steps/steps'
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchSteps: 'steps/FETCH_STEPS'
+    })
   }
 }
 </script>

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <the-header/>
-    <router-view></router-view>
+    <transition name="page" mode="out-in">
+      <router-view :key="$route.path"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -18,14 +20,6 @@ import {mapActions} from 'vuex'
 export default {
   components: {
     TheHeader
-  },
-  methods: {
-    ...mapActions({
-      fetchData: 'testcases/FETCH_DATA' // maps 'this.fetchData()' to 'this.$store.dispatch['api/FETCH_DATA'
-    })
-  },
-  created () {
-    this.fetchData()
   }
 }
 </script>

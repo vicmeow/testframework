@@ -14,6 +14,7 @@
 <script>
 import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Step',
@@ -29,11 +30,12 @@ export default {
     item: {
       type: Object,
       required: false
-    },
-    steps: {
-      type: Array,
-      required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      steps: 'steps/steps'
+    })
   }
 }
 </script>

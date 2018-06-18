@@ -17,6 +17,7 @@
 
           <router-link slot="routerlink"
                        class="item-title"
+                       @click.native="fetchTc"
                        :to="{
                          name: 'run',
                          params: {
@@ -36,6 +37,7 @@ import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Project',
@@ -55,13 +57,16 @@ export default {
       required: false
     }
   },
+  methods: {
+    ...mapActions({
+      fetchTc: 'testcases/FETCH_TC',
+    })
+  },
   computed: {
-    projects () {
-      return this.$store.getters['projects/projects']
-    },
-    runs () {
-      return this.$store.getters['runs/runs']
-    }
+    ...mapGetters({
+      runs: 'runs/runs',
+      projects: 'projects/projects'
+    })
   }
 }
 </script>

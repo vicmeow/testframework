@@ -84,6 +84,8 @@ export default {
   @import 'src/assets/styles/style-variables.sass'
 
   .item
+    position: sticky
+    top: 55px
     grid-column: 4 / 12
     background: white
     border-radius: .2rem

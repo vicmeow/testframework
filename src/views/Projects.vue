@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper">
-      <transition name="page" mode="in-out">
       <router-view :key="$route.path"></router-view>
-    </transition>
   </div>
 </template>
 

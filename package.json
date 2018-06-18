@@ -9,6 +9,10 @@
     "src_format": "prettier --no-semi --single-quote --trailing-comma es5 --write \"{src,tests}/**/*.js\""
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/vue-fontawesome": "0.0.23",
     "axios": "^0.18.0",
     "eslint": "^4.19.1",
     "vue": "^2.5.16",

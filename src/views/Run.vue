@@ -41,7 +41,8 @@ import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: 'Run',
   components: {
@@ -58,24 +59,18 @@ export default {
     item: {
       type: Object,
       required: false
-    },
-    activeList: {
-      type: Array,
-      required: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      runs: 'runs/runs',
+      testcases: 'testcases/testcases'
+    })
   },
   methods: {
     ...mapActions({
-      fetchSteps: 'testcases/FETCH_STEPS'
+      fetchSteps: 'steps/FETCH_STEPS'
     })
-  },
-  computed: {
-    runs () {
-      return this.$store.getters['runs/runs']
-    },
-    testcases () {
-      return this.$store.getters['testcases/testcases']
-    }
   }
 }
 </script>

@@ -1,8 +1,17 @@
 <template>
   <aside class="sidebar">
-    <searchbar :placeholder="placeholder" v-model="value"/>
     <!-- BACK button -->
-    <router-link v-if="$route.name != 'project'" :to="back" tag="button" exact class="label navigate-back">Back to {{$route.name + 's'}}</router-link>
+    <router-link v-if="$route.name != 'project'" :to="back" tag="button" class="label navigate-back">
+      <font-awesome-icon
+        :icon="['fas', 'arrow-left']"
+        class="info-icon"
+        role="img"
+        aria-hidden="true"
+      />
+      Back to {{$route.name + 's'}}</router-link>
+
+    <searchbar :placeholder="placeholder" v-model="value"/>
+
     <!-- ITEMLIST in sidebar -->
     <item-list :labels="labels" class="sidebar">
       <!-- Loop to render LISTITEMS in sidebar -->
@@ -107,4 +116,7 @@ export default {
   button.navigate-back
     margin-bottom: .5rem
     cursor: pointer
+    transition: transform .3s linear
+    &:hover
+      transform: scale(1.02)
 </style>
