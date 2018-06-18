@@ -27,6 +27,7 @@
 
     <slot name="list-right"></slot>
     <slot name="list-bottom"></slot>
+    <span class="label" v-if="log">Log</span>
     <div class="log" v-if="log">
       <pre><code>{{log}}</code></pre>
     </div>
@@ -92,10 +93,10 @@ export default {
     margin-bottom: .5rem
 
   .log
-    margin: 1rem 0
+    margin: .5rem 0
     white-space: pre
     background: $black
-    color: white
+    color: $white
     padding: 1rem
     border-radius: .2rem
     line-height: 1.5

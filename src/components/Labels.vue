@@ -34,7 +34,7 @@ export default {
   .sidebar .labels
     padding-left: 1.4rem
 
-  .run-list .labels
+  .list .labels
     padding-left: 1.25rem
 
   .label
@@ -44,10 +44,10 @@ export default {
     &:first-letter
       text-transform: uppercase
 
-  .run-list .labels .label:nth-child(1)
+  .list .labels .label:nth-child(1)
     flex-basis: 80%
 
-  .run-list .labels .label:nth-child(2)
+  .list .labels .label:nth-child(2)
     flex-basis: 20%
 
 </style>

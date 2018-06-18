@@ -1,8 +1,8 @@
 <template>
   <aside class="sidebar">
-    <!-- BACK button -->
-    <router-link v-if="$route.name != 'project'" :to="back" tag="button" exact class="label navigate-back">Back</router-link>
     <searchbar :placeholder="placeholder" v-model="value"/>
+    <!-- BACK button -->
+    <router-link v-if="$route.name != 'project'" :to="back" tag="button" exact class="label navigate-back">Back to {{$route.name + 's'}}</router-link>
     <!-- ITEMLIST in sidebar -->
     <item-list :labels="labels" class="sidebar">
       <!-- Loop to render LISTITEMS in sidebar -->
@@ -29,6 +29,13 @@
                        v-if="routename === 'testcase'"
                        class="item-title"
                        :to="{name: routename, params: {tctitle: item.title}}">
+              {{item.title}}
+            </router-link>
+          <!-- ROUTERLINK if LISTITEM === STEP -->
+          <router-link slot="routerlink"
+                       v-if="routename === 'step'"
+                       class="item-title"
+                       :to="{name: routename, params: {steptitle: item.title}}">
               {{item.title}}
             </router-link>
         </list-item>
@@ -71,17 +78,13 @@ export default {
       type: String,
       required: false
     },
-    type: {
-      type: String,
-      required: false
-    },
     labels: {
       type: Array,
       required: false
     },
     routename: {
       type: String,
-      required: true
+      required: false
     }
   },
   computed: {
@@ -102,10 +105,6 @@ export default {
 <style lang="sass" scoped>
 
   button.navigate-back
-    color: black
     margin-bottom: .5rem
     cursor: pointer
-    background: white
-    padding: .2rem 1rem
-    border-radius: 1rem
 </style>

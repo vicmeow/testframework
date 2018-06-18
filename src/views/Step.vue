@@ -2,8 +2,8 @@
   <div class="wrapper">
     <the-sidebar :placeholder="'Search steps...'"
                  :back="{name: 'testcase'}"
-                 :items="steps"
                  :routename="'step'"
+                 :items="steps"
                  :labels="['step', '+']">
     </the-sidebar>
 
@@ -29,11 +29,10 @@ export default {
     item: {
       type: Object,
       required: false
-    }
-  },
-   computed: {
-    steps () {
-      return this.$store.getters['runs/runs']
+    },
+    steps: {
+      type: Array,
+      required: true
     }
   }
 }

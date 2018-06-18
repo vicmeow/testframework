@@ -10,7 +10,7 @@
    <item :title="$route.params.tctitle">
 
       <item-list slot="list-bottom"
-                 class="run-list"
+                 class="step-list"
                  :title="'steps'"
                  :labels="['Name', 'Timestamp']">
 
@@ -26,6 +26,7 @@
                       :to="{
                         name: 'step',
                         params: {
+                          steps: steps,
                           steptitle: item.title,
                           item: item
                           }}">{{item.title}}</router-link>

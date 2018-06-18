@@ -10,7 +10,7 @@
    <item :title="$route.params.runtitle">
 
       <item-list slot="list-bottom"
-                 class="run-list"
+                 class="tc-list"
                  :title="'Test cases'"
                  :labels="['Name', 'Timestamp']">
 

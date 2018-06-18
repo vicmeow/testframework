@@ -34,12 +34,14 @@ export default {
     list-style-type: none
     margin: 0
     padding: 0
-    margin-top: 1rem
 
   .list-title
     font-size: 1.2rem
     margin-bottom: .2rem
     &:first-letter
       text-transform: uppercase
+  
+  .run-list, .tc-list, .step-list
+    margin-top: 1rem
 
 </style>
