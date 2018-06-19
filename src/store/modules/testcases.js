@@ -12,13 +12,14 @@ const getters = {
 }
 
 const actions = {
-  async FETCH_TC ({commit}, id) {
+  async FETCH_RUN_TCS ({commit}, runid) {
     try {
       const response = await axios.get(
-        'http://localhost:3000/testcases/' + id
+        'http://localhost:3000/testcases/' + runid
       )
+      console.log('http://localhost:3000/testcases/' + runid)
       // Send data to mutations to write/give(mutate) data to state
-      commit('RECEIVE_TC', {data: response.data})
+      commit('RECEIVE_RUN_TCS', {data: response.data})
     } catch (error) {
       console.log(error)
     }
@@ -26,19 +27,20 @@ const actions = {
 }
 
 const mutations = {
-  RECEIVE_TC (state, {data}) {
+  RECEIVE_RUN_TCS (state, {data}) {
+    // Empty current array to prevent duplicating
+    state.testcases = []
     // Loop through objects in response data
     for (let testcase of data) {
       // Push objects with custom keys to state
       state.testcases.push({
         time: testcase.meta.time,
         title: testcase.meta.tc.name,
-        id: testcase._id,
-        status: 'OK',
+        id: testcase._key,
+        parentid: testcase.meta.run.id,
+        status: testcase.meta.logLevel,
         data: {
-          data1: 'data1',
-          data2: 'data2',
-          data3: 'data3'
+          'parent ID': testcase.meta.run.id
         }
       })
     }

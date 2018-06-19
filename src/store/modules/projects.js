@@ -3,7 +3,7 @@ const state = {
     {
       title: 'Project 1',
       type: 'project',
-      status: 'FAILED',
+      status: 1,
       data: {
         'test cases': 45,
         runs: 2,
@@ -13,7 +13,7 @@ const state = {
     {
       title: 'Project 2',
       type: 'project',
-      status: 'OK',
+      status: 0,
       data: {
         'test cases': 45,
         runs: 2,

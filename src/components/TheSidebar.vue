@@ -8,24 +8,19 @@
         role="img"
         aria-hidden="true"
       />
-      Back to {{$route.name + 's'}}</router-link>
+      Back to {{back.name + 's'}}</router-link>
 
     <searchbar :placeholder="placeholder" v-model="value"/>
 
     <!-- ITEMLIST in sidebar -->
     <item-list :labels="labels" class="sidebar">
+
       <!-- Loop to render LISTITEMS in sidebar -->
         <list-item slot="list-item"
                    v-for="item in filteredItems"
                    :key="item.title" :item="item"
                    :type="'sidebar'">
-          <!-- ROUTERLINK if LISTITEM === RUN -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'run'"
-                       class="item-title"
-                       :to="{name: routename, params: {runtitle: item.title}}">
-              {{item.title}}
-            </router-link>
+
           <!-- ROUTERLINK if LISTITEM === PROJECT -->
           <router-link slot="routerlink"
                        v-if="routename === 'project'"
@@ -33,13 +28,25 @@
                        :to="{name: routename, params: {projecttitle: item.title}}">
               {{item.title}}
             </router-link>
+          
+          <!-- ROUTERLINK if LISTITEM === RUN -->
+          <router-link slot="routerlink"
+                       v-if="routename === 'run'"
+                       class="item-title"
+                       @click.native="fetchRunTcs(item.parentid)"
+                       :to="{name: routename, params: {runtitle: item.title}}">
+              {{item.title}}
+            </router-link>
+
           <!-- ROUTERLINK if LISTITEM === TESTCASE -->
           <router-link slot="routerlink"
                        v-if="routename === 'testcase'"
                        class="item-title"
+                       @click.native="fetchTcSteps(item.parentid)"
                        :to="{name: routename, params: {tctitle: item.title}}">
               {{item.title}}
             </router-link>
+
           <!-- ROUTERLINK if LISTITEM === STEP -->
           <router-link slot="routerlink"
                        v-if="routename === 'step'"
@@ -47,6 +54,7 @@
                        :to="{name: routename, params: {steptitle: item.title}}">
               {{item.title}}
             </router-link>
+
         </list-item>
       </item-list>
     </aside>
@@ -62,6 +70,7 @@ import Searchbar from '@/components/Searchbar'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
+import {mapActions} from 'vuex'
 
 export default {
   name: 'Sidebar',
@@ -107,6 +116,12 @@ export default {
         return false
       }
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchRunTcs: 'testcases/FETCH_RUN_TCS',
+      fetchTcSteps: 'steps/FETCH_TC_STEPS',
+    })
   }
 }
 </script>

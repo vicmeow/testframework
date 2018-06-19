@@ -14,6 +14,11 @@
                  :title="'steps'"
                  :labels="['Name', 'Timestamp']">
 
+          <li 
+            slot="no-items"
+            class="no-items" 
+            v-if="steps.length === 0">This test case does not have any steps.</li>
+
           <list-item slot="list-item"
                     v-for="item in steps"
                     :key="item.title"
@@ -23,7 +28,7 @@
             <router-link
                       slot="routerlink"
                       class="item-title"
-                      @click.native="fetchSteps"
+                      @click.native="fetchTcSteps(item.parentid)"
                       :to="{
                         name: 'step',
                         params: {
@@ -71,7 +76,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchSteps: 'steps/FETCH_STEPS'
+      fetchTcSteps: 'steps/FETCH_TC_STEPS'
     })
   }
 }

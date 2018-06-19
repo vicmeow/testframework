@@ -2,8 +2,8 @@
   <li class="list-item"
       :class="{
         active: item.title === $route.params.projecttitle || item.title === $route.params.runtitle || item.title === $route.params.tctitle || item.title === $route.params.steptitle,
-        success: item.status === 'OK',
-        error: item.status === 'FAILED',
+        success: item.status === 'OK' || item.status === 0,
+        error: item.status === 'error' || item.status === 1,
         current: item.status === 'current',
         sidebar: type === 'sidebar',
         table: type === 'table',
@@ -13,6 +13,10 @@
     }">
 
     <slot name="routerlink"></slot>
+    <span class="data-item" v-if="type === 'run' && item.duration">
+    {{item.duration}}
+      </span>
+
     <span class="data-item" v-if="type === 'testcase'">
     {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
       </span>

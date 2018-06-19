@@ -7,7 +7,12 @@
       <item-list slot="list-bottom"
                  class="run-list"
                  :title="'Runs'"
-                 :labels="['Name']">
+                 :labels="['Name', 'Duration (min)']">
+
+        <li 
+            slot="no-items"
+            class="no-items" 
+            v-if="runs.length === 0">This project does not have any runs.</li>
 
         <list-item slot="list-item"
                    v-for="item in runs"
@@ -17,7 +22,7 @@
 
           <router-link slot="routerlink"
                        class="item-title"
-                       @click.native="fetchTc"
+                       @click.native="fetchRunTcs(item.parentid)"
                        :to="{
                          name: 'run',
                          params: {
@@ -59,14 +64,23 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchTc: 'testcases/FETCH_TC',
-    })
+      fetchRunTcs: 'testcases/FETCH_RUN_TCS',
+      fetchRuns: 'runs/FETCH_PROJECT_RUNS'
+    }),
+    fetch(status){
+      console.log(status)
+    }
   },
   computed: {
     ...mapGetters({
       runs: 'runs/runs',
       projects: 'projects/projects'
     })
+  },
+  created(){
+    if(this.$store.getters['runs/runs'].length === 0){
+      this.fetchRuns()
+    }
   }
 }
 </script>

@@ -2,6 +2,7 @@
   <ul class="list">
     <h4 class="list-title">{{title}}</h4>
     <labels :labels="labels"/>
+    <slot name="no-items"></slot>
     <slot name="list-item"></slot>
   </ul>
 </template>

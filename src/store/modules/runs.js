@@ -1,28 +1,7 @@
+import axios from 'axios'
+
 const state = {
-  runs: [
-    {
-      title: 'Run 1',
-      suite: 'RI-Kern Suite',
-      status: 'FAILED',
-      id: '3f2376db-1e68-4a16-a280-f346317ed46f',
-      data: {
-        'test cases': 45,
-        success: 30,
-        error: 15
-      }
-    },
-    {
-      title: 'Run 2',
-      suite: 'RI-Kern Suite',
-      status: 'OK',
-      id: '3f2376db-1e68-4a16-a280-f346317ed46f',
-      data: {
-        'test cases': 45,
-        success: 45,
-        error: 0
-      }
-    }
-  ]
+  runs: []
 }
 
 const getters = {
@@ -30,10 +9,38 @@ const getters = {
     return state.runs
   }
 }
-const actions = {}
+const actions = {
+  async FETCH_PROJECT_RUNS ({commit}) {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/runs/'
+      )
+      // Send data to mutations to write/give(mutate) data to state
+      commit('RECEIVE_PROJECT_RUNS', {data: response.data})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 const mutations = {
-
+  RECEIVE_PROJECT_RUNS (state, {data}) {
+    // Empty current array to prevent duplicating
+    state.runs = []
+    // Loop through objects in response data
+    for (let run of data) {
+      // Push objects with custom keys to state
+      state.runs.push({
+        title: 'Run ID: ' + run.runId,
+        status: run.log.status,
+        duration: run.duration_in_min,
+        id: run.runId,
+        data: {
+          'test cases': run.log.testcases
+        }
+      })
+    }
+  }
 }
 export default {
   namespaced: true,
