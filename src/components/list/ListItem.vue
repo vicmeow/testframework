@@ -2,7 +2,7 @@
   <li class="list-item"
       :class="{
         active: item.title === $route.params.projecttitle || item.title === $route.params.runtitle || item.title === $route.params.tctitle || item.title === $route.params.steptitle,
-        success: item.status === 'OK' || item.status === 0,
+        success: item.status === 'OK' || item.status === 0 || item.status === 'info',
         error: item.status === 'error' || item.status === 1,
         current: item.status === 'current',
         sidebar: type === 'sidebar',

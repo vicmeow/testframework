@@ -34,7 +34,7 @@ const mutations = {
     for (let step of data) {
       // Push objects with custom keys to state
       state.steps.push({
-        title: 'belongs to: ' + step.meta.tc.name + ' | ' + step.meta.step.name,
+        title: step.meta.step.name,
         status: 'OK',
         time: step.meta.time,
         log: step,

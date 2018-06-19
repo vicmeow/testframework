@@ -22,7 +22,7 @@
 
           <router-link slot="routerlink"
                        class="item-title"
-                       @click.native="fetchRunTcs(item.parentid)"
+                       @click.native="fetchRunTcs(item.id)"
                        :to="{
                          name: 'run',
                          params: {
@@ -67,8 +67,8 @@ export default {
       fetchRunTcs: 'testcases/FETCH_RUN_TCS',
       fetchRuns: 'runs/FETCH_PROJECT_RUNS'
     }),
-    fetch(status){
-      console.log(status)
+    fetch(itemid){
+      console.log(itemid)
     }
   },
   computed: {

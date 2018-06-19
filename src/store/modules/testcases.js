@@ -36,7 +36,7 @@ const mutations = {
       state.testcases.push({
         time: testcase.meta.time,
         title: testcase.meta.tc.name,
-        id: testcase._key,
+        id: testcase.meta.tc.id,
         parentid: testcase.meta.run.id,
         status: testcase.meta.logLevel,
         data: {
