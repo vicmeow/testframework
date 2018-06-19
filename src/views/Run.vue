@@ -28,7 +28,7 @@
             <router-link
                       slot="routerlink"
                       class="item-title"
-                      @click.native="fetchTcSteps(item.parentid)"
+                      @click.native="fetchTcSteps(item.id)"
                       :to="{
                         name: 'testcase',
                         params: {
