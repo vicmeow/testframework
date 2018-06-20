@@ -83,7 +83,7 @@ export default {
     font-size: 1rem
     font-weight: normal
     cursor: pointer
-    word-break: break-word
+    word-break: break-all
 
   .data-title::first-letter
     text-transform: capitalize

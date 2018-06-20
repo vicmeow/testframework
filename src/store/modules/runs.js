@@ -41,9 +41,7 @@ const mutations = {
         status: run.run.meta.logLevel,
         duration: run.duration_in_min,
         id: run.runId,
-        data: {
-          'test cases': run.log.testcases
-        }
+        data: {}
       })
     }
   }

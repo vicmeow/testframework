@@ -33,7 +33,7 @@
                         name: 'testcase',
                         params: {
                           tctitle: item.title
-                          }}">{{item.title}}</router-link>
+                          }}">{{item.title | truncate(60)}}</router-link>
             </list-item>
         </item-list>
 
@@ -76,6 +76,11 @@ export default {
     ...mapActions({
       fetchTcSteps: 'steps/FETCH_TC_STEPS'
     })
+  },
+  filters: {
+    truncate(value, length) {
+      return value.substring(0, length) + '...'
+    }
   }
 }
 </script>

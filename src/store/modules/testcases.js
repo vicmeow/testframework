@@ -17,7 +17,6 @@ const actions = {
       const response = await axios.get(
         'http://localhost:3000/testcases/' + runid
       )
-      console.log('http://localhost:3000/testcases/' + runid)
       // Send data to mutations to write/give(mutate) data to state
       commit('RECEIVE_RUN_TCS', {data: response.data})
     } catch (error) {
@@ -39,9 +38,7 @@ const mutations = {
         id: testcase.meta.tc.id,
         parentid: testcase.meta.run.id,
         status: testcase.meta.logLevel,
-        data: {
-          'parent ID': testcase.meta.run.id
-        }
+        data: {}
       })
     }
   }

@@ -1,7 +1,5 @@
 <template>
-  <div class="wrapper">
-      <router-view :key="$route.path"></router-view>
-  </div>
+  <router-view :key="$route.path"></router-view>
 </template>
 
 /**
