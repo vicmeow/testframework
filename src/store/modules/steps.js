@@ -17,7 +17,6 @@ const actions = {
       const response = await axios.get(
         'http://localhost:3000/teststeps/' + tcid
       )
-      console.log('http://localhost:3000/teststeps/' + tcid)
       // Send data to mutations to write/give(mutate) data to state
       commit('RECEIVE_TC_STEPS', {data: response.data})
     } catch (error) {
@@ -35,14 +34,12 @@ const mutations = {
       // Push objects with custom keys to state
       state.steps.push({
         title: step.meta.step.name,
-        status: 'OK',
+        status: step.meta.logLevel,
         time: step.meta.time,
         log: step,
         parentid: step.meta.tc.id,
         data: {
-          type: step.meta.step.type,
-          parent: step.meta.tc.name,
-          'parent ID': step.meta.tc.id
+          type: step.meta.step.type
         }
       })
     }

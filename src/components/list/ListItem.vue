@@ -44,6 +44,11 @@ export default {
       type: String,
       required: false
     }
+  },
+  filters: {
+    truncate(value, length) {
+      return value.substring(0, length) + '...'
+    }
   }
 }
 </script>
