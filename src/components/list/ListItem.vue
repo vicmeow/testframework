@@ -126,6 +126,7 @@ export default {
 
     .data-item
       flex-basis: 20%
+      word-break: break-all
 
   /* ROUTER LINK STYLING */
 
