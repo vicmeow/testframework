@@ -28,7 +28,7 @@
                        :to="{name: routename, params: {projecttitle: item.title}}">
               {{item.title}}
             </router-link>
-          
+
           <!-- ROUTERLINK if LISTITEM === RUN -->
           <router-link slot="routerlink"
                        v-if="routename === 'run'"
@@ -120,7 +120,7 @@ export default {
   methods: {
     ...mapActions({
       fetchRunTcs: 'testcases/FETCH_RUN_TCS',
-      fetchTcSteps: 'steps/FETCH_TC_STEPS',
+      fetchTcSteps: 'steps/FETCH_TC_STEPS'
     })
   }
 }

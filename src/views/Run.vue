@@ -14,9 +14,9 @@
                  :title="'Test cases'"
                  :labels="['Name', 'Timestamp']">
 
-          <li 
+          <li
             slot="no-items"
-            class="no-items" 
+            class="no-items"
             v-if="testcases.length === 0">This run does not have any test cases.</li>
 
           <list-item slot="list-item"

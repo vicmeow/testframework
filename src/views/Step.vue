@@ -14,7 +14,7 @@
 <script>
 import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
-import {mapActions, mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Step',

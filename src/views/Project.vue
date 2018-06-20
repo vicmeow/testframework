@@ -7,11 +7,11 @@
       <item-list slot="list-bottom"
                  class="run-list"
                  :title="'Runs'"
-                 :labels="['Name', 'Duration (min)']">
+                 :labels="['Name', 'Date', 'Duration (min)']">
 
-        <li 
+        <li
             slot="no-items"
-            class="no-items" 
+            class="no-items"
             v-if="runs.length === 0">This project does not have any runs.</li>
 
         <list-item slot="list-item"
@@ -67,7 +67,7 @@ export default {
       fetchRunTcs: 'testcases/FETCH_RUN_TCS',
       fetchRuns: 'runs/FETCH_PROJECT_RUNS'
     }),
-    fetch(itemid){
+    fetch (itemid) {
       console.log(itemid)
     }
   },
@@ -77,8 +77,8 @@ export default {
       projects: 'projects/projects'
     })
   },
-  created(){
-    if(this.$store.getters['runs/runs'].length === 0){
+  created () {
+    if (this.$store.getters['runs/runs'].length === 0) {
       this.fetchRuns()
     }
   }

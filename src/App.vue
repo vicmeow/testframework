@@ -15,8 +15,6 @@
 
 <script>
 import TheHeader from '@/components/header/TheHeader'
-// Enables us to use ...mapActions in our component
-import {mapActions} from 'vuex'
 export default {
   components: {
     TheHeader

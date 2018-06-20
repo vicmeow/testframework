@@ -14,9 +14,9 @@
                  :title="'steps'"
                  :labels="['Name', 'Timestamp']">
 
-          <li 
+          <li
             slot="no-items"
-            class="no-items" 
+            class="no-items"
             v-if="steps.length === 0">This test case does not have any steps.</li>
 
           <list-item slot="list-item"
