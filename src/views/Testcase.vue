@@ -1,13 +1,5 @@
 <template>
-  <div class="wrapper">
-    <the-sidebar :placeholder="'Search test cases...'"
-                 :back="{name: 'run'}"
-                 :items="testcases"
-                 :routename="'testcase'"
-                 :labels="['test case', '+']">
-    </the-sidebar>
-
-   <item :title="$route.params.tctitle">
+   <item :title="$route.params.tctitle" :item="item">
 
       <item-list slot="list-bottom"
                  class="step-list"
@@ -32,19 +24,15 @@
                       :to="{
                         name: 'step',
                         params: {
-                          steps: steps,
                           steptitle: item.title,
                           item: item
                           }}">{{item.title | truncate(60)}}</router-link>
             </list-item>
         </item-list>
-
       </item>
-  </div>
 </template>
 
 <script>
-import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
@@ -53,7 +41,6 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
   name: 'Testcase',
   components: {
-    TheSidebar,
     Item,
     ItemList,
     ListItem

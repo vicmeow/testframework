@@ -36,6 +36,8 @@ const mutations = {
         title: step.meta.step.name,
         status: step.meta.logLevel,
         time: step.meta.time,
+        date: new Date(step.meta.time).toLocaleDateString('de-DE'),
+        description: 'This will be the description of this test step.',
         log: step,
         parentid: step.meta.tc.id,
         data: {

@@ -1,25 +1,19 @@
 <template>
-  <div class="wrapper">
-    <the-sidebar :placeholder="'Search steps...'"
-                 :back="{name: 'testcase'}"
-                 :routename="'step'"
-                 :items="steps"
-                 :labels="['step', '+']">
-    </the-sidebar>
-
-   <item :title="$route.params.steptitle" :log="item.log"></item>
-  </div>
+  <item :title="$route.params.steptitle" :log="item.log" :item="item"></item>
 </template>
 
+/** TODO:
+* - 
+*
+ */
+
 <script>
-import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'Step',
   components: {
-    TheSidebar,
     Item
   },
   props: {

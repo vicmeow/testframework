@@ -1,18 +1,18 @@
 <template>
   <div class="item">
     <span class="label">Title</span>
-    <h1 class="item-title">{{title}}</h1>
+    <h1 class="item-title">{{item.title}}</h1>
 
     <ul class="labels">
       <li class="label-item">
         <span class="label label-type">Created</span>
-        <span class="label-info">18.06.2018</span>
+        <span class="label-info">{{item.date}}</span>
         </li>
-      <li class="label-item">
+      <li class="label-item" v-if="item.updated">
         <span class="label label-type">Updated</span>
         <span class="label-info">18.06.2018</span>
       </li>
-      <li class="label-item">
+      <li class="label-item" v-if="item.author">
         <span class="label label-type">Author</span>
         <span class="label-info">Ola Nordmann</span>
       </li>
@@ -20,8 +20,8 @@
 
     <div class="item-description">
       <span class="label">Description</span>
-      <div class="description">
-        Duis vitae feugiat massa, ut posuere est. Etiam facilisis bibendum mi in aliquet. Vivamus lobortis orci quis lectus mattis elementum. Quisque molestie finibus leo, et lacinia ipsum convallis nec.
+      <div class="description" v-if="item.description">
+        {{item.description}}
       </div>
     </div>
 
@@ -47,6 +47,14 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    item: {
+      type: Object,
+      required: false
+    },
+    date: {
+      type: String,
+      required: false
     },
     description: {
       type: String,

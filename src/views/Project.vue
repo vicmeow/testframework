@@ -1,8 +1,5 @@
 <template>
-  <div class="wrapper">
-    <the-sidebar :placeholder="'Search projects...'" :routename="'project'" :labels="['project', '+']" :items="projects"/>
-
-    <item :title="$route.params.projecttitle">
+    <item :title="$route.params.projecttitle" :item="item">
 
       <item-list slot="list-bottom"
                  class="run-list"
@@ -26,7 +23,8 @@
                        :to="{
                          name: 'run',
                          params: {
-                           runtitle: item.title
+                           runtitle: item.title,
+                           item: item
                             }
                           }">
               {{item.title}}
@@ -34,11 +32,9 @@
             </list-item>
         </item-list>
       </item>
-    </div>
 </template>
 
 <script>
-import TheSidebar from '@/components/TheSidebar'
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
@@ -47,7 +43,6 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
   name: 'Project',
   components: {
-    TheSidebar,
     Item,
     ItemList,
     ListItem
