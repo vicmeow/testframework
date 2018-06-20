@@ -78,7 +78,7 @@ export default {
     font-size: 1rem
     font-weight: normal
     cursor: pointer
-    word-break: break-all
+    word-break: break-word
 
   .data-title::first-letter
     text-transform: capitalize
@@ -126,7 +126,7 @@ export default {
 
     .data-item
       flex-basis: 20%
-      word-break: break-all
+      word-break: break-word
 
   /* ROUTER LINK STYLING */
 
