@@ -1,9 +1,9 @@
 <template>
-  <item :title="$route.params.steptitle" :log="item.log" :item="item"></item>
+  <item :title="$route.params.steptitle" :log="item.log" :item="item"/>
 </template>
 
 /** TODO:
-* - 
+* -
 *
  */
 
@@ -19,11 +19,17 @@ export default {
   props: {
     title: {
       type: String,
-      required: false
+      required: true,
+      default: 'Item title'
     },
     item: {
       type: Object,
-      required: false
+      required: true,
+      default: function () {
+        return {
+          name: 'Unavailable'
+        }
+      }
     }
   },
   computed: {

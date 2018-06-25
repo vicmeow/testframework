@@ -30,9 +30,6 @@
     "sass-loader": "^6.0.6",
     "vue-template-compiler": "^2.5.13"
   },
-  "vue": {
-    "lintOnSave": true
-  },
   "babel": {
     "presets": [
       "@vue/app"
@@ -43,7 +40,27 @@
     "extends": [
       "plugin:vue/essential",
       "@vue/standard"
-    ]
+    ],
+    "rules": {
+      "vue/attribute-hyphenation": [
+        "error",
+        "always"
+      ],
+      "vue/html-end-tags": "error",
+      "vue/html-indent": [
+        "error",
+        2
+      ],
+      "vue/html-self-closing": "error",
+      "vue/require-default-prop": "error",
+      "vue/require-prop-types": "error",
+      "vue/attributes-order": "error",
+      "vue/html-quotes": [
+        "error",
+        "double"
+      ],
+      "vue/order-in-components": "error"
+    }
   },
   "postcss": {
     "plugins": {

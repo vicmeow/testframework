@@ -1,35 +1,35 @@
 <template>
-   <item :title="$route.params.tctitle" :item="item">
+  <item :title="$route.params.tctitle" :item="item">
 
-      <item-list slot="list-bottom"
-                 class="step-list"
-                 :title="'steps'"
-                 :labels="['Name', 'Timestamp']">
+    <item-list slot="list-bottom"
+               :title="'steps'"
+               :labels="['Name', 'Timestamp']"
+               class="step-list">
 
-          <li
-            slot="no-items"
-            class="no-items"
-            v-if="steps.length === 0">This test case does not have any steps.</li>
+      <li
+        v-if="steps.length === 0"
+        slot="no-items"
+        class="no-items">This test case does not have any steps.</li>
 
-          <list-item slot="list-item"
-                    v-for="item in steps"
-                    :key="item.title"
-                    :item="item"
-                    :type="'step'">
+      <list-item v-for="item in steps"
+                 slot="list-item"
+                 :key="item.title"
+                 :item="item"
+                 :type="'step'">
 
-            <router-link
-                      slot="routerlink"
-                      class="item-title"
-                      @click.native="fetchTcSteps(item.parentid)"
-                      :to="{
-                        name: 'step',
-                        params: {
-                          steptitle: item.title,
-                          item: item
-                          }}">{{item.title | truncate(60)}}</router-link>
-            </list-item>
-        </item-list>
-      </item>
+        <router-link
+          slot="routerlink"
+          :to="{
+            name: 'step',
+            params: {
+              steptitle: item.title,
+              item: item
+          }}"
+          class="item-title"
+          @click.native="fetchTcSteps(item.parentid)">{{item.title | truncate(60)}}</router-link>
+      </list-item>
+    </item-list>
+  </item>
 </template>
 
 <script>
@@ -45,14 +45,25 @@ export default {
     ItemList,
     ListItem
   },
+  filters: {
+    truncate (value, length) {
+      return value.substring(0, length) + '...'
+    }
+  },
   props: {
     title: {
       type: String,
-      required: false
+      required: true,
+      default: 'Item title'
     },
     item: {
       type: Object,
-      required: false
+      required: true,
+      default: function () {
+        return {
+          name: 'Unavailable'
+        }
+      }
     }
   },
   computed: {
@@ -65,11 +76,6 @@ export default {
     ...mapActions({
       fetchTcSteps: 'steps/FETCH_TC_STEPS'
     })
-  },
-  filters: {
-    truncate(value, length) {
-      return value.substring(0, length) + '...'
-    }
   }
 }
 </script>

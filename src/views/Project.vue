@@ -1,37 +1,37 @@
 <template>
-    <item :title="$route.params.projecttitle" :item="item">
+  <item :title="$route.params.projecttitle" :item="item">
 
-      <item-list slot="list-bottom"
-                 class="run-list"
-                 :title="'Runs'"
-                 :labels="['Name', 'Date', 'Duration (min)']">
+    <item-list slot="list-bottom"
+               :title="'Runs'"
+               :labels="['Name', 'Date', 'Duration (min)']"
+               class="run-list">
 
-        <li
-            slot="no-items"
-            class="no-items"
-            v-if="runs.length === 0">This project does not have any runs.</li>
+      <li
+        v-if="runs.length === 0"
+        slot="no-items"
+        class="no-items">This project does not have any runs.</li>
 
-        <list-item slot="list-item"
-                   v-for="item in runs"
-                   :key="item.title"
-                   :item="item"
-                   :type="'run'">
+      <list-item v-for="item in runs"
+                 slot="list-item"
+                 :key="item.title"
+                 :item="item"
+                 :type="'run'">
 
-          <router-link slot="routerlink"
-                       class="item-title"
-                       @click.native="fetchRunTcs(item.id)"
-                       :to="{
-                         name: 'run',
-                         params: {
-                           runtitle: item.title,
-                           item: item
-                            }
-                          }">
-              {{item.title}}
-              </router-link>
-            </list-item>
-        </item-list>
-      </item>
+        <router-link slot="routerlink"
+                     :to="{
+                       name: 'run',
+                       params: {
+                         runtitle: item.title,
+                         item: item
+                       }
+                     }"
+                     class="item-title"
+                     @click.native="fetchRunTcs(item.id)">
+          {{item.title}}
+        </router-link>
+      </list-item>
+    </item-list>
+  </item>
 </template>
 
 <script>
@@ -50,20 +50,17 @@ export default {
   props: {
     title: {
       type: String,
-      required: false
+      required: true,
+      default: 'Item title'
     },
     item: {
       type: Object,
-      required: false
-    }
-  },
-  methods: {
-    ...mapActions({
-      fetchRunTcs: 'testcases/FETCH_RUN_TCS',
-      fetchRuns: 'runs/FETCH_PROJECT_RUNS'
-    }),
-    fetch (itemid) {
-      console.log(itemid)
+      required: true,
+      default: function () {
+        return {
+          name: 'Unavailable'
+        }
+      }
     }
   },
   computed: {
@@ -75,6 +72,15 @@ export default {
   created () {
     if (this.$store.getters['runs/runs'].length === 0) {
       this.fetchRuns()
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchRunTcs: 'testcases/FETCH_RUN_TCS',
+      fetchRuns: 'runs/FETCH_PROJECT_RUNS'
+    }),
+    fetch (itemid) {
+      console.log(itemid)
     }
   }
 }

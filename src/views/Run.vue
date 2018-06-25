@@ -1,35 +1,35 @@
 <template>
-   <item :title="$route.params.runtitle" :item="item">
+  <item :title="$route.params.runtitle" :item="item">
 
-      <item-list slot="list-bottom"
-                 class="tc-list"
-                 :title="'Test cases'"
-                 :labels="['Name', 'Timestamp']">
+    <item-list slot="list-bottom"
+               :title="'Test cases'"
+               :labels="['Name', 'Timestamp']"
+               class="tc-list">
 
-          <li
-            slot="no-items"
-            class="no-items"
-            v-if="testcases.length === 0">This run does not have any test cases.</li>
+      <li
+        v-if="testcases.length === 0"
+        slot="no-items"
+        class="no-items">This run does not have any test cases.</li>
 
-          <list-item slot="list-item"
-                    v-for="item in testcases"
-                    :key="item.title"
-                    :item="item"
-                    :type="'testcase'">
+      <list-item v-for="item in testcases"
+                 slot="list-item"
+                 :key="item.title"
+                 :item="item"
+                 :type="'testcase'">
 
-            <router-link
-                      slot="routerlink"
-                      class="item-title"
-                      @click.native="fetchTcSteps(item.id)"
-                      :to="{
-                        name: 'testcase',
-                        params: {
-                          tctitle: item.title,
-                          item: item
-                          }}">{{item.title | truncate(60)}}</router-link>
-            </list-item>
-        </item-list>
-      </item>
+        <router-link
+          slot="routerlink"
+          :to="{
+            name: 'testcase',
+            params: {
+              tctitle: item.title,
+              item: item
+          }}"
+          class="item-title"
+          @click.native="fetchTcSteps(item.id)">{{item.title | truncate(60)}}</router-link>
+      </list-item>
+    </item-list>
+  </item>
 </template>
 
 <script>
@@ -45,14 +45,25 @@ export default {
     ItemList,
     ListItem
   },
+  filters: {
+    truncate (value, length) {
+      return value.substring(0, length) + '...'
+    }
+  },
   props: {
     title: {
       type: String,
-      required: false
+      required: true,
+      default: 'Item title'
     },
     item: {
       type: Object,
-      required: false
+      required: true,
+      default: function () {
+        return {
+          name: 'Unavailable'
+        }
+      }
     }
   },
   computed: {
@@ -65,11 +76,6 @@ export default {
     ...mapActions({
       fetchTcSteps: 'steps/FETCH_TC_STEPS'
     })
-  },
-  filters: {
-    truncate(value, length) {
-      return value.substring(0, length) + '...'
-    }
   }
 }
 </script>

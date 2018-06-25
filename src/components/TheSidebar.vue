@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
     <!-- BACK button -->
-    <router-link v-if="$route.name != 'project'" :to="back" tag="button" class="label navigate-back">
+    <router-link v-if="$route.name !='project'" :to="back" tag="button" class="label navigate-back">
       <font-awesome-icon
         :icon="['fas', 'arrow-left']"
         class="info-icon"
@@ -16,48 +16,48 @@
     <item-list :labels="labels" class="sidebar">
 
       <!-- Loop to render LISTITEMS in sidebar -->
-        <list-item slot="list-item"
-                   v-for="item in filteredItems"
-                   :key="item.title" :item="item"
-                   :type="'sidebar'">
+      <list-item v-for="item in filteredItems"
+                 slot="list-item"
+                 :key="item.title" :item="item"
+                 :type="'sidebar'">
 
-          <!-- ROUTERLINK if LISTITEM === PROJECT -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'project'"
-                       class="item-title"
-                       :to="{name: routename, params: {projecttitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === PROJECT -->
+        <router-link v-if="routename === 'project'"
+                     slot="routerlink"
+                     :to="{name: routename, params: {projecttitle: item.title}}"
+                     class="item-title">
+          {{item.title}}
+        </router-link>
 
-          <!-- ROUTERLINK if LISTITEM === RUN -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'run'"
-                       class="item-title"
-                       @click.native="fetchRunTcs(item.parentid)"
-                       :to="{name: routename, params: {runtitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === RUN -->
+        <router-link v-if="routename === 'run'"
+                     slot="routerlink"
+                     :to="{name: routename, params: {runtitle: item.title}}"
+                     class="item-title"
+                     @click.native="fetchRunTcs(item.parentid)">
+          {{item.title}}
+        </router-link>
 
-          <!-- ROUTERLINK if LISTITEM === TESTCASE -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'testcase'"
-                       class="item-title"
-                       @click.native="fetchTcSteps(item.parentid)"
-                       :to="{name: routename, params: {tctitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === TESTCASE -->
+        <router-link v-if="routename === 'testcase'"
+                     slot="routerlink"
+                     :to="{name: routename, params: {tctitle: item.title}}"
+                     class="item-title"
+                     @click.native="fetchTcSteps(item.parentid)">
+          {{item.title}}
+        </router-link>
 
-          <!-- ROUTERLINK if LISTITEM === STEP -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'step'"
-                       class="item-title"
-                       :to="{name: routename, params: {steptitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === STEP -->
+        <router-link v-if="routename === 'step'"
+                     slot="routerlink"
+                     :to="{name: routename, params: {steptitle: item.title}}"
+                     class="item-title">
+          {{item.title}}
+        </router-link>
 
-        </list-item>
-      </item-list>
-    </aside>
+      </list-item>
+    </item-list>
+  </aside>
 </template>
 
 /**
@@ -80,31 +80,45 @@ export default {
     Labels,
     ListItem
   },
-  data: () => ({
-    value: ''
-  }),
   props: {
     back: {
       type: Object,
-      required: false
+      required: false,
+      default: function (value) {
+        return {name: 'project'}
+      }
     },
     items: {
       type: Array,
-      required: false
+      required: false,
+      default: function () {
+        return [{error: 'Items unavailble'}]
+      }
     },
     placeholder: {
       type: String,
-      required: false
+      required: false,
+      default: 'Search...'
     },
     labels: {
       type: Array,
-      required: false
+      required: false,
+      default: function () {
+        return ['Projects', '+']
+      }
     },
     routename: {
       type: String,
-      required: false
+      default: 'project',
+      validator: function (value) {
+        // Value must match one of these strings
+        return ['project', 'run', 'testcase', 'step'].indexOf(value) !== -1
+      }
     }
   },
+  data: () => ({
+    value: ''
+  }),
   computed: {
     filteredItems () {
       // Filters item in sidebar according to searcbar input
@@ -125,6 +139,16 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+
+  aside.sidebar
+    flex: 1
+    margin-right: 1rem
+    position: sticky
+    top: calc(55px + 1rem)
+    height: 100vh
+</style>
 
 <style lang="sass" scoped>
 
