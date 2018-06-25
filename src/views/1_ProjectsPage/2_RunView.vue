@@ -1,5 +1,5 @@
 <template>
-  <item :title="$route.params.runtitle" :item="item">
+  <item :item="item">
 
     <item-list slot="list-bottom"
                :title="'Test cases'"
@@ -22,7 +22,7 @@
           :to="{
             name: 'testcase',
             params: {
-              tctitle: item.title,
+              tc: item.title,
               item: item
           }}"
           class="item-title"

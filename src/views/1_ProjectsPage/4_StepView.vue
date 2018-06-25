@@ -1,11 +1,6 @@
 <template>
-  <item :title="$route.params.steptitle" :log="item.log" :item="item"/>
+  <item :item="item"/>
 </template>
-
-/** TODO:
-* -
-*
- */
 
 <script>
 import Item from '@/components/Item'

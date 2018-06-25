@@ -87,6 +87,6 @@ header.header
   transition: all .3s
 
 .page-enter, .page-leave-to
-  transform: translateY(5rem)
+  opacity: .5
 
 </style>

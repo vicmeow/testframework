@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '@/store/store'
+import Store from '@/store/store'
 
 // Main Routes
 const LandingPage = () => import('@/views/0_LandingPage/0_LandingPage')
@@ -29,30 +29,30 @@ export default new Router({
       redirect: {
         name: 'project',
         params: {
-          projecttitle: store.getters['projects/projects'][0].title,
-          item: store.getters['projects/projects'][0]
+          project: Store.getters['projects/projects'][0].title,
+          item: Store.getters['projects/projects'][0]
         }
       },
       children: [{
-          path: ':projecttitle',
+          path: ':project',
           name: 'project',
           component: Project,
           props: true
         },
         {
-          path: ':projecttitle/:runtitle',
+          path: ':project/:run',
           name: 'run',
           component: Run,
           props: true
         },
         {
-          path: ':projecttitle/:runtitle/:tctitle',
+          path: ':project/:run/:tc',
           name: 'testcase',
           component: Testcase,
           props: true
         },
         {
-          path: ':projecttitle/:runtitle/:tctitle/:steptitle',
+          path: ':project/:run/:tc/:step',
           name: 'step',
           component: Step,
           props: true

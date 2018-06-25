@@ -1,5 +1,5 @@
 <template>
-  <item :title="$route.params.projecttitle" :item="item">
+  <item :item="item">
 
     <item-list slot="list-bottom"
                :title="'Runs'"
@@ -21,7 +21,7 @@
                      :to="{
                        name: 'run',
                        params: {
-                         runtitle: item.title,
+                         run: item.title,
                          item: item
                        }
                      }"
