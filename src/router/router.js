@@ -1,26 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Run from '@/views/Run'
-import LandingPage from '@/views/LandingPage'
-// import TheSidebar from './components/TheSidebar'
 import store from '@/store/store'
-import Projects from '@/views/Projects'
-import Project from '@/views/Project'
-import Testcase from '@/views/Testcase'
-import Step from '@/views/Step'
+
+// Main Routes
+const LandingPage = () => import('@/views/0_LandingPage/0_LandingPage')
+const ProjectsPage = () => import('@/views/1_ProjectsPage/0_ProjectsPage')
+
+// Child Routes (Projects)
+const Project = () => import('@/views/1_ProjectsPage/1_ProjectView')
+const Run = () => import('@/views/1_ProjectsPage/2_RunView')
+const Testcase = () => import('@/views/1_ProjectsPage/3_TestcaseView')
+const Step = () => import('@/views/1_ProjectsPage/4_StepView')
 
 Vue.use(Router)
 
-/**
- * TODO:
- * - Load last active or first project in list on initial render
- * - Add dynamic routing for tables and runs by name or id
- */
-
 export default new Router({
   mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'landing',
       component: LandingPage
@@ -28,7 +24,7 @@ export default new Router({
     {
       path: '/projects',
       name: 'projects',
-      component: Projects,
+      component: ProjectsPage,
       props: true,
       redirect: {
         name: 'project',
@@ -37,8 +33,7 @@ export default new Router({
           item: store.getters['projects/projects'][0]
         }
       },
-      children: [
-        {
+      children: [{
           path: ':projecttitle',
           name: 'project',
           component: Project,
