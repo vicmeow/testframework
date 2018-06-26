@@ -1,6 +1,5 @@
 <template>
   <ul class="list">
-    <h4 class="list-title">{{title}}</h4>
     <labels :labels="labels"/>
     <slot name="no-items"/>
     <slot name="list-item"/>
@@ -14,11 +13,6 @@ export default {
     Labels
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-      default: 'Item title'
-    },
     labels: {
       type: Array,
       required: false,
