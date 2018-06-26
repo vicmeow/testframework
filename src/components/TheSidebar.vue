@@ -13,7 +13,8 @@
     <searchbar :placeholder="placeholder" v-model="value"/>
 
     <!-- ITEMLIST in sidebar -->
-    <item-list :labels="labels" class="sidebar">
+    <div v-if="items.length === 0" class="error label">Sidebar is currently unavailble.</div>
+    <item-list v-if="items.length > 1" :labels="labels" class="sidebar">
 
       <!-- Loop to render LISTITEMS in sidebar -->
       <list-item v-for="item in filteredItems"
@@ -22,35 +23,35 @@
                  :type="'sidebar'">
 
         <!-- ROUTERLINK if LISTITEM === PROJECT -->
-        <router-link v-if="routename === 'project'"
+        <router-link v-if="route.name === 'project'"
                      slot="routerlink"
-                     :to="{name: routename, params: {projecttitle: item.title}}"
+                     :to="{name: route.name, params: {project: item.title}}"
                      class="item-title">
           {{item.title}}
         </router-link>
 
         <!-- ROUTERLINK if LISTITEM === RUN -->
-        <router-link v-if="routename === 'run'"
+        <router-link v-if="route.name === 'run'"
                      slot="routerlink"
-                     :to="{name: routename, params: {runtitle: item.title}}"
+                     :to="{name: route.name, params: {runt: item.title}}"
                      class="item-title"
                      @click.native="fetchRunTcs(item.parentid)">
           {{item.title}}
         </router-link>
 
         <!-- ROUTERLINK if LISTITEM === TESTCASE -->
-        <router-link v-if="routename === 'testcase'"
+        <router-link v-if="route.name === 'testcase'"
                      slot="routerlink"
-                     :to="{name: routename, params: {tctitle: item.title}}"
+                     :to="{name: route.name, params: {tct: item.title}}"
                      class="item-title"
                      @click.native="fetchTcSteps(item.parentid)">
           {{item.title}}
         </router-link>
 
         <!-- ROUTERLINK if LISTITEM === STEP -->
-        <router-link v-if="routename === 'step'"
+        <router-link v-if="route.name === 'step'"
                      slot="routerlink"
-                     :to="{name: routename, params: {steptitle: item.title}}"
+                     :to="{name: route.name, params: {stept: item.title}}"
                      class="item-title">
           {{item.title}}
         </router-link>
@@ -70,7 +71,7 @@ import Searchbar from '@/components/Searchbar'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
-import {mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: 'Sidebar',
@@ -88,17 +89,10 @@ export default {
         return {name: 'project'}
       }
     },
-    items: {
-      type: Array,
-      required: false,
-      default: function () {
-        return [{error: 'Items unavailble'}]
-      }
-    },
     placeholder: {
       type: String,
       required: false,
-      default: 'Search...'
+      default: 'Search projects...'
     },
     labels: {
       type: Array,
@@ -106,20 +100,33 @@ export default {
       default: function () {
         return ['Projects', '+']
       }
-    },
-    routename: {
-      type: String,
-      default: 'project',
-      validator: function (value) {
-        // Value must match one of these strings
-        return ['project', 'run', 'testcase', 'step'].indexOf(value) !== -1
-      }
     }
   },
   data: () => ({
     value: ''
   }),
   computed: {
+    ...mapState({
+      route: 'RouteModule'
+    }),
+    items () {
+      switch (this.route.name) {
+        case 'project':
+          return this.$store.getters['projects/projects']
+          break
+        case 'run':
+          return this.$store.getters['runs/runs']
+          break
+        case 'testcase':
+          return this.$store.getters['testcases/testcases']
+          break
+        case 'step':
+          return this.$store.getters['steps/steps']
+          break
+        default:
+          return this.$store.getters['projects/projects']
+      }
+    },
     filteredItems () {
       // Filters item in sidebar according to searcbar input
       if (this.items) {
@@ -143,11 +150,12 @@ export default {
 <style lang="sass">
 
   aside.sidebar
+    position: relative
     flex: 1
     margin-right: 1rem
-    position: sticky
-    top: calc(55px + 1rem)
-    height: 100vh
+    max-height: 100vh
+    overflow: scroll
+
 </style>
 
 <style lang="sass" scoped>
@@ -156,6 +164,11 @@ export default {
     margin-bottom: .5rem
     cursor: pointer
     transition: transform .3s linear
+    position: sticky
+    top: .5rem
     &:hover
       transform: scale(1.02)
+
+  .error
+    text-align: center
 </style>
