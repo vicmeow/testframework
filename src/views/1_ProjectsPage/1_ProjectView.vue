@@ -21,12 +21,12 @@
                      :to="{
                        name: 'run',
                        params: {
-                         run: item.title,
+                         run: item.id,
                          item: item
                        }
                      }"
                      class="item-title"
-                     @click.native="fetchRunTcs(item.id)">
+                     @click.native="fetchTc(item.id)">
           {{item.title}}
         </router-link>
       </list-item>
@@ -38,7 +38,7 @@
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
-import {mapActions, mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Project',
@@ -48,39 +48,36 @@ export default {
     ListItem
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-      default: 'Item title'
-    },
     item: {
       type: Object,
       required: true,
       default: function () {
-        return {
-          name: 'Unavailable'
-        }
+        return false
       }
     }
   },
   computed: {
     ...mapGetters({
+      loading: 'loader/isLoading',
       runs: 'runs/runs',
       projects: 'projects/projects'
     })
   },
   created () {
-    if (this.$store.getters['runs/runs'].length === 0) {
-      this.fetchRuns()
-    }
+    this.fetchRuns()
   },
   methods: {
-    ...mapActions({
-      fetchRunTcs: 'testcases/FETCH_RUN_TCS',
-      fetchRuns: 'runs/FETCH_PROJECT_RUNS'
-    }),
-    fetch (itemid) {
-      console.log(itemid)
+    fetchTc (id) {
+      this.$store.commit('loader/setLoading', true)
+      this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
+        this.$store.commit('loader/setLoading', false)
+      })
+    },
+    fetchRuns () {
+      this.$store.commit('loader/setLoading', true)
+      this.$store.dispatch('runs/FETCH_PROJECT_RUNS').then(() => {
+        this.$store.commit('loader/setLoading', false)
+      })
     }
   }
 }

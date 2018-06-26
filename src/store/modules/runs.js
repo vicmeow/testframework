@@ -10,17 +10,13 @@ const getters = {
   }
 }
 const actions = {
-  async FETCH_PROJECT_RUNS ({
-    commit
-  }) {
+  async FETCH_PROJECT_RUNS ({commit}) {
     try {
       const response = await axios.get(
         'http://localhost:3000/runs/'
       )
       // Send data to mutations to write/give(mutate) data to state
-      commit('RECEIVE_PROJECT_RUNS', {
-        data: response.data
-      })
+      commit('RECEIVE_PROJECT_RUNS', {data: response.data})
     } catch (error) {
       console.log(error)
     }
@@ -28,9 +24,7 @@ const actions = {
 }
 
 const mutations = {
-  RECEIVE_PROJECT_RUNS (state, {
-    data
-  }) {
+  RECEIVE_PROJECT_RUNS (state, {data, commit}) {
     // Empty current array to prevent duplicating
     state.runs = []
     // Loop through objects in response data

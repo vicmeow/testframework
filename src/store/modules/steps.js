@@ -34,6 +34,7 @@ const mutations = {
       // Push objects with custom keys to state
       state.steps.push({
         title: step.meta.step.name,
+        id: step._key,
         status: step.meta.logLevel,
         time: step.meta.time,
         date: new Date(step.meta.time).toLocaleDateString('de-DE'),
