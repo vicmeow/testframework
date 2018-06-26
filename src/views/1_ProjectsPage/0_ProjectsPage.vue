@@ -1,7 +1,7 @@
 <template>
   <div class="projects-route">
-    <div class="loader" v-if="loading">
-      <div class="spinner"></div>
+    <div v-if="loading" class="loader">
+      <div class="spinner"/>
     </div>
     <the-sidebar :back="{name: 'project'}" :placerholder="'Filter items...'"/>
     <router-view :key="$route.path"/>
@@ -62,7 +62,6 @@ export default {
       transform: rotate(0deg)
     100%
       transform: rotate(360deg)
-    
 
   @supports (display: grid)
     .projects-route
