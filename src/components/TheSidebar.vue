@@ -13,7 +13,7 @@
     <searchbar :placeholder="placeholder" v-model="value"/>
 
     <!-- ITEMLIST in sidebar -->
-    <div v-if="items.length === 0" class="error label">Sidebar is currently unavailble.</div>
+    <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
     <item-list v-if="items.length > 1" :labels="labels" class="sidebar">
 
       <!-- Loop to render LISTITEMS in sidebar -->
@@ -33,7 +33,7 @@
         <!-- ROUTERLINK if LISTITEM === RUN -->
         <router-link v-if="route.name === 'run'"
                      slot="routerlink"
-                     :to="{name: route.name, params: {runt: item.title}}"
+                     :to="{name: route.name, params: {run: item.title}}"
                      class="item-title"
                      @click.native="fetchRunTcs(item.parentid)">
           {{item.title}}
@@ -42,7 +42,7 @@
         <!-- ROUTERLINK if LISTITEM === TESTCASE -->
         <router-link v-if="route.name === 'testcase'"
                      slot="routerlink"
-                     :to="{name: route.name, params: {tct: item.title}}"
+                     :to="{name: route.name, params: {tc: item.title}}"
                      class="item-title"
                      @click.native="fetchTcSteps(item.parentid)">
           {{item.title}}
@@ -51,7 +51,7 @@
         <!-- ROUTERLINK if LISTITEM === STEP -->
         <router-link v-if="route.name === 'step'"
                      slot="routerlink"
-                     :to="{name: route.name, params: {stept: item.title}}"
+                     :to="{name: route.name, params: {step: item.title}}"
                      class="item-title">
           {{item.title}}
         </router-link>
@@ -60,11 +60,6 @@
     </item-list>
   </aside>
 </template>
-
-/**
- * TODO:
- * - Make selected item always appear on top of list
- */
 
 <script>
 import Searchbar from '@/components/Searchbar'
@@ -169,6 +164,6 @@ export default {
     &:hover
       transform: scale(1.02)
 
-  .error
+  .no-items
     text-align: center
 </style>
