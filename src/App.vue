@@ -7,12 +7,6 @@
   </div>
 </template>
 
-/**
- * TODO:
- * - Add route transitions
- * - Add a footer with neccessary information
- */
-
 <script>
 import TheHeader from '@/components/header/TheHeader'
 export default {
