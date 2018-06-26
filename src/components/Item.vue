@@ -27,9 +27,9 @@
 
     <slot name="list-right"/>
     <slot name="list-bottom"/>
-    <span v-if="log" class="label">Log</span>
-    <div v-if="log" class="log">
-      <pre><code>{{log}}</code></pre>
+    <span v-if="item.log" class="label">Log</span>
+    <div v-if="item.log" class="log">
+      <pre><code>{{item.log}}</code></pre>
     </div>
   </main>
 </template>
@@ -44,11 +44,6 @@
 export default {
   name: 'Item',
   props: {
-    title: {
-      type: String,
-      required: true,
-      default: 'Item title'
-    },
     item: {
       type: Object,
       required: true,
