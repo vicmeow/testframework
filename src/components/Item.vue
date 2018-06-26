@@ -41,6 +41,7 @@
  */
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'Item',
   props: {
@@ -53,11 +54,18 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'loader/isLoading'
+    })
   }
 }
 </script>
 
 <style lang="sass" scoped>
+
+  @import 'src/assets/styles/style-variables.sass'
 
   .labels
     display: contents

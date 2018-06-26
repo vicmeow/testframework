@@ -1,7 +1,7 @@
 <template>
   <div class="projects-route">
-    <div v-if="loading" class="loader">
-      <div class="loader-bar"/>
+    <div class="loader" v-if="loading">
+      <div class="spinner"></div>
     </div>
     <the-sidebar :back="{name: 'project'}" :placerholder="'Filter items...'"/>
     <router-view :key="$route.path"/>
@@ -42,21 +42,27 @@ export default {
 
   @import 'src/assets/styles/style-variables.sass'
 
+  // Temporary loader
+
   .loader
-    flex-basis: 100%
-    height: .2rem
-    width: 100%
+    position: absolute
+    right: 0
 
-    .loader-bar
-      width: 100%
-      height: 100%
-      background: $blue
+  .spinner
+    width: 1.5rem
+    height: 1.5rem
+    border-radius: 50%
+    border: 3px solid $blue
+    border-top: 3px solid transparent
+    margin: .5rem 1rem
+    animation: spin 1s linear infinite
 
-  @keyframes loading
+  @keyframes spin
     0%
-      width: 0%
+      transform: rotate(0deg)
     100%
-      width: 100%
+      transform: rotate(360deg)
+    
 
   @supports (display: grid)
     .projects-route
@@ -81,8 +87,5 @@ export default {
 
     main.content
       grid-area: mn
-
-    .loader
-      grid-column: span 12
 
 </style>

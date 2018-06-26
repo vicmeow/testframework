@@ -1,6 +1,5 @@
 <template>
   <item :item="item">
-
     <item-list slot="list-bottom"
                :title="'Runs'"
                :labels="['Name', 'Date', 'Duration (min)']"
