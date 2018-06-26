@@ -1,68 +1,63 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Run from '@/views/Run'
-import LandingPage from '@/views/LandingPage'
-// import TheSidebar from './components/TheSidebar'
-import store from '@/store/store'
-import Projects from '@/views/Projects'
-import Project from '@/views/Project'
-import Testcase from '@/views/Testcase'
-import Step from '@/views/Step'
+import Store from '@/store/store'
+
+// Main Routes
+const LandingPage = () => import('@/views/0_LandingPage/0_LandingPage')
+const ProjectsPage = () => import('@/views/1_ProjectsPage/0_ProjectsPage')
+
+// Child Routes (Projects)
+const Project = () => import('@/views/1_ProjectsPage/1_ProjectView')
+const Run = () => import('@/views/1_ProjectsPage/2_RunView')
+const Testcase = () => import('@/views/1_ProjectsPage/3_TestcaseView')
+const Step = () => import('@/views/1_ProjectsPage/4_StepView')
 
 Vue.use(Router)
 
-/**
- * TODO:
- * - Load last active or first project in list on initial render
- * - Add dynamic routing for tables and runs by name or id
- */
-
 export default new Router({
   mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'landing',
-      component: LandingPage
+  routes: [{
+    path: '/',
+    name: 'landing',
+    component: LandingPage
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: ProjectsPage,
+    props: true,
+    redirect: {
+      name: 'project',
+      params: {
+        project: Store.getters['projects/projects'][0].title,
+        item: Store.getters['projects/projects'][0]
+      }
+    },
+    children: [{
+      path: ':project',
+      name: 'project',
+      component: Project,
+      props: true
     },
     {
-      path: '/projects',
-      name: 'projects',
-      component: Projects,
-      props: true,
-      redirect: {
-        name: 'project',
-        params: {
-          projecttitle: store.getters['projects/projects'][0].title,
-          item: store.getters['projects/projects'][0]
-        }
-      },
-      children: [
-        {
-          path: ':projecttitle',
-          name: 'project',
-          component: Project,
-          props: true
-        },
-        {
-          path: ':projecttitle/:runtitle',
-          name: 'run',
-          component: Run,
-          props: true
-        },
-        {
-          path: ':projecttitle/:runtitle/:tctitle',
-          name: 'testcase',
-          component: Testcase,
-          props: true
-        },
-        {
-          path: ':projecttitle/:runtitle/:tctitle/:steptitle',
-          name: 'step',
-          component: Step,
-          props: true
-        }
-      ]
+      path: ':project/:run',
+      name: 'run',
+      component: Run,
+      props: true
+    },
+    {
+      path: ':project/:run/:tc',
+      name: 'testcase',
+      component: Testcase,
+      props: true
+    },
+    {
+      path: ':project/:run/:tc/:step',
+      name: 'step',
+      component: Step,
+      props: true
     }
+    ]
+  }
   ]
 })

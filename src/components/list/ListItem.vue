@@ -1,6 +1,5 @@
 <template>
-  <li class="list-item"
-      :class="{
+  <li :class="{
         active: item.title === $route.params.projecttitle || item.title === $route.params.runtitle || item.title === $route.params.tctitle || item.title === $route.params.steptitle,
         success: item.status === 'OK' || item.status === 0 || item.status === 'info',
         error: item.status === 'error' || item.status === 1,
@@ -10,22 +9,23 @@
         run: type === 'run',
         testcase: type === 'testcase',
         step: type === 'step'
-    }">
+      }"
+      class="list-item">
 
-    <slot name="routerlink"></slot>
-    <span class="data-item" v-if="type === 'run' && item.duration">
-    {{item.duration}}
-      </span>
+    <slot name="routerlink"/>
+    <span v-if="type === 'run' && item.duration" class="data-item">
+      {{item.duration}}
+    </span>
 
-    <span class="data-item" v-if="type === 'testcase'">
-    {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
-      </span>
+    <span v-if="type === 'testcase'" class="data-item">
+      {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
+    </span>
 
-    <span class="data-item" v-if="type === 'step'">
-    {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
-      </span>
+    <span v-if="type === 'step'" class="data-item">
+      {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
+    </span>
 
-    <div class="sidebar-dataset" v-for="(value, key) in item.data" :key="key" v-if="type === 'sidebar'">
+    <div v-for="(value, key) in item.data" v-if="type === 'sidebar'" :key="key" class="sidebar-dataset">
       <span class="data-title">{{key}}</span>
       <span class="data-item">{{value}}</span>
     </div>
@@ -35,19 +35,29 @@
 
 <script>
 export default {
+  filters: {
+    truncate (value, length) {
+      return value.substring(0, length) + '...'
+    }
+  },
   props: {
     item: {
       type: Object,
-      required: false
+      required: true,
+      default: function () {
+        return {
+          name: 'Unavailable'
+        }
+      }
     },
     type: {
       type: String,
-      required: false
-    }
-  },
-  filters: {
-    truncate(value, length) {
-      return value.substring(0, length) + '...'
+      required: false,
+      default: '',
+      validator: function (value) {
+        // Value must match one of these strings
+        return ['sidebar', 'table', 'run'].indexOf(value) !== -1
+      }
     }
   }
 }

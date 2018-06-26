@@ -1,18 +1,18 @@
 <template>
-  <div class="item">
+  <main class="content">
     <span class="label">Title</span>
-    <h1 class="item-title">{{title}}</h1>
+    <h1 class="item-title">{{item.title}}</h1>
 
     <ul class="labels">
       <li class="label-item">
         <span class="label label-type">Created</span>
-        <span class="label-info">18.06.2018</span>
-        </li>
-      <li class="label-item">
+        <span class="label-info">{{item.date}}</span>
+      </li>
+      <li v-if="item.updated" class="label-item">
         <span class="label label-type">Updated</span>
         <span class="label-info">18.06.2018</span>
       </li>
-      <li class="label-item">
+      <li v-if="item.author" class="label-item">
         <span class="label label-type">Author</span>
         <span class="label-info">Ola Nordmann</span>
       </li>
@@ -20,18 +20,18 @@
 
     <div class="item-description">
       <span class="label">Description</span>
-      <div class="description">
-        Duis vitae feugiat massa, ut posuere est. Etiam facilisis bibendum mi in aliquet. Vivamus lobortis orci quis lectus mattis elementum. Quisque molestie finibus leo, et lacinia ipsum convallis nec.
+      <div v-if="item.description" class="description">
+        {{item.description}}
       </div>
     </div>
 
-    <slot name="list-right"></slot>
-    <slot name="list-bottom"></slot>
-    <span class="label" v-if="log">Log</span>
-    <div class="log" v-if="log">
+    <slot name="list-right"/>
+    <slot name="list-bottom"/>
+    <span v-if="log" class="label">Log</span>
+    <div v-if="log" class="log">
       <pre><code>{{log}}</code></pre>
     </div>
-  </div>
+  </main>
 </template>
 
 /**
@@ -46,15 +46,17 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
+      default: 'Item title'
     },
-    description: {
-      type: String,
-      required: false
-    },
-    log: {
+    item: {
       type: Object,
-      required: false
+      required: true,
+      default: function () {
+        return {
+          name: 'Unavailable'
+        }
+      }
     }
   }
 }
@@ -81,15 +83,15 @@ export default {
 </style>
 
 <style lang="sass">
+
   @import 'src/assets/styles/style-variables.sass'
 
-  .item
-    position: sticky
-    top: 55px
-    grid-column: 4 / 12
-    background: white
+  main.content
+    grid-area: mn
+    flex: 3
+    background: $white
     border-radius: .2rem
-    padding: .5rem 1rem 2rem
+    padding: 1rem
 
   .item-title
     margin-bottom: .5rem

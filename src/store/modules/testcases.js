@@ -34,6 +34,8 @@ const mutations = {
       // Push objects with custom keys to state
       state.testcases.push({
         time: testcase.meta.time,
+        date: new Date(testcase.meta.time).toLocaleDateString('de-DE'),
+        description: 'This will be the description of this test case.',
         title: testcase.meta.tc.name,
         id: testcase.meta.tc.id,
         parentid: testcase.meta.run.id,

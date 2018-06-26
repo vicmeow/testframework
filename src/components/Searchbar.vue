@@ -1,5 +1,5 @@
 <template>
-  <input type="search" class="searchbar" :placeholder="placeholder" v-bind:value="value" v-on:input="updateValue($event.target.value)">
+  <input :placeholder="placeholder" v-bind:value="value" type="search" class="searchbar" v-on:input="updateValue($event.target.value)">
 </template>
 
 /*
@@ -13,11 +13,13 @@ export default {
   props: {
     value: {
       type: String,
-      required: false
+      required: false,
+      default: ''
     },
     placeholder: {
       type: String,
-      required: false
+      required: false,
+      default: 'Search...'
     }
   },
   methods: {

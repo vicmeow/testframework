@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
     <!-- BACK button -->
-    <router-link v-if="$route.name != 'project'" :to="back" tag="button" class="label navigate-back">
+    <router-link v-if="$route.name !='project'" :to="back" tag="button" class="label navigate-back">
       <font-awesome-icon
         :icon="['fas', 'arrow-left']"
         class="info-icon"
@@ -13,64 +13,60 @@
     <searchbar :placeholder="placeholder" v-model="value"/>
 
     <!-- ITEMLIST in sidebar -->
-    <item-list :labels="labels" class="sidebar">
+    <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
+    <item-list v-if="items.length > 1" :labels="labels" class="sidebar">
 
       <!-- Loop to render LISTITEMS in sidebar -->
-        <list-item slot="list-item"
-                   v-for="item in filteredItems"
-                   :key="item.title" :item="item"
-                   :type="'sidebar'">
+      <list-item v-for="item in filteredItems"
+                 slot="list-item"
+                 :key="item.title" :item="item"
+                 :type="'sidebar'">
 
-          <!-- ROUTERLINK if LISTITEM === PROJECT -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'project'"
-                       class="item-title"
-                       :to="{name: routename, params: {projecttitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === PROJECT -->
+        <router-link v-if="route.name === 'project'"
+                     slot="routerlink"
+                     :to="{name: route.name, params: {project: item.title}}"
+                     class="item-title">
+          {{item.title}}
+        </router-link>
 
-          <!-- ROUTERLINK if LISTITEM === RUN -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'run'"
-                       class="item-title"
-                       @click.native="fetchRunTcs(item.parentid)"
-                       :to="{name: routename, params: {runtitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === RUN -->
+        <router-link v-if="route.name === 'run'"
+                     slot="routerlink"
+                     :to="{name: route.name, params: {run: item.title}}"
+                     class="item-title"
+                     @click.native="fetchRunTcs(item.parentid)">
+          {{item.title}}
+        </router-link>
 
-          <!-- ROUTERLINK if LISTITEM === TESTCASE -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'testcase'"
-                       class="item-title"
-                       @click.native="fetchTcSteps(item.parentid)"
-                       :to="{name: routename, params: {tctitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === TESTCASE -->
+        <router-link v-if="route.name === 'testcase'"
+                     slot="routerlink"
+                     :to="{name: route.name, params: {tc: item.title}}"
+                     class="item-title"
+                     @click.native="fetchTcSteps(item.parentid)">
+          {{item.title}}
+        </router-link>
 
-          <!-- ROUTERLINK if LISTITEM === STEP -->
-          <router-link slot="routerlink"
-                       v-if="routename === 'step'"
-                       class="item-title"
-                       :to="{name: routename, params: {steptitle: item.title}}">
-              {{item.title}}
-            </router-link>
+        <!-- ROUTERLINK if LISTITEM === STEP -->
+        <router-link v-if="route.name === 'step'"
+                     slot="routerlink"
+                     :to="{name: route.name, params: {step: item.title}}"
+                     class="item-title">
+          {{item.title}}
+        </router-link>
 
-        </list-item>
-      </item-list>
-    </aside>
+      </list-item>
+    </item-list>
+  </aside>
 </template>
-
-/**
- * TODO:
- * - Make selected item always appear on top of list
- */
 
 <script>
 import Searchbar from '@/components/Searchbar'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
-import {mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: 'Sidebar',
@@ -80,32 +76,52 @@ export default {
     Labels,
     ListItem
   },
-  data: () => ({
-    value: ''
-  }),
   props: {
     back: {
       type: Object,
-      required: false
-    },
-    items: {
-      type: Array,
-      required: false
+      required: false,
+      default: function (value) {
+        return {name: 'project'}
+      }
     },
     placeholder: {
       type: String,
-      required: false
+      required: false,
+      default: 'Search projects...'
     },
     labels: {
       type: Array,
-      required: false
-    },
-    routename: {
-      type: String,
-      required: false
+      required: false,
+      default: function () {
+        return ['Projects', '+']
+      }
     }
   },
+  data: () => ({
+    value: ''
+  }),
   computed: {
+    ...mapState({
+      route: 'RouteModule'
+    }),
+    items () {
+      switch (this.route.name) {
+        case 'project':
+          return this.$store.getters['projects/projects']
+          break
+        case 'run':
+          return this.$store.getters['runs/runs']
+          break
+        case 'testcase':
+          return this.$store.getters['testcases/testcases']
+          break
+        case 'step':
+          return this.$store.getters['steps/steps']
+          break
+        default:
+          return this.$store.getters['projects/projects']
+      }
+    },
     filteredItems () {
       // Filters item in sidebar according to searcbar input
       if (this.items) {
@@ -126,12 +142,28 @@ export default {
 }
 </script>
 
+<style lang="sass">
+
+  aside.sidebar
+    position: relative
+    flex: 1
+    margin-right: 1rem
+    max-height: 100vh
+    overflow: scroll
+
+</style>
+
 <style lang="sass" scoped>
 
   button.navigate-back
     margin-bottom: .5rem
     cursor: pointer
     transition: transform .3s linear
+    position: sticky
+    top: .5rem
     &:hover
       transform: scale(1.02)
+
+  .no-items
+    text-align: center
 </style>

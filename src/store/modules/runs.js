@@ -39,6 +39,8 @@ const mutations = {
       state.runs.push({
         title: run.runId,
         status: run.run.meta.logLevel,
+        date: new Date(run.run.meta.time).toLocaleDateString('de-DE'),
+        description: 'This will be the description of this run.',
         duration: run.duration_in_min,
         id: run.runId,
         data: {}

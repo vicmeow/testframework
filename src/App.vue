@@ -2,16 +2,10 @@
   <div id="app">
     <the-header/>
     <transition name="page" mode="out-in">
-      <router-view :key="$route.path"></router-view>
+      <router-view :key="$route.path"/>
     </transition>
   </div>
 </template>
-
-/**
- * TODO:
- * - Add route transitions
- * - Add a footer with neccessary information
- */
 
 <script>
 import TheHeader from '@/components/header/TheHeader'
@@ -71,9 +65,6 @@ h1
   flex-wrap: wrap
   margin: auto
 
-.wrapper
-  display: contents
-
 header.header
   position: sticky
   top: 0
@@ -84,48 +75,12 @@ header.header
   align-items: center
   z-index: 99
 
-aside.sidebar
-  flex: 1
-  margin-right: 1rem
-  position: sticky
-  top: calc(55px + 1rem)
-  height: 100vh
-
-main.content
-  flex: 3
-  background: $white
-  border-radius: .2rem
-  padding: 1rem
-
-@supports (display: grid)
-  #app
-    display: grid
-    grid-template-columns: repeat(12, 1fr)
-    grid-template-rows: repeat(3, auto)
-    grid-template-areas: "hd hd hd hd hd hd hd hd hd hd hd hd " ". sb sb mn mn mn mn mn mn mn mn ." ". sb sb mn mn mn mn mn mn mn mn ."
-    grid-gap: 1rem
-    @include tablet
-      padding: 0 1rem
-      grid-template-columns: repeat(8, 1fr)
-      grid-template-areas: "hd hd hd hd hd hd hd hd " "sb sb mn mn mn mn mn mn" "sb sb mn mn mn mn mn mn"
-
-  header.header
-    grid-area: hd
-    margin-bottom: 0
-
-  aside.sidebar
-    grid-area: sb
-    margin-right: 0
-
-  main.content
-    grid-area: mn
-
 /* TRANSITIONS */
 
 .page-enter-active, .page-leave-active
   transition: all .3s
 
 .page-enter, .page-leave-to
-  transform: translateY(5rem)
+  opacity: .5
 
 </style>

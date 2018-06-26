@@ -1,6 +1,6 @@
 <template>
   <li class="labels">
-    <span class="label" v-for="label in labels" :key="label.index">{{label}}</span>
+    <span v-for="label in labels" :key="label.index" class="label">{{label}}</span>
   </li>
 </template>
 
@@ -15,7 +15,10 @@ export default {
   props: {
     labels: {
       type: Array,
-      required: false
+      required: false,
+      default: function (value) {
+        return ['Label']
+      }
     }
   }
 }

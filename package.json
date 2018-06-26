@@ -16,7 +16,8 @@
     "eslint": "^4.19.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.3",
@@ -30,20 +31,43 @@
     "sass-loader": "^6.0.6",
     "vue-template-compiler": "^2.5.13"
   },
-  "vue": {
-    "lintOnSave": true
-  },
   "babel": {
     "presets": [
       "@vue/app"
     ]
   },
   "eslintConfig": {
+    "parser": "vue-eslint-parser",
+      "parserOptions": {
+        "parser": "babel-eslint",
+        "ecmaVersion": 8,
+        "sourceType": "module"
+      },
     "root": true,
     "extends": [
       "plugin:vue/essential",
       "@vue/standard"
-    ]
+    ],
+    "rules": {
+      "vue/attribute-hyphenation": [
+        "error",
+        "always"
+      ],
+      "vue/html-end-tags": "error",
+      "vue/html-indent": [
+        "error",
+        2
+      ],
+      "vue/html-self-closing": "error",
+      "vue/require-default-prop": "error",
+      "vue/require-prop-types": "error",
+      "vue/attributes-order": "error",
+      "vue/html-quotes": [
+        "error",
+        "double"
+      ],
+      "vue/order-in-components": "error"
+    }
   },
   "postcss": {
     "plugins": {
