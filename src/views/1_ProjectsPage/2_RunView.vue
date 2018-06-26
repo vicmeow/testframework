@@ -22,11 +22,11 @@
           :to="{
             name: 'testcase',
             params: {
-              tc: item.title,
+              tc: item.id,
               item: item
           }}"
           class="item-title"
-          @click.native="fetchTcSteps(item.id)">{{item.title | truncate(60)}}</router-link>
+          @click.native="fetchTc(item.id)">{{item.title | truncate(60)}}</router-link>
       </list-item>
     </item-list>
   </item>
@@ -36,7 +36,7 @@
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
-import {mapActions, mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Run',
@@ -51,31 +51,36 @@ export default {
     }
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-      default: 'Item title'
-    },
     item: {
       type: Object,
       required: true,
       default: function () {
-        return {
-          name: 'Unavailable'
-        }
+        return false
       }
     }
   },
   computed: {
     ...mapGetters({
-      runs: 'runs/runs',
+      loading: 'loader/isLoading',
       testcases: 'testcases/testcases'
     })
   },
+  created () {
+    this.fetchTcs(this.item.id)
+  },
   methods: {
-    ...mapActions({
-      fetchTcSteps: 'steps/FETCH_TC_STEPS'
-    })
+    fetchTcs (id) {
+      this.$store.commit('loader/setLoading', true)
+      this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
+        this.$store.commit('loader/setLoading', false)
+      })
+    },
+    fetchTc (id) {
+      this.$store.commit('loader/setLoading', true)
+      this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
+        this.$store.commit('loader/setLoading', false)
+      })
+    }
   }
 }
 </script>

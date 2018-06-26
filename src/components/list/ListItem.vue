@@ -56,7 +56,7 @@ export default {
       default: '',
       validator: function (value) {
         // Value must match one of these strings
-        return ['sidebar', 'table', 'run'].indexOf(value) !== -1
+        return ['sidebar', 'table', 'project', 'run', 'testcase', 'step'].indexOf(value) !== -1
       }
     }
   }

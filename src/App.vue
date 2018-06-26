@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <the-header/>
-    <transition name="page" mode="out-in">
-      <router-view :key="$route.path"/>
-    </transition>
+    <router-view :key="$route.path"/>
   </div>
 </template>
 

@@ -14,7 +14,7 @@
 
     <!-- ITEMLIST in sidebar -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
-    <item-list v-if="items.length > 1" :labels="labels" class="sidebar">
+    <item-list v-if="items.length > 0" :labels="labels" class="sidebar">
 
       <!-- Loop to render LISTITEMS in sidebar -->
       <list-item v-for="item in filteredItems"
@@ -108,16 +108,12 @@ export default {
       switch (this.route.name) {
         case 'project':
           return this.$store.getters['projects/projects']
-          break
         case 'run':
           return this.$store.getters['runs/runs']
-          break
         case 'testcase':
           return this.$store.getters['testcases/testcases']
-          break
         case 'step':
           return this.$store.getters['steps/steps']
-          break
         default:
           return this.$store.getters['projects/projects']
       }

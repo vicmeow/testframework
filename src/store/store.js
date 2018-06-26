@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 /* ----------  Modules  ---------- */
+import loader from './modules/loader'
 import projects from './modules/projects'
 import runs from './modules/runs'
 import testcases from './modules/testcases'
@@ -25,6 +26,7 @@ export default new Vuex.Store({
   mutations,
   getters,
   modules: {
+    loader,
     projects,
     runs,
     testcases,
