@@ -145,7 +145,6 @@ export default {
     flex: 1
     margin-right: 1rem
     max-height: 100vh
-    overflow: scroll
 
 </style>
 
