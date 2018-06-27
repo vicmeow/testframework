@@ -49,7 +49,6 @@ export default {
     ...mapGetters({
       loading: 'loader/isLoading',
       runs: 'runs/runs',
-      projects: 'projects/projects',
       item: 'item'
     })
   },
@@ -60,11 +59,13 @@ export default {
   methods: {
     fetchProject () {
       this.$store.commit('RECIEVE_ITEM', this.$store.getters['projects/projects'][0])
-      //this.$store.commit('loader/setLoading', true)
-      //this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
-      //this.$store.commit('loader/setLoading', false)})
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.$store.getters['projects/projects'])
+      // this.$store.commit('loader/setLoading', true)
+      // this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
+      // this.$store.commit('loader/setLoading', false)})
     },
     fetchTcs (id, item) {
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.runs)
       this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {

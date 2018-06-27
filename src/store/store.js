@@ -15,23 +15,32 @@ const vuexLocalStorage = new VuexPersist({
   key: 'vuex', // The key to store the state on in the storage provider.
   storage: window.localStorage, // or window.sessionStorage or localForage
   reducer: state => ({
-    item: state.item
+    item: state.item,
+    sidebarItems: state.sidebarItems
   })
 })
 
 /* ----------  Global Scope  ---------- */
 const state = {
-  item: {}
+  item: {},
+  sidebarItems: {}
 }
 const getters = {
   item () {
     return state.item
+  },
+  sidebarItems () {
+    return state.sidebarItems
   }
 }
 const mutations = {
   RECIEVE_ITEM (state, item) {
     state.item = {}
     state.item = item
+  },
+  RECIEVE_SIDEBAR_ITEMS (state, items) {
+    state.sidebarItems = []
+    state.sidebarItems = items
   }
 }
 

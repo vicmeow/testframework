@@ -13,7 +13,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      steps: 'steps/steps',
       item: 'item'
     })
   }

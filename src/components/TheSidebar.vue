@@ -23,7 +23,7 @@
                  :type="'sidebar'">
         <!-- ROUTER LINK for LIST ITEMS -->
         <router-link slot="routerlink"
-                     :to="{name: $route.name, params: {id: item.title}}"
+                     :to="{name: $route.name, params: {project: item.title}}"
                      class="item-title"
                      @click.native="setItem(item)">
           {{item.title}}
@@ -38,6 +38,7 @@ import Searchbar from '@/components/Searchbar'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Sidebar',
@@ -72,20 +73,9 @@ export default {
     value: ''
   }),
   computed: {
-    items () {
-      switch (this.$route.name) {
-        case 'project':
-          return this.$store.getters['projects/projects']
-        case 'run':
-          return this.$store.getters['runs/runs']
-        case 'testcase':
-          return this.$store.getters['testcases/testcases']
-        case 'step':
-          return this.$store.getters['steps/steps']
-        default:
-          return this.$store.getters['projects/projects']
-      }
-    },
+    ...mapGetters({
+      items: 'sidebarItems'
+    }),
     filteredItems () {
       // Filters item in sidebar according to searcbar input
       if (this.items) {

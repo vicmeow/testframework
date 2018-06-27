@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     fetchStep (id, item) {
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.steps)
       this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('steps/FETCH_TC_STEPS', id).then(() => {

@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     fetchTc (id, item) {
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.testcases)
       this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
