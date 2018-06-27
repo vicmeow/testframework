@@ -22,12 +22,11 @@
                  :key="item.title" :item="item"
                  :type="'sidebar'">
         <!-- ROUTER LINK for LIST ITEMS -->
-        <router-link slot="routerlink"
-                     :to="{name: $route.name, params: {project: item.title}}"
-                     class="item-title"
-                     @click.native="setItem(item)">
+        <h4 slot="routerlink"
+            class="item-title"
+            @click="setItem(item)">
           {{item.title}}
-        </router-link>
+        </h4>
       </list-item>
     </item-list>
   </aside>
@@ -74,6 +73,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
+      loading: 'loader/isLoading',
       items: 'sidebarItems'
     }),
     filteredItems () {
@@ -90,6 +90,18 @@ export default {
   methods: {
     setItem (item) {
       this.$store.commit('RECIEVE_ITEM', item)
+      console.log(item.id)
+      // Store current route name
+      let route = this.$route.name
+      // Create obj for router push
+      let to = {
+        name: route,
+        params: {
+          [route]: item.id
+        }
+      }
+      // Navigate using to obj
+      this.$router.push(to)
     }
   }
 }

@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     fetchProject () {
-      this.$store.commit('RECIEVE_ITEM', this.$store.getters['projects/projects'][0])
       this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.$store.getters['projects/projects'])
       // this.$store.commit('loader/setLoading', true)
       // this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
