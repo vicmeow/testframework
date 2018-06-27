@@ -47,19 +47,20 @@ export default {
     ListItem
   },
   props: {
-    item: {
+    /* item: {
       type: Object,
       required: true,
       default: function () {
         return false
       }
-    }
+    } */
   },
   computed: {
     ...mapGetters({
       loading: 'loader/isLoading',
       runs: 'runs/runs',
-      projects: 'projects/projects'
+      projects: 'projects/projects',
+      item: 'item'
     })
   },
   created () {
