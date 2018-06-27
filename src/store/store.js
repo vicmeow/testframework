@@ -29,8 +29,8 @@ const getters = {
   }
 }
 const mutations = {
-  RECIEVE_ITEM (state, {data}) {
-    state.item = data
+  RECIEVE_ITEM (state, item) {
+    state.item = item
   }
 }
 

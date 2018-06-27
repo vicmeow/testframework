@@ -20,12 +20,11 @@
                      :to="{
                        name: 'run',
                        params: {
-                         run: item.id,
-                         item: item
+                         run: item.id
                        }
                      }"
                      class="item-title"
-                     @click.native="fetchTc(item.id)">
+                     @click.native="fetchTc(item.id, item)">
           {{item.title}}
         </router-link>
       </list-item>
@@ -46,15 +45,6 @@ export default {
     ItemList,
     ListItem
   },
-  props: {
-    /* item: {
-      type: Object,
-      required: true,
-      default: function () {
-        return false
-      }
-    } */
-  },
   computed: {
     ...mapGetters({
       loading: 'loader/isLoading',
@@ -65,9 +55,16 @@ export default {
   },
   created () {
     this.fetchRuns()
+    this.setProject(this.$route.params.item)
   },
   methods: {
-    fetchTc (id) {
+    setProject (item) {
+      if (item) {
+        this.$store.commit('RECIEVE_ITEM', item)
+      }
+    },
+    fetchTc (id, item) {
+      this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
         this.$store.commit('loader/setLoading', false)

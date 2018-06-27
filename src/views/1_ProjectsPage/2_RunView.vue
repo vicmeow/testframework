@@ -22,11 +22,10 @@
           :to="{
             name: 'testcase',
             params: {
-              tc: item.id,
-              item: item
+              tc: item.id
           }}"
           class="item-title"
-          @click.native="fetchTc(item.id)">{{item.title | truncate(60)}}</router-link>
+          @click.native="fetchTc(item.id, item)">{{item.title | truncate(60)}}</router-link>
       </list-item>
     </item-list>
   </item>
@@ -50,32 +49,25 @@ export default {
       return value.substring(0, length) + '...'
     }
   },
-  props: {
-    item: {
-      type: Object,
-      required: true,
-      default: function () {
-        return false
-      }
-    }
-  },
   computed: {
     ...mapGetters({
       loading: 'loader/isLoading',
-      testcases: 'testcases/testcases'
+      testcases: 'testcases/testcases',
+      item: 'item'
     })
   },
   created () {
     this.fetchTcs(this.item.id)
   },
   methods: {
-    fetchTcs (id) {
+    fetchTc (id, item) {
+      this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
         this.$store.commit('loader/setLoading', false)
       })
     },
-    fetchTc (id) {
+    fetchTcs (id) {
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
         this.$store.commit('loader/setLoading', false)
