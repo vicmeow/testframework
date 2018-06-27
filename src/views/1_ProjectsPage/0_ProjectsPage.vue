@@ -3,7 +3,7 @@
     <div v-if="loading" class="loader">
       <div class="spinner"/>
     </div>
-    <the-sidebar :back="{name: 'project'}" :placerholder="'Filter items...'"/>
+    <the-sidebar :placerholder="'Filter items...'"/>
     <router-view :key="$route.path"/>
   </div>
 </template>
@@ -23,18 +23,6 @@ export default {
       loading: 'loader/isLoading'
     })
   }
-  /* created() {
-    // When API is ready, this will fetch projects from the API.
-    this.fetchProjects()
-  },
-  methods: {
-    fetchProjects () {
-      this.$store.commit('loader/setLoading', true)
-      this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
-      this.$store.commit('loader/setLoading', false)
-    })
-    }
-  } */
 }
 </script>
 

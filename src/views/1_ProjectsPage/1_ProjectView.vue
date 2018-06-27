@@ -24,7 +24,7 @@
                        }
                      }"
                      class="item-title"
-                     @click.native="fetchTc(item.id, item)">
+                     @click.native="fetchTcs(item.id, item)">
           {{item.title}}
         </router-link>
       </list-item>
@@ -55,15 +55,16 @@ export default {
   },
   created () {
     this.fetchRuns()
-    this.setProject(this.$route.params.item)
+    this.fetchProject()
   },
   methods: {
-    setProject (item) {
-      if (item) {
-        this.$store.commit('RECIEVE_ITEM', item)
-      }
+    fetchProject () {
+      this.$store.commit('RECIEVE_ITEM', this.$store.getters['projects/projects'][0])
+      //this.$store.commit('loader/setLoading', true)
+      //this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
+      //this.$store.commit('loader/setLoading', false)})
     },
-    fetchTc (id, item) {
+    fetchTcs (id, item) {
       this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
