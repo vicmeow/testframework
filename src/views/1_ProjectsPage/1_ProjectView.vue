@@ -20,18 +20,19 @@
                      :to="{
                        name: 'run',
                        params: {
-                         run: item.id,
-                         item: item
+                         run: item.id
                        }
                      }"
                      class="item-title"
-                     @click.native="fetchTc(item.id)">
+                     @click.native="fetchTcs(item.id, item)">
           {{item.title}}
         </router-link>
       </list-item>
     </item-list>
   </item>
 </template>
+
+/* CHANGE TO FETCH DATA USING ID IN API CALL ON CREATED, INSTEAD OF STORING ITEM IN THE STORE? */
 
 <script>
 import Item from '@/components/Item'
@@ -46,27 +47,27 @@ export default {
     ItemList,
     ListItem
   },
-  props: {
-    item: {
-      type: Object,
-      required: true,
-      default: function () {
-        return false
-      }
-    }
-  },
   computed: {
     ...mapGetters({
       loading: 'loader/isLoading',
       runs: 'runs/runs',
-      projects: 'projects/projects'
+      item: 'item'
     })
   },
   created () {
     this.fetchRuns()
+    this.fetchProject()
   },
   methods: {
-    fetchTc (id) {
+    fetchProject () {
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.$store.getters['projects/projects'])
+      // this.$store.commit('loader/setLoading', true)
+      // this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
+      // this.$store.commit('loader/setLoading', false)})
+    },
+    fetchTcs (id, item) {
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.runs)
+      this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
         this.$store.commit('loader/setLoading', false)

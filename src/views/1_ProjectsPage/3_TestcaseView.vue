@@ -22,11 +22,10 @@
           :to="{
             name: 'step',
             params: {
-              step: item.id,
-              item: item
+              step: item.id
           }}"
           class="item-title"
-          @click.native="fetchStep(item.parentid)">{{item.title | truncate(60)}}</router-link>
+          @click.native="fetchStep(item.parentid, item)">{{item.title | truncate(60)}}</router-link>
       </list-item>
     </item-list>
   </item>
@@ -50,32 +49,26 @@ export default {
       return value.substring(0, length) + '...'
     }
   },
-  props: {
-    item: {
-      type: Object,
-      required: true,
-      default: function () {
-        return false
-      }
-    }
-  },
   computed: {
     ...mapGetters({
       loading: 'loader/isLoading',
-      steps: 'steps/steps'
+      steps: 'steps/steps',
+      item: 'item'
     })
   },
   created () {
     this.fetchSteps(this.item.id)
   },
   methods: {
-    fetchSteps (id) {
+    fetchStep (id, item) {
+      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.steps)
+      this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('steps/FETCH_TC_STEPS', id).then(() => {
         this.$store.commit('loader/setLoading', false)
       })
     },
-    fetchStep (id) {
+    fetchSteps (id) {
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('steps/FETCH_TC_STEPS', id).then(() => {
         this.$store.commit('loader/setLoading', false)

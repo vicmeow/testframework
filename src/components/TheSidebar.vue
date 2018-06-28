@@ -13,49 +13,22 @@
       />
       Back to {{backButton.name + 's'}}</router-link>
 
-    <!-- ITEMLIST in sidebar -->
+    <!-- ITEMLIST -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
-    <item-list v-if="items.length > 0" :labels="labels" class="sidebar-list">
-      <!-- Loop to render LISTITEMS in sidebar -->
+    
+    <item-list v-if="items.length > 0" :labels="labels" class="sidebar">
+    
+      <!-- Loop to render LIST ITEMS -->
       <list-item v-for="item in filteredItems"
                  slot="list-item"
                  :key="item.title" :item="item"
                  :type="'sidebar'">
-
-        <!-- ROUTERLINK if LISTITEM === PROJECT -->
-        <router-link v-if="route.name === 'project'"
-                     slot="routerlink"
-                     :to="{name: route.name, params: {project: item.title}}"
-                     class="item-title">
+        <!-- ROUTER LINK for LIST ITEMS -->
+        <h4 slot="routerlink"
+            class="item-title"
+            @click="setItem(item)">
           {{item.title}}
-        </router-link>
-
-        <!-- ROUTERLINK if LISTITEM === RUN -->
-        <router-link v-if="route.name === 'run'"
-                     slot="routerlink"
-                     :to="{name: route.name, params: {run: item.title}}"
-                     class="item-title"
-                     @click.native="fetchRunTcs(item.parentid)">
-          {{item.title}}
-        </router-link>
-
-        <!-- ROUTERLINK if LISTITEM === TESTCASE -->
-        <router-link v-if="route.name === 'testcase'"
-                     slot="routerlink"
-                     :to="{name: route.name, params: {tc: item.title}}"
-                     class="item-title"
-                     @click.native="fetchTcSteps(item.parentid)">
-          {{item.title}}
-        </router-link>
-
-        <!-- ROUTERLINK if LISTITEM === STEP -->
-        <router-link v-if="route.name === 'step'"
-                     slot="routerlink"
-                     :to="{name: route.name, params: {step: item.title}}"
-                     class="item-title">
-          {{item.title}}
-        </router-link>
-
+        </h4>
       </list-item>
     </item-list>
   </aside>
@@ -66,7 +39,7 @@ import Searchbar from '@/components/Searchbar'
 import ItemList from '@/components/list/ItemList'
 import ListItem from '@/components/list/ListItem'
 import Labels from '@/components//Labels'
-import {mapState, mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Sidebar',
@@ -95,37 +68,10 @@ export default {
     activeItem: {}
   }),
   computed: {
-    backButton () {
-      switch (this.$route.name) {
-        case 'project':
-          return false
-        case 'run':
-          return {name: 'project'}
-        case 'testcase':
-          return {name: 'run'}
-        case 'step':
-          return {name: 'testcase'}
-        default:
-          return false
-      }
-    },
-    ...mapState({
-      route: 'RouteModule'
+    ...mapGetters({
+      loading: 'loader/isLoading',
+      items: 'sidebarItems'
     }),
-    items () {
-      switch (this.route.name) {
-        case 'project':
-          return this.$store.getters['projects/projects']
-        case 'run':
-          return this.$store.getters['runs/runs']
-        case 'testcase':
-          return this.$store.getters['testcases/testcases']
-        case 'step':
-          return this.$store.getters['steps/steps']
-        default:
-          return this.$store.getters['projects/projects']
-      }
-    },
     filteredItems () {
       // Filters item in sidebar according to searcbar input
       if (this.items) {
@@ -138,12 +84,20 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      fetchRunTcs: 'testcases/FETCH_RUN_TCS',
-      fetchTcSteps: 'steps/FETCH_TC_STEPS'
-    }),
-    prependActive (item) {
-      this.activeItem = item
+    setItem (item) {
+      this.$store.commit('RECIEVE_ITEM', item)
+      console.log(item.id)
+      // Store current route name
+      let route = this.$route.name
+      // Create obj for router push
+      let to = {
+        name: route,
+        params: {
+          [route]: item.id
+        }
+      }
+      // Navigate using to obj
+      this.$router.push(to)
     }
   }
 }

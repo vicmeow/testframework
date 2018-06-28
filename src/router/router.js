@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Store from '@/store/store'
 
 // Main Routes
-const LandingPage = () => import('@/views/0_LandingPage/0_LandingPage')
+const HomePage = () => import('@/views/0_HomePage/0_HomePage')
 const ProjectsPage = () => import('@/views/1_ProjectsPage/0_ProjectsPage')
 
 // Child Routes (Projects)
@@ -18,8 +18,8 @@ export default new Router({
   mode: 'history',
   routes: [{
     path: '/',
-    name: 'landing',
-    component: LandingPage
+    name: 'home',
+    component: HomePage
   },
   {
     path: '/projects',
@@ -29,8 +29,7 @@ export default new Router({
     redirect: {
       name: 'project',
       params: {
-        project: Store.getters['projects/projects'][0].title,
-        item: Store.getters['projects/projects'][0]
+        project: Store.getters['projects/projects'][0].id
       }
     },
     children: [{
