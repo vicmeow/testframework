@@ -1,16 +1,17 @@
 <template>
   <aside class="sidebar">
+    <form role="search">
+      <searchbar :placeholder="placeholder" v-model="value"/>
+    </form>
     <!-- BACK button -->
-    <router-link v-if="$route.name !='project'" :to="back" tag="button" class="label navigate-back">
+    <router-link v-if="$route.name !='project'" :to="backButton" tag="button" class="navigate-back">
       <font-awesome-icon
         :icon="['fas', 'arrow-left']"
         class="info-icon"
         role="img"
         aria-hidden="true"
       />
-      Back to {{back.name + 's'}}</router-link>
-
-    <searchbar :placeholder="placeholder" v-model="value"/>
+      Back to {{backButton.name + 's'}}</router-link>
 
     <!-- ITEMLIST in sidebar -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
@@ -77,13 +78,6 @@ export default {
     ListItem
   },
   props: {
-    back: {
-      type: Object,
-      required: false,
-      default: function (value) {
-        return {name: 'project'}
-      }
-    },
     placeholder: {
       type: String,
       required: false,
@@ -101,6 +95,20 @@ export default {
     value: ''
   }),
   computed: {
+    backButton () {
+      switch (this.$route.name) {
+        case 'project':
+          return false
+        case 'run':
+          return {name: 'project'}
+        case 'testcase':
+          return {name: 'run'}
+        case 'step':
+          return {name: 'testcase'}
+        default:
+          return false
+      }
+    },
     ...mapState({
       route: 'RouteModule'
     }),
@@ -150,15 +158,23 @@ export default {
 
 <style lang="sass" scoped>
 
+  @import 'src/assets/styles/style-variables.sass'
+
   button.navigate-back
+    text-align: left
     margin-bottom: .5rem
     cursor: pointer
-    transition: transform .3s linear
-    position: sticky
-    top: .5rem
+    transition: transform .1s linear
+    background: white
+    padding: .2rem 1rem
+    border-radius: 1rem
+    color: $grey
     &:hover
       transform: scale(1.02)
 
   .no-items
     text-align: center
+
+  .info-icon
+    font-size: .6rem
 </style>
