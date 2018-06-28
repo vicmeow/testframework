@@ -82,6 +82,7 @@ export default {
 
   .description
     max-width: 700px
+    margin-top: .2rem
 
 </style>
 

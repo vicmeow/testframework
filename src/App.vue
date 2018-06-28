@@ -24,6 +24,8 @@ body, html
   font-size: 16px
   color: $black
   background: $bg
+  @include large-desktop
+    font-size: 17px
 
 *
   box-sizing: border-box

@@ -13,9 +13,8 @@
       class="list-item">
 
     <slot name="routerlink"/>
-    <span v-if="type === 'run' && item.duration" class="data-item">
-      {{item.duration}}
-    </span>
+    <span v-if="type === 'run' && item.date" class="data-item">{{item.date}}</span>
+    <span v-if="type === 'run' && item.duration" class="data-item">{{item.duration}}</span>
 
     <span v-if="type === 'testcase'" class="data-item">
       {{new Date(item.time).toLocaleDateString('de-DE')}} {{new Date(item.time).toLocaleTimeString('de-DE')}}
@@ -35,11 +34,6 @@
 
 <script>
 export default {
-  filters: {
-    truncate (value, length) {
-      return value.substring(0, length) + '...'
-    }
-  },
   props: {
     item: {
       type: Object,
@@ -122,7 +116,7 @@ export default {
   .table, .run, .testcase, .step
     display: flex
     flex-direction: row
-    justify-content: space-between
+    justify-content: flex-start
     align-content: center
     align-items: baseline
     min-height: 35px
@@ -136,11 +130,9 @@ export default {
       +border(.25rem, $blue)
 
     .item-title
-      flex-basis: 80%
       padding-right: 1rem
 
     .data-item
-      flex-basis: 20%
       word-break: break-word
 
   /* ROUTER LINK STYLING */
@@ -151,5 +143,19 @@ export default {
   .active
     transform: translateX(-.5rem)
     box-shadow: 0 .5rem 1rem $bg-darker
+
+  .list-item.testcase, .list-item.step
+    @for $i from 1 through 2
+      a:nth-child(1)
+        flex-basis: 80%
+      span:nth-child(2)
+        flex-basis: 20%
+
+  .list-item.run
+    @for $i from 1 through 3
+      a:nth-child(1)
+        flex-basis: 60%
+      span:nth-child(2), .label:nth-child(3)
+        flex-basis: 20%
 
 </style>
