@@ -32,6 +32,8 @@
   </item>
 </template>
 
+/* CHANGE TO FETCH DATA USING ID IN API CALL ON CREATED, INSTEAD OF STORING ITEM IN THE STORE? */
+
 <script>
 import Item from '@/components/Item'
 import ItemList from '@/components/list/ItemList'

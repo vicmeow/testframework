@@ -29,7 +29,7 @@ export default new Router({
     redirect: {
       name: 'project',
       params: {
-        project: Store.getters['projects/projects'][0].title
+        project: Store.getters['projects/projects'][0].id
       }
     },
     children: [{
