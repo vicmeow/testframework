@@ -26,7 +26,7 @@
               item: item
           }}"
           class="item-title"
-          @click.native="fetchTc(item.id)">{{item.title | truncate(60)}}</router-link>
+          @click.native="fetchTc(item.id)">{{item.title}}</router-link>
       </list-item>
     </item-list>
   </item>
@@ -44,11 +44,6 @@ export default {
     Item,
     ItemList,
     ListItem
-  },
-  filters: {
-    truncate (value, length) {
-      return value.substring(0, length) + '...'
-    }
   },
   props: {
     item: {

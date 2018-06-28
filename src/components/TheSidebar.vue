@@ -14,7 +14,7 @@
 
     <!-- ITEMLIST in sidebar -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
-    <item-list v-if="items.length > 0" :labels="labels" class="sidebar">
+    <item-list v-if="items.length > 0" :labels="labels" class="sidebar-list">
 
       <!-- Loop to render LISTITEMS in sidebar -->
       <list-item v-for="item in filteredItems"
