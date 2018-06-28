@@ -42,8 +42,7 @@ export default {
 
   .label
     font-size: .8rem
-    color: $black
-    opacity: .5
+    color: $grey
     margin-bottom: .2rem
     &:first-letter
       text-transform: uppercase

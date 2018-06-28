@@ -81,7 +81,7 @@ export default {
       margin: .1rem 0
 
     &:hover
-      transform: translateX(-.5rem)
+      transform: translateX(-.2rem)
 
   .item-title
     font-size: 1rem
@@ -141,7 +141,7 @@ export default {
     font-weight: bold
 
   .active
-    transform: translateX(-.5rem)
+    transform: translateX(-.2rem)
     box-shadow: 0 .5rem 1rem $bg-darker
 
   .list-item.testcase, .list-item.step
