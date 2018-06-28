@@ -1,6 +1,6 @@
 <template>
   <li :class="{
-        active: item.title === $route.params.projecttitle || item.title === $route.params.runtitle || item.title === $route.params.tctitle || item.title === $route.params.steptitle,
+        active: item.title === $route.params.project || item.title === $route.params.run || item.title === $route.params.tc || item.title === $route.params.step,
         success: item.status === 'OK' || item.status === 0 || item.status === 'info',
         error: item.status === 'error' || item.status === 1,
         current: item.status === 'current',
@@ -76,6 +76,7 @@ export default {
     box-shadow: 0 .1rem .4rem $bg-darker
     justify-content: space-between
     flex-wrap: no-wrap
+    order: 2
 
     *
       margin: .1rem 0
@@ -92,7 +93,7 @@ export default {
   .data-title::first-letter
     text-transform: capitalize
 
-  /* STYLING OF LIST ITEMS IN SIDEBAR */
+  // List items in sidebar
 
   .sidebar-dataset
     display: contents
@@ -111,10 +112,9 @@ export default {
       font-weight: bold
       flex-basis: 100%
 
-  /* STYLING OF LIST ITEMS WHEN A TABLE, RUN OR TESTCASE */
+  // List item styling based on type
 
   .table, .run, .testcase, .step
-    display: flex
     flex-direction: row
     justify-content: flex-start
     align-content: center
@@ -135,14 +135,25 @@ export default {
     .data-item
       word-break: break-word
 
-  /* ROUTER LINK STYLING */
+  // Active item styling
 
-  .router-link-exact-active
-    font-weight: bold
-
-  .active
-    transform: translateX(-.2rem)
+  .list-item.active
+    order: 1
+    transform: translateX(0rem)
     box-shadow: 0 .5rem 1rem $bg-darker
+    &:hover
+      transform: 0
+    &::after
+      position: absolute
+      display: block
+      content: ''
+      top: 0
+      right: -1.5rem
+      height: 100%
+      width: 1.5rem
+      background: $white
+
+  // Flex-basis for items in lists
 
   .list-item.testcase, .list-item.step
     @for $i from 1 through 2

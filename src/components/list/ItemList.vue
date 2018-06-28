@@ -1,6 +1,7 @@
 <template>
   <ul class="list">
     <labels :labels="labels"/>
+    <slot name="active-item"/>
     <slot name="no-items"/>
     <slot name="list-item"/>
   </ul>
@@ -33,6 +34,10 @@ export default {
     list-style-type: none
     margin: 0
     padding: 0
+
+  .sidebar-list
+    display: flex
+    flex-direction: column
 
   .list-title
     font-size: 1.2rem

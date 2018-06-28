@@ -16,7 +16,6 @@
     <!-- ITEMLIST in sidebar -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
     <item-list v-if="items.length > 0" :labels="labels" class="sidebar-list">
-
       <!-- Loop to render LISTITEMS in sidebar -->
       <list-item v-for="item in filteredItems"
                  slot="list-item"
@@ -92,7 +91,8 @@ export default {
     }
   },
   data: () => ({
-    value: ''
+    value: '',
+    activeItem: {}
   }),
   computed: {
     backButton () {
@@ -141,7 +141,10 @@ export default {
     ...mapActions({
       fetchRunTcs: 'testcases/FETCH_RUN_TCS',
       fetchTcSteps: 'steps/FETCH_TC_STEPS'
-    })
+    }),
+    prependActive (item) {
+      this.activeItem = item
+    }
   }
 }
 </script>
