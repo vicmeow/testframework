@@ -30,11 +30,11 @@ export default {
 
   .labels
     display: flex
-    justify-content: space-between
-    margin-bottom: .5rem
+    margin-bottom: .2rem
     padding-right: 1rem
 
-  .sidebar .labels
+  .sidebar-list .labels
+    justify-content: space-between
     padding-left: 1.4rem
 
   .list .labels
@@ -47,10 +47,18 @@ export default {
     &:first-letter
       text-transform: uppercase
 
-  .list .labels .label:nth-child(1)
-    flex-basis: 80%
+  .run-list
+    @for $i from 1 through 3
+      .label:nth-child(1)
+        flex-basis: 60%
+      .label:nth-child(2), .label:nth-child(3)
+        flex-basis: 20%
 
-  .list .labels .label:nth-child(2)
-    flex-basis: 20%
+  .tc-list, .step-list
+    @for $i from 1 through 2
+      .label:nth-child(1)
+        flex-basis: 80%
+      .label:nth-child(2)
+        flex-basis: 20%
 
 </style>

@@ -3,7 +3,7 @@
     <div v-if="loading" class="loader">
       <div class="spinner"/>
     </div>
-    <the-sidebar :placerholder="'Filter items...'"/>
+    <the-sidebar :placeholder="'Search ' + $route.name + 's...'"/>
     <router-view :key="$route.path"/>
   </div>
 </template>

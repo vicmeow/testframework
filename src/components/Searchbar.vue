@@ -1,5 +1,10 @@
 <template>
-  <input :placeholder="placeholder" v-bind:value="value" type="search" class="searchbar" v-on:input="updateValue($event.target.value)">
+  <input :placeholder="placeholder"
+         :value="value"
+         type="search"
+         class="searchbar"
+         aria-label="Search for items in this list"
+         @input="updateValue($event.target.value)">
 </template>
 
 /*
