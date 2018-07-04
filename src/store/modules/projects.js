@@ -3,9 +3,9 @@ const state = {
     {
       title: 'Project 1',
       type: 'project',
-      id: 1,
+      id: 12345,
       status: 1,
-      time: 'XX.XX.XXXX',
+      date: 'XX.XX.XXXX',
       description: 'This will be the description of this project.',
       data: {
         'test cases': 45,
@@ -16,9 +16,9 @@ const state = {
     {
       title: 'Project 2',
       type: 'project',
-      id: 2,
+      id: 65789,
       status: 0,
-      time: 'XX.XX.XXXX',
+      date: 'XX.XX.XXXX',
       description: 'This will be the description of this project.',
       data: {
         'test cases': 45,
