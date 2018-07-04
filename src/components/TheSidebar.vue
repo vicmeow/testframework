@@ -16,7 +16,7 @@
     <!-- ITEMLIST -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
     
-    <item-list v-if="items.length > 0" :labels="labels" class="sidebar">
+    <item-list v-if="items.length > 0" :labels="labels" class="sidebar-list">
     
       <!-- Loop to render LIST ITEMS -->
       <list-item v-for="item in filteredItems"
@@ -72,6 +72,20 @@ export default {
       loading: 'loader/isLoading',
       items: 'sidebarItems'
     }),
+    backButton () {
+      switch (this.$route.name) {
+        case 'project':
+          return false
+        case 'run':
+          return {name: 'project'}
+        case 'testcase':
+          return {name: 'run'}
+        case 'step':
+          return {name: 'testcase'}
+        default:
+          return false
+      }
+    },
     filteredItems () {
       // Filters item in sidebar according to searcbar input
       if (this.items) {
@@ -86,7 +100,6 @@ export default {
   methods: {
     setItem (item) {
       this.$store.commit('RECIEVE_ITEM', item)
-      console.log(item.id)
       // Store current route name
       let route = this.$route.name
       // Create obj for router push
@@ -134,4 +147,5 @@ export default {
 
   .info-icon
     font-size: .6rem
+
 </style>
