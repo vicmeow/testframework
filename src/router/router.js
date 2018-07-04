@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store/store'
+import Meta from 'vue-meta'
 
 // Main Routes
 const HomePage = () => import('@/views/0_HomePage/0_HomePage')
@@ -13,6 +14,7 @@ const Testcase = () => import('@/views/1_ProjectsPage/3_TestcaseView')
 const Step = () => import('@/views/1_ProjectsPage/4_StepView')
 
 Vue.use(Router)
+Vue.use(Meta)
 
 export default new Router({
   mode: 'history',
