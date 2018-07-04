@@ -25,7 +25,7 @@
               step: item.id
           }}"
           class="item-title"
-          @click.native="fetchStep(item.parentid, item)">{{item.title | truncate(60)}}</router-link>
+          @click.native="fetchStep(item.id, item)">{{item.title}}</router-link>
       </list-item>
     </item-list>
   </item>
