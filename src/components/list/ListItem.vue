@@ -56,8 +56,8 @@ export default {
   },
   computed: {
     isActive () {
-      console.log(this.item.id)
-      if(this.item.id === this.$route.params.project || this.item.id === this.$route.params.run || this.item.id === this.$route.params.tc || this.item.id === this.$route.params.step) {
+      //console.log(this.item.id)
+      if (this.item.id === this.$route.params.project || this.item.id === this.$route.params.run || this.item.id === this.$route.params.tc || this.item.id === this.$route.params.step) {
         return true
       } else {
         return false
