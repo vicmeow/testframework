@@ -57,7 +57,7 @@ export default {
     })
   },
   created () {
-    this.fetchSteps(this.item.id)
+    this.fetchSteps(this.$route.params.tc)
   },
   methods: {
     fetchStep (id, item) {
