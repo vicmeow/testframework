@@ -4,31 +4,31 @@
       <searchbar :placeholder="placeholder" v-model="value"/>
     </form>
     <!-- BACK button -->
-    <router-link v-if="$route.name !='project'" :to="backButton" tag="button" class="navigate-back">
+    <!-- <router-link v-if="$route.name !='project'" :to="{name: 'project', params: {id: item.parentid}}" tag="button" class="navigate-back">
       <font-awesome-icon
         :icon="['fas', 'arrow-left']"
         class="info-icon"
         role="img"
         aria-hidden="true"
       />
-      Back to {{backButton.name + 's'}}</router-link>
+      Back to {{backButton.name + 's'}}</router-link> -->
 
     <!-- ITEMLIST -->
     <div v-if="items.length === 0" class="no-items label">Sidebar is currently unavailble.</div>
-    
+
     <item-list v-if="items.length > 0" :labels="labels" class="sidebar-list">
-    
+
       <!-- Loop to render LIST ITEMS -->
       <list-item v-for="item in filteredItems"
                  slot="list-item"
                  :key="item.title" :item="item"
                  :type="'sidebar'">
         <!-- ROUTER LINK for LIST ITEMS -->
-        <h4 slot="routerlink"
+        <router-link slot="routerlink"
             class="item-title"
-            @click="setItem(item)">
+            :to="{name: item.type, params: {id: item.id}}">
           {{item.title}}
-        </h4>
+        </router-link>
       </list-item>
     </item-list>
   </aside>
@@ -99,18 +99,18 @@ export default {
   },
   methods: {
     setItem (item) {
-      this.$store.commit('RECIEVE_ITEM', item)
+      //this.$store.commit('RECIEVE_ITEM', item)
       // Store current route name
       let route = this.$route.name
       // Create obj for router push
       let to = {
         name: route,
         params: {
-          [route]: item.id
+          id: item.id
         }
       }
       // Navigate using to obj
-      this.$router.push(to)
+      //this.$router.push(to)
     }
   }
 }

@@ -31,29 +31,29 @@ export default new Router({
     redirect: {
       name: 'project',
       params: {
-        project: Store.getters['projects/projects'][0].id
+        id: Store.getters['projects/projects'][0].id
       }
     },
     children: [{
-      path: ':project',
+      path: ':id',
       name: 'project',
       component: Project,
       props: true
     },
     {
-      path: ':project/:run',
+      path: ':id',
       name: 'run',
       component: Run,
       props: true
     },
     {
-      path: ':project/:run/:tc',
+      path: ':id',
       name: 'testcase',
       component: Testcase,
       props: true
     },
     {
-      path: ':project/:run/:tc/:step',
+      path: ':id',
       name: 'step',
       component: Step,
       props: true

@@ -20,7 +20,8 @@
                      :to="{
                        name: 'run',
                        params: {
-                         run: item.id
+                         id: item.id,
+                         item: item
                        }
                      }"
                      class="item-title"
@@ -51,23 +52,22 @@ export default {
     ...mapGetters({
       loading: 'loader/isLoading',
       runs: 'runs/runs',
-      item: 'item'
     })
   },
   created () {
     this.fetchRuns()
-    this.fetchProject()
+    //this.fetchProject()
   },
   methods: {
-    fetchProject () {
-      this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.$store.getters['projects/projects'])
+    //fetchProject () {
+      //this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.$store.getters['projects/projects'])
       // this.$store.commit('loader/setLoading', true)
       // this.$store.dispatch('projects/FETCH_PROJECTS').then(() => {
       // this.$store.commit('loader/setLoading', false)})
-    },
+    //},
     fetchTcs (id, item) {
       this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.runs)
-      this.$store.commit('RECIEVE_ITEM', item)
+      //this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
         this.$store.commit('loader/setLoading', false)

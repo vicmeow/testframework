@@ -22,7 +22,8 @@
           :to="{
             name: 'testcase',
             params: {
-              tc: item.id
+              id: item.id,
+              item: item
           }}"
           class="item-title"
           @click.native="fetchTc(item.id)">{{item.title}}</router-link>
@@ -47,25 +48,31 @@ export default {
   computed: {
     ...mapGetters({
       loading: 'loader/isLoading',
-      testcases: 'testcases/testcases',
-      item: 'item'
-    })
+      testcases: 'testcases/testcases'
+    }),
+    item () {
+      if(this.$route.params.item) {
+        return this.$route.params.item
+      } else {
+        console.log(this.$route.params)
+      }
+    }
   },
   created () {
-    this.fetchTcs(this.item.id)
+    this.fetchTcs()
   },
   methods: {
     fetchTc (id, item) {
       this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.testcases)
-      this.$store.commit('RECIEVE_ITEM', item)
+      //this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
         this.$store.commit('loader/setLoading', false)
       })
     },
-    fetchTcs (id) {
+    fetchTcs () {
       this.$store.commit('loader/setLoading', true)
-      this.$store.dispatch('testcases/FETCH_RUN_TCS', id).then(() => {
+      this.$store.dispatch('testcases/FETCH_RUN_TCS', this.$route.params.id).then(() => {
         this.$store.commit('loader/setLoading', false)
       })
     }

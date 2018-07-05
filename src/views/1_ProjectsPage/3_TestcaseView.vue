@@ -22,7 +22,7 @@
           :to="{
             name: 'step',
             params: {
-              step: item.id
+              id: item.id
           }}"
           class="item-title"
           @click.native="fetchStep(item.id, item)">{{item.title}}</router-link>
@@ -53,24 +53,31 @@ export default {
     ...mapGetters({
       loading: 'loader/isLoading',
       steps: 'steps/steps',
-      item: 'item'
-    })
+    }),
+    item () {
+      if(this.$route.params.item) {
+        return this.$route.params.item
+      } else {
+        console.log(this.$route.params)
+      }
+    }
   },
   created () {
-    this.fetchSteps(this.item.id)
+    console.log(this.$route.params.item)
+    this.fetchSteps()
   },
   methods: {
     fetchStep (id, item) {
       this.$store.commit('RECIEVE_SIDEBAR_ITEMS', this.steps)
-      this.$store.commit('RECIEVE_ITEM', item)
+      //this.$store.commit('RECIEVE_ITEM', item)
       this.$store.commit('loader/setLoading', true)
       this.$store.dispatch('steps/FETCH_TC_STEPS', id).then(() => {
         this.$store.commit('loader/setLoading', false)
       })
     },
-    fetchSteps (id) {
+    fetchSteps () {
       this.$store.commit('loader/setLoading', true)
-      this.$store.dispatch('steps/FETCH_TC_STEPS', id).then(() => {
+      this.$store.dispatch('steps/FETCH_TC_STEPS', this.$route.params.id).then(() => {
         this.$store.commit('loader/setLoading', false)
       })
     }

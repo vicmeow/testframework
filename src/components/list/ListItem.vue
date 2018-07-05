@@ -1,6 +1,6 @@
 <template>
   <li :class="{
-        active: isActive,
+        active: $route.params.id === item.id,
         success: item.status === 'OK' || item.status === 0 || item.status === 'info',
         error: item.status === 'error' || item.status === 1,
         current: item.status === 'current',
@@ -51,16 +51,6 @@ export default {
       validator: function (value) {
         // Value must match one of these strings
         return ['sidebar', 'table', 'project', 'run', 'testcase', 'step'].indexOf(value) !== -1
-      }
-    }
-  },
-  computed: {
-    isActive () {
-      console.log(this.item.id)
-      if(this.item.id === this.$route.params.project || this.item.id === this.$route.params.run || this.item.id === this.$route.params.tc || this.item.id === this.$route.params.step) {
-        return true
-      } else {
-        return false
       }
     }
   }

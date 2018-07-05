@@ -33,6 +33,7 @@ const mutations = {
     for (let step of data) {
       // Push objects with custom keys to state
       state.steps.push({
+        type: 'step',
         title: step.meta.step.name,
         id: step._key,
         status: step.meta.logLevel,

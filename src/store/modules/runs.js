@@ -16,7 +16,9 @@ const actions = {
         'http://localhost:3000/runs/'
       )
       // Send data to mutations to write/give(mutate) data to state
-      commit('RECEIVE_PROJECT_RUNS', {data: response.data})
+      commit('RECEIVE_PROJECT_RUNS', {
+        data: response.data
+      })
     } catch (error) {
       console.log(error)
     }
@@ -24,19 +26,21 @@ const actions = {
 }
 
 const mutations = {
-  RECEIVE_PROJECT_RUNS (state, {data, commit}) {
+  RECEIVE_PROJECT_RUNS (state, {data}) {
     // Empty current array to prevent duplicating
     state.runs = []
     // Loop through objects in response data
     for (let run of data) {
       // Push objects with custom keys to state
       state.runs.push({
+        type: 'run',
         title: run.runId,
         status: run.run.meta.logLevel,
         date: new Date(run.run.meta.time).toLocaleDateString('de-DE'),
         description: 'This will be the description of this run.',
         duration: run.duration_in_min,
         id: run.runId,
+        parentid: 6789,
         data: {}
       })
     }
